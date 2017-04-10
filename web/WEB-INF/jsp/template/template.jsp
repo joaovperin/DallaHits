@@ -6,10 +6,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <tiles:insertAttribute name="header"/>
+        xx<tiles:insertAttribute name="title"/>xx
+        <title><tiles:insertAttribute name="title"/></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
         <div class="container" style="border: #C1C1C1 solid 1px; border-radius:10px;">
-            <div id="divMenu" class="menu span-5  border" style="height:400px;background-color:#FCFCFC;">
+            <div id="divMenu" class="menu span-5  border" style="background-color:#FCFCFC;">
                 <tiles:insertAttribute name="menu"/>
             </div>
             <div id="divContent" class="container span-19 last " >

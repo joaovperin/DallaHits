@@ -2,7 +2,7 @@
  <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
     <definition name="DefaultTemplate" template="/WEB-INF/jsp/template/template.jsp">
-        <put-attribute name="title" value="DallaHits Night House" />
+        <put-attribute name="title" value="DallaHits" />
         <put-attribute name="header" value="/WEB-INF/jsp/template/header.jsp" />
         <put-attribute name="menu" value="/WEB-INF/jsp/template/menu.jsp" />
         <put-attribute name="body" value="" />

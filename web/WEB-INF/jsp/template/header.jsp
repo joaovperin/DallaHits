@@ -10,5 +10,3 @@
 <style>
     body{ margin-top:20px; margin-bottom:20px; background-color:#DFDFDF;}
 </style>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Bem vindo</title>
