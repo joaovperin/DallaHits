@@ -18,6 +18,10 @@
     <context:component-scan base-package="br.jpe.dallahits.controller" />
 
     <!-- https://dzone.com/articles/spring-mvc-tiles-3-integration -->
+    <!-- http://www.javatpoint.com/spring-mvc-tiles-example -->
+    <!-- https://richardbarabe.wordpress.com/2014/02/02/apache-tiles-3-integration-with-spring-mvc/ -->
+    <!-- http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-example/ -->
+    <!-- https://dzone.com/articles/spring-mvc-tiles-3-integration -->
     
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 
