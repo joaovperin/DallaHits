@@ -12,22 +12,38 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-    
+
     <!-- Indica que deve utilizar anotações e o pacote base -->
     <mvc:annotation-driven />
     <context:component-scan base-package="br.jpe.dallahits.controller" />
 
+    <!-- Handler do Spring MVC -->
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+
+    <!-- Exemplos de utilização do Apache Tiles com Spring MVC: -->
     <!-- https://dzone.com/articles/spring-mvc-tiles-3-integration -->
     <!-- http://www.javatpoint.com/spring-mvc-tiles-example -->
     <!-- https://richardbarabe.wordpress.com/2014/02/02/apache-tiles-3-integration-with-spring-mvc/ -->
     <!-- http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-example/ -->
     <!-- https://dzone.com/articles/spring-mvc-tiles-3-integration -->
-    
-    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 
+    <!-- ViewResolver do Apache Tiles -->
     <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.tiles3.TilesViewResolver " />
+
+    <!--ViewResolver do Spring MVC -->
+    <bean id="springViewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/views/"
           p:suffix=".jsp" />
+
+    <!-- Configurador de views do Apache Tiles -->
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/META-INF/layouts/layouts.xml</value>
+            </list>
+        </property>
+    </bean>
 
 </beans>

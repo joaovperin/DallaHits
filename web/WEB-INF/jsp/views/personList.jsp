@@ -1,8 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-INICIO;
-<tiles:insertTemplate template="DefaultTemplate">
-    xxx
+<%@ taglib prefix="jpe" uri="/META-INF/tlds/jpe.tld" %>
+<tiles:insertDefinition  name="DefaultTemplate" >
     <tiles:putAttribute name="body">
         <div style="margin: 10px;">
             <h4>List of Persons</h4>
@@ -27,5 +26,4 @@ INICIO;
             </table>
         </div>
     </tiles:putAttribute>
-</tiles:insertTemplate>
-FIM;
+</tiles:insertDefinition>
