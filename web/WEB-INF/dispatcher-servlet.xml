@@ -17,6 +17,8 @@
     <mvc:annotation-driven />
     <context:component-scan base-package="br.jpe.dallahits.controller" />
 
+    <!-- https://dzone.com/articles/spring-mvc-tiles-3-integration -->
+    
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 
     <bean id="viewResolver"
