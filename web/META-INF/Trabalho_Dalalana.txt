@@ -1,0 +1,94 @@
+M�dulos:
+
+1.Cadastros:
+1.1-Clientes
+1.2-Produtos
+1.3-Fornecedores
+
+2.Gerenciamento
+2.1-Funcion�rios
+2.2-Atra��es
+2.3-Marketing/Publicidade
+
+3.Comercial
+3.1-Comandas
+3.1.1-Incluir
+3.1.2-Alterar
+3.1.3-Consultar
+3.1.4-Listagem
+
+Requisitos funcionais:
+1.LOGIN;
+2.VENDAS;
+
+Requisitos Opcionais (se sobrar tempo):
+GRUPO PRODUTO POR N�VEIS:
+  Tudo(Bebidas(Cervejas(Bud,Skol), Destilados(Vodka, Whisky)), Alimentos(Salgados, Doces))
+BANCO DE DADOS;
+MANUTEN��O COMANDAS (Listagem/Consulta fechadas);
+CADASTRO CLIENTES (Todos, Criar bot�o Add na manuten��o da comanda);
+N�VEIS DE USU�RIO (Admin/Representante);
+CADASTRO PRODUTOS (S� Admin);
+
+Etapas:
+1.Prototipa��o:
+  Defini��o tecnologias
+     JSP/Servlets/jQuery/jQueryUI/MySQL/MVC.
+  Cria��o projeto
+     ...
+  Cria��o de classes
+     Controllers, Beans, DAOs, Utils.
+  Defini��o usabilidade
+     Navbar Comandas -> Links para as a��es
+     Grid listar� as 20 �ltimas comandas criadas com a��es para redirecionar � consulta/altera��o/finaliza��o
+     Bot�o criar comanda: S� Gera um n�mero e pede o Cliente(cod? + nome + SEXO) -> Deve inicializar a DtHoraEntrada
+  Cria��o do Layout de Venda
+     Tudo em uma p�gina
+     Campos:
+       Cliente     (cod/nome/DtHoraEntrada) /SOMENTE EXIBI��O/,
+       Lista itens (cod/desc/val un/qtd/total/'thrash'Action),
+       Bt. Add -> Abre Modal para inclus�o de item:        
+          Prod (cod/desc/valor/'+'Action)
+       Totalizador (Vl.Ing/Vl.Itens/Vl.Tot)
+       Bt.Gravar (Salva altera��es feitas e retorna � listagem comandas)
+       Bt.Fechar Comanda -> Abre Modal para acertar valores:
+          Exibe Cliente(cod/nome/DtHoraEntrada)
+          Exibe Valor Ingresso
+          Exibe Valor total itens
+          Exibe lista itens
+          Condi��es Pgto (Dinheiro/cart�o):
+             Se dinheiro: Pede valor e calcula troco.
+          Ao Confirmar:
+            Grava DtHoraSaida e Muda Status (vai servir pra listagem/consulta).   
+  Cria��o das Views
+     ...
+
+Obs.: Inicialmente, DAOs ter�o Maps com valores pr�-definidos.
+MYSQL � UM REQUISITO N�O FUNCIONAL.
+
+2. Desenvolvimento:
+  Iniciar na p�gina de vendas:
+    Beans (Usuario/Cliente/Produto/Comanda)
+    DAOs  (   0   /   3   /   5   /   0   ) -> N�mero de valores a pr�-definir
+    Views -> 
+       Janela principal (alt. comanda),
+       Modal Itens,
+       Modal Finalizar comanda,
+    Simples: solicita usu�rio e senha, valida num Map pr�-definidos no fonte.
+       Tela Login (add 2 usu nos DAOS)
+    Criar sistema de a��es (alt/con) -> Somente desabilitar campos/bot�es na consulta.
+ ---------
+    Iniciar an�lise das atra��es.
+
+
+
+//MATERIAL CONSULTA:
+http://homepages.dcc.ufmg.br/~figueiredo/disciplinas/aulas/req-funcional-rnf_v01.pdf
+https://www.youtube.com/watch?v=LQE-2jwIXwc
+https://www.youtube.com/watch?v=rma93QNiDU0
+https://www.youtube.com/watch?v=lGbPwwoKdwI
+https://www.google.com.br/search?q=sistema+erp+casa+noturna&oq=sistema+erp+casa+noturna&aqs=chrome..69i57.2963j0j1&sourceid=chrome&ie=UTF-8
+
+
+// ANOTA��ES:
+(Matheus): DJ FABINHO TEM QUE TER NAS ATRA��ES -> Pre�o 100 reais
