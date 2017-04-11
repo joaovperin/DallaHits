@@ -6,19 +6,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <tiles:insertAttribute name="header"/>
-        xx<tiles:insertAttribute name="title"/>xx
-        <title><tiles:insertAttribute name="title"/></title>
+        <title><tiles:insertAttribute name="titulo"/></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <div class="container" style="border: #C1C1C1 solid 1px; border-radius:10px;">
-            <div id="divMenu" class="menu span-5  border" style="background-color:#FCFCFC;">
+        <div class="container tpContainer">
+            <div id="divMenu" class="container tpMenu">
                 <tiles:insertAttribute name="menu"/>
             </div>
-            <div id="divContent" class="container span-19 last " >
+            <div id="divContent" class="container tpContent" >
                 <tiles:insertAttribute name="body"/>
             </div>
-            <div id="divFooter" class="footer">
+            <div id="divFooter" class="container tpFooter">
                 <tiles:insertAttribute name="footer"/>
             </div>
         </div>

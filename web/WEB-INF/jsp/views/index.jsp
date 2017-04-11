@@ -4,11 +4,34 @@
 <%@ taglib prefix="jpe" uri="/META-INF/tlds/jpe.tld" %>
 <tiles:insertDefinition  name="DefaultTemplate" >
     <tiles:putAttribute name="body">
-        <h1>Página principal</h1>
-        <br><br><br>
-        <h2>Bem vindo, ${usuarioLogado.nome}.</h2>
-        <p>Um texto qualquer...</p>
-        <a href="logout">Sair do sistema</a>
+        <!-- Header -->
+        <a name="about"></a>
+        <div class="intro-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="intro-message">
+                            <h1>Bem vindo, ${usuarioLogado.nome}.</h1>
+                            <h3>O que deseja fazer?</h3>
+                            <hr class="intro-divider">
+                            <ul class="list-inline intro-social-buttons">
+                                <li>
+                                    <a href="#Vendas" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Vendas</span></a>
+                                </li>
+                                <li>
+                                    <a href="#Cadastros" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Cadastros</span></a>
+                                </li>
+                                <li>
+                                    <a href="#Listagens" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Listagens</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.intro-header -->
     </tiles:putAttribute>
 </tiles:insertDefinition>
-

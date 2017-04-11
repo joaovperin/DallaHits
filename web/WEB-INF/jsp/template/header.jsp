@@ -1,12 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%-- Scripts e Link Rels --%>
-<!--            <link rel="stylesheet" href="resources/css/screen.css"
-                              type="text/css" media="screen, projection"></link>
-                        <link rel="stylesheet" href="resources/css/print.css"
-                              type="text/css" media="print"></link>-->
-<!--[if IE]>
-<link rel="stylesheet" href="resources/css/ie.css"
-      type="text/css" media="screen, projection">
-<![endif]-->
-<style>
-    body{ margin-top:20px; margin-bottom:20px; background-color:#DFDFDF;}
-</style>
+<link href="<c:url value="/resources/third/css/bootstrap.min.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/css/layout.css" />" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<c:url value="/resources/third/js/jquery.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/third/js/jquery-ui.min.js" />"></script>

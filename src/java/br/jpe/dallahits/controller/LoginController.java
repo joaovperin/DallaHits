@@ -39,7 +39,7 @@ public class LoginController {
         UsuarioBean usuarioBean = null;
         if (usuario.getLogin() != null) {
             try (Conexao conn = ConnFactory.criaConexao()) {
-                usuarioBean = new UsuarioDAO(conn).busca(usuario.getLogin());
+                usuarioBean = new UsuarioDAO(conn).buscaLogin(usuario.getLogin());
             }
         }
         // Se o usuario e senha forem válidos, redireciona para o login
@@ -49,7 +49,7 @@ public class LoginController {
         }
         // Retorna a página de login informando que não encontrou usuário
         if (usuario.getLogin() != null || usuario.getSenha() != null) {
-            req.setAttribute("msg", "Usuário ou senha inválidos!");
+            req.setAttribute("msg", "Usuário ou senha inválidos!");   
         }
         return "login";
     }

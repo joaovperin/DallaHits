@@ -15,6 +15,7 @@ import java.util.Objects;
 public class UsuarioBean {
 
     private String login;
+    private String email;
     private String senha;
     private String nome;
     private String tipo;
@@ -25,6 +26,14 @@ public class UsuarioBean {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
@@ -53,11 +62,12 @@ public class UsuarioBean {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.login);
-        hash = 83 * hash + Objects.hashCode(this.senha);
-        hash = 83 * hash + Objects.hashCode(this.nome);
-        hash = 83 * hash + Objects.hashCode(this.tipo);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.login);
+        hash = 53 * hash + Objects.hashCode(this.email);
+        hash = 53 * hash + Objects.hashCode(this.senha);
+        hash = 53 * hash + Objects.hashCode(this.nome);
+        hash = 53 * hash + Objects.hashCode(this.tipo);
         return hash;
     }
 
@@ -76,6 +86,9 @@ public class UsuarioBean {
         if (!Objects.equals(this.login, other.login)) {
             return false;
         }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
         if (!Objects.equals(this.senha, other.senha)) {
             return false;
         }
@@ -90,7 +103,7 @@ public class UsuarioBean {
 
     @Override
     public String toString() {
-        return "UsuarioBean{" + "login=" + login + ", senha=" + senha + ", nome=" + nome + ", tipo=" + tipo + '}';
+        return "UsuarioBean{" + "login=" + login + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", tipo=" + tipo + '}';
     }
 
 }

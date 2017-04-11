@@ -6,6 +6,7 @@
 package br.jpe.dallahits.util.db;
 
 import br.jpe.dallahits.exception.DAOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -37,6 +38,27 @@ public abstract class AbstractDAO<B> {
     public abstract void update(B bean) throws DAOException;
 
     public abstract void delete(B bean) throws DAOException;
+
+    /**
+     * Busca o primeiro registro através do PreparedStatement
+     *
+     * @param pstmt PreparedStatement com os filtro estabelecidos
+     * @return B Bean populado
+     * @throws DAOException
+     */
+    protected B buscaPrimeiro(PreparedStatement pstmt) throws DAOException {
+        try {
+            // Realiza busca
+            ResultSet rs = pstmt.executeQuery();
+            // Se encontrar
+            if (rs.next()) {
+                return getBeanFromResultSet(rs);
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+        return null;
+    }
 
     /**
      * Cria um novo Bean e popula a partir do ResultSet

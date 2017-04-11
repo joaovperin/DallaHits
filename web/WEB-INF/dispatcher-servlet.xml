@@ -16,9 +16,15 @@
     <!-- Indica que deve utilizar anotações e o pacote base -->
     <mvc:annotation-driven />
     <context:component-scan base-package="br.jpe.dallahits.controller" />
+    <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" />
 
     <!-- Handler do Spring MVC -->
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+    
+    <!-- Interceptador de requisições -->
+    <mvc:interceptors>
+        <bean class="br.jpe.dallahits.interceptor.LoginInterceptor" />
+    </mvc:interceptors>
 
     <!-- Exemplos de utilização do Apache Tiles com Spring MVC: -->
     <!-- https://dzone.com/articles/spring-mvc-tiles-3-integration -->

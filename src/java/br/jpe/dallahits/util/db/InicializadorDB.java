@@ -41,10 +41,7 @@ public class InicializadorDB {
             // Roda os scripts
             criaTabelas(sr);
             inicializaDados(sr);
-            DBUtils.commit(conn);
-        } catch (IOException | DAOException e) {
-            // Executa rollback e relança exceção
-            DBUtils.rollback(conn);
+        } catch (IOException e) {
             throw e;
         } finally {
             // Encerra conexão

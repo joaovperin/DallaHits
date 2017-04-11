@@ -24,7 +24,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean> {
 
     /** SQL para SELECT */
     private static final String SELECT
-            = "SELECT Login, Senha, Nome, Tipo FROM USUARIO";
+            = "SELECT Login, Email, Senha, Nome, Tipo FROM USUARIO";
 
     /**
      * Construtor padrão que recebe uma conexão por inversão de controle
@@ -42,22 +42,35 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean> {
      * @return UsuarioBean
      * @throws DAOException
      */
-    public UsuarioBean busca(String login) throws DAOException {
+    public UsuarioBean buscaLogin(String login) throws DAOException {
         try {
             // Monta SQL de busca
             String busca = SELECT.concat(" WHERE Login = ?");
             PreparedStatement pstmt = conn.get().prepareStatement(busca);
             pstmt.setString(1, login);
-            // Realiza busca
-            ResultSet rs = pstmt.executeQuery();
-            // Se encontrar
-            if (rs.next()) {
-                return getBeanFromResultSet(rs);
-            }
+            return buscaPrimeiro(pstmt);
         } catch (SQLException e) {
             throw new DAOException(e);
         }
-        return null;
+    }
+    
+    /**
+     * Busca um usuário à partir do seu Email
+     *
+     * @param email
+     * @return UsuarioBean
+     * @throws DAOException
+     */
+    public UsuarioBean buscaEmail(String email) throws DAOException {
+        try {
+            // Monta SQL de busca
+            String busca = SELECT.concat(" WHERE Email = ?");
+            PreparedStatement pstmt = conn.get().prepareStatement(busca);
+            pstmt.setString(1, email);
+            return buscaPrimeiro(pstmt);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
     }
 
     /**
@@ -107,9 +120,10 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean> {
     protected UsuarioBean getBeanFromResultSet(ResultSet rs) throws SQLException {
         UsuarioBean bean = new UsuarioBean();
         bean.setLogin(rs.getString(1));
-        bean.setSenha(rs.getString(2));
-        bean.setNome(rs.getString(3));
-        bean.setTipo(rs.getString(4));
+        bean.setEmail(rs.getString(2));
+        bean.setSenha(rs.getString(3));
+        bean.setNome(rs.getString(4));
+        bean.setTipo(rs.getString(5));
         return bean;
     }
 
