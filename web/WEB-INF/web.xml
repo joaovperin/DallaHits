@@ -9,7 +9,12 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <!-- Tiles -->
+    <!-- Serlvet de inicialização -->
+    <servlet>
+        <servlet-name>InitServlet</servlet-name>
+        <servlet-class>br.jpe.dallahits.servlet.InitServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet>
         <servlet-name>TilesServlet</servlet-name>
         <servlet-class>org.apache.tiles.web.startup.TilesServlet</servlet-class>

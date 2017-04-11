@@ -9,6 +9,7 @@ import br.jpe.dallahits.exception.DAOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Factory responsavel por criar conexões com o banco
@@ -19,12 +20,15 @@ public class ConnFactory {
 
     /** Nome do Driver do MySQL */
     private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+    /** Propriedades da conexão com o banco */
+    private static final Properties DB_PROPERTIES = new Properties();
+
     /** Nome da conexão com o BD */
-    private static final String DB_CONN = "jdbc:mysql://localhost/dallahits";
+    private static final String DB_DEF_CONN = "jdbc:mysql://localhost/dallahits";
     /** Nome do usuário no BD */
-    private static final String DB_USER = "admin";
+    private static final String DB_DEF_USER = "admin";
     /** Senha do usuário no BD */
-    private static final String DB_PASS = "senhaAdmin12";
+    private static final String DB_DEF_PASS = "senhaAdmin12";
     /** Controle - indica se já registrou o driver do MySQL */
     private static boolean registrouDriver = false;
 
@@ -73,7 +77,12 @@ public class ConnFactory {
         if (registrouDriver == false) {
             registraDriver();
         }
-        return DriverManager.getConnection(DB_CONN, DB_USER, DB_PASS);
+        // Define as propriedades da conexão
+        Properties pt = new Properties();
+        pt.setProperty("user", getUsername());
+        pt.setProperty("password", getPassword());
+        pt.setProperty("autoReconnect", "true");
+        return DriverManager.getConnection(getUrl(), pt);
     }
 
     /**
@@ -88,6 +97,71 @@ public class ConnFactory {
             registrouDriver = false;
             throw new RuntimeException("Falha ao registrar o Driver do MySQL JDBC!", e);
         }
+    }
+
+    /**
+     * Define as propriedades da conexão com o banco de dados
+     *
+     * @param url
+     * @param user
+     * @param pass
+     */
+    public static void setProperties(String url, String user, String pass) {
+        DB_PROPERTIES.clear();
+        setUrl(url);
+        setUser(user);
+        setPassword(pass);
+    }
+
+    /**
+     * Define a URL da conexão
+     */
+    private static void setUrl(String url) {
+        DB_PROPERTIES.setProperty("url", url);
+    }
+
+    /**
+     * Define o usuário da conexão
+     */
+    private static void setUser(String user) {
+        DB_PROPERTIES.setProperty("user", user);
+    }
+
+    /**
+     * Define a senha da conexão
+     */
+    private static void setPassword(String password) {
+        DB_PROPERTIES.setProperty("password", password);
+    }
+
+    /**
+     * Retorna a URL da conexão
+     */
+    private static String getUrl() {
+        if (DB_PROPERTIES.containsKey("url")) {
+            return DB_PROPERTIES.getProperty("url");
+        }
+        return DB_DEF_CONN;
+    }
+
+    /**
+     * Retorna o usuário conexão
+     */
+    private static String getUsername() {
+        if (DB_PROPERTIES.containsKey("user")) {
+            return DB_PROPERTIES.getProperty("user");
+        }
+        return DB_DEF_USER;
+    }
+
+    /**
+     * Retorna a senha da conexão
+     */
+    private static String getPassword() {
+        if (DB_PROPERTIES.containsKey("password")) {
+            return DB_PROPERTIES.getProperty("password");
+        }
+        return DB_DEF_PASS;
     }
 
 }
