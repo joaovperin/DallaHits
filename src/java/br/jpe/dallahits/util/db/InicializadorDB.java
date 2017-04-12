@@ -6,6 +6,7 @@
 package br.jpe.dallahits.util.db;
 
 import br.jpe.dallahits.exception.DAOException;
+import static br.jpe.dallahits.util.db.ConnFactory.getDatabaseName;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -35,8 +36,11 @@ public class InicializadorDB {
     public void executaCriacaoBanco() throws IOException, DAOException {
         Conexao conn = null;
         try {
+            // Define as propriedades da conexão
+            ConnFactory.setProperties(ContextUtils.lePropriedadesConexao());
             // Cria conexão e prepara o ScriptRunner
             conn = ConnFactory.criaConexaoTransacao();
+            criaBaseDados();
             ScriptRunner sr = new ScriptRunner(conn.get());
             // Roda os scripts
             criaTabelas(sr);
@@ -81,6 +85,47 @@ public class InicializadorDB {
             return ContextUtils.getResourcesAsReader(fileName);
         } catch (Exception e) {
             return new BufferedReader(new FileReader(DIR_BASE + fileName));
+        }
+    }
+
+    /**
+     * Retorna o SQL de DROP database
+     *
+     * @return String
+     */
+    private String getSqlDropDB() {
+        return "DROP SCHEMA IF EXISTS " + getDatabaseName();
+    }
+
+    /**
+     * Retorna o SQL de CREATE database
+     *
+     * @return String
+     */
+    private String getSqlCreateDB() {
+        return "CREATE SCHEMA IF NOT EXISTS " + getDatabaseName() +
+                " DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci";
+    }
+
+    /**
+     * Retorna o SQL de USE database
+     *
+     * @return String
+     */
+    private String getSqlUseDB() {
+        return "USE " + getDatabaseName();
+    }
+
+    /**
+     * Executa criação do Database (Schema)
+     *
+     * @throws DAOException
+     */
+    private void criaBaseDados() throws DAOException {
+        try (Conexao conn = ConnFactory.criaConexaoTransacao()) {
+            conn.execSQL(getSqlDropDB());
+            conn.execSQL(getSqlCreateDB());
+            conn.execSQL(getSqlUseDB());
         }
     }
 

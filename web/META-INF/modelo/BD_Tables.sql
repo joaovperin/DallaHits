@@ -1,8 +1,5 @@
 /* Gerado em 11/04/2017 23:44:11 por Joaov. */
 
-DROP SCHEMA IF EXISTS `dallahits` ;
-CREATE SCHEMA IF NOT EXISTS `dallahits` DEFAULT CHARACTER SET utf8 ;
-
 CREATE TABLE IF NOT EXISTS `mensagem` (
   `idMsg` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT 'Código da mensagem',
   `Usuario` VARCHAR(80) NOT NULL COMMENT 'Usuário que escreveu',

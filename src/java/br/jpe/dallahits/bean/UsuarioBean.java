@@ -5,6 +5,7 @@
  */
 package br.jpe.dallahits.bean;
 
+import br.jpe.dallahits.util.db.AbstractBean;
 import java.util.Objects;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Objects;
  *
  * @author Joaov
  */
-public class UsuarioBean {
+public class UsuarioBean extends AbstractBean<UsuarioBean> {
 
     private String login;
     private String email;
@@ -103,7 +104,8 @@ public class UsuarioBean {
 
     @Override
     public String toString() {
-        return "UsuarioBean{" + "login=" + login + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", tipo=" + tipo + '}';
+        return "UsuarioBean{" + "login=" + login + ", email=" + email + ", senha=" + senha + ", nome=" + nome +
+                ", tipo=" + tipo + '}';
     }
 
 }

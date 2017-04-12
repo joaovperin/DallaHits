@@ -5,12 +5,6 @@
  */
 package br.jpe.dallahits.controller;
 
-import br.jpe.dallahits.dao.MensagemDAO;
-import br.jpe.dallahits.exception.DAOException;
-import br.jpe.dallahits.util.db.Conexao;
-import br.jpe.dallahits.util.db.ConnFactory;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,7 +22,7 @@ public class IndexController {
      * @return String
      */
     @RequestMapping("/index")
-    public String index() { 
+    public String index() {
         return "index";
     }
 }

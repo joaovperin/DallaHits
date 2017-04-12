@@ -29,6 +29,8 @@ public class ConnFactory {
     private static final String DB_DEF_USER = "admin";
     /** Senha do usuário no BD */
     private static final String DB_DEF_PASS = "senhaAdmin12";
+    /** Database padrão */
+    private static final String DB_DEF_DATABASE = "dallahits";
     /** Controle - indica se já registrou o driver do MySQL */
     private static boolean registrouDriver = false;
 
@@ -77,6 +79,10 @@ public class ConnFactory {
         if (registrouDriver == false) {
             registraDriver();
         }
+        return getConn();
+    }
+
+    private static Connection getConn() throws SQLException {
         // Define as propriedades da conexão
         Properties pt = new Properties();
         pt.setProperty("user", getUsername());
@@ -88,14 +94,22 @@ public class ConnFactory {
     /**
      * Registra o Driver do MySQL no ClassLoader da JVM
      */
-    private static void registraDriver() {
+    private static void registraDriver() throws SQLException {
         registrouDriver = false;
+        Connection conn = null;
         try {
             Class.forName(DRIVER_NAME);
+            conn = getConn();
+            conn.createStatement().execute(getSqlUseDB());
+            conn.commit();
             registrouDriver = true;
         } catch (ClassNotFoundException e) {
             registrouDriver = false;
             throw new RuntimeException("Falha ao registrar o Driver do MySQL JDBC!", e);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
     }
 
@@ -171,6 +185,24 @@ public class ConnFactory {
      */
     private static String getPassword() {
         return DB_PROPERTIES.getProperty("password", DB_DEF_PASS);
+    }
+
+    /**
+     * Retorna o nome do banco de dados
+     *
+     * @return String Nome do database
+     */
+    public static String getDatabaseName() {
+        return DB_PROPERTIES.getProperty("database", DB_DEF_DATABASE);
+    }
+
+    /**
+     * Retorna o SQL de USE database
+     *
+     * @return String
+     */
+    private static String getSqlUseDB() {
+        return "USE " + getDatabaseName();
     }
 
 }

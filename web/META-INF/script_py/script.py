@@ -4,7 +4,7 @@
 #	Rotina criada para gerar um Script de criação de banco de dados MySQL
 #	...a partir de um Modelo ER .mwb utilizando o MySQL Workbench.
 #
-#	Irá chamar as rotinas do Workbench e realizar um pós-processamento, 
+#	Irá chamar as rotinas do Workbench e realizar um pós-processamento,
 #	...deixando o script nos padrões Rech/PWE.
 #
 #	Criado por Perin em 24/03/2017.
@@ -14,7 +14,7 @@
 #  		https://dev.mysql.com/doc/workbench/en/wb-grt-data-organization.html
 #  		http://mysqlworkbench.org/doc/globals/index.html
 #		http://mysqlworkbench.org/2009/03/python-scripting-in-workbench/
-#         
+#
 #   Utilização do cursor para ler metadados:
 #   https://dev.mysql.com/doc/connector-python/en/connector-python-api-mysqlcursor-constructor.html
 #
@@ -62,7 +62,7 @@ def geraDumpProcessando(output):
 
 	# Percorre schemas (na teoria só tem um)
 	for schema in c.schemata:
-		buffBaseDados += schema.temp_sql + ';'
+		#buffBaseDados += schema.temp_sql + ';'
 		buffBaseDados += '\n\n'
 		# Percorre tabelas do schema
 		for table in schema.tables:

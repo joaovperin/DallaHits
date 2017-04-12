@@ -8,7 +8,6 @@ package br.jpe.dallahits.servlet;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.ContextUtils;
 import java.io.IOException;
-import java.util.Properties;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -39,9 +38,7 @@ public class InitServlet extends HttpServlet {
      */
     private void definePropriedadesConexao() throws ServletException {
         try {
-            Properties pt = new Properties();
-            pt.load(ContextUtils.getResourcesAsReader("/META-INF/conexao.properties"));
-            ConnFactory.setProperties(pt);
+            ConnFactory.setProperties(ContextUtils.lePropriedadesConexao());
         } catch (IOException e) {
             throw new ServletException(e);
         }

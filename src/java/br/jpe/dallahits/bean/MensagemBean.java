@@ -5,6 +5,7 @@
  */
 package br.jpe.dallahits.bean;
 
+import br.jpe.dallahits.util.db.AbstractBean;
 import java.util.Objects;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Objects;
  *
  * @author Joaov
  */
-public class MensagemBean {
+public class MensagemBean extends AbstractBean<MensagemBean> {
 
     private long idMsg;
     private String usuario;

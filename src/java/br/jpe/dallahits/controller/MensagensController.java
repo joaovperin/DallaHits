@@ -14,7 +14,6 @@ import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.DBUtils;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,10 +26,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MensagensController {
 
+    // TODO: Adicionar API Gson().
+
     /**
      * Url para a página inicial (index)
      *
+     * @param req
      * @return String
+     * @throws br.jpe.dallahits.exception.DAOException
      */
     @RequestMapping("/mensagens")
     public String mensagens(HttpServletRequest req) throws DAOException {
@@ -41,12 +44,9 @@ public class MensagensController {
         return "mensagens";
     }
 
-    public String addMsg(HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        return "";
-//        Object attribute = session.getAttribut"e("mensagens");
-    }
-
+    /**
+     * Adiciona uma mensagem na lista
+     */
     @RequestMapping("/addMensagem")
     @ResponseBody
     public String addMensagem(MensagemBean bean, HttpServletRequest req) throws DAOException {
@@ -57,7 +57,7 @@ public class MensagensController {
             dao.insert(bean);
             msgs = dao.busca();
             DBUtils.commit(conn);
-        } catch (DAOException e){
+        } catch (DAOException e) {
             DBUtils.rollback(conn);
         } finally {
             DBUtils.close(conn);
@@ -76,7 +76,7 @@ public class MensagensController {
             sb.append("usuario: '").append(bean.getUsuario()).append("', ");
             sb.append("msg: '").append(bean.getMsg()).append("'");
             sb.append("}");
-            // 
+            //
             if (i < len - 1) {
                 sb.append(", ");
             }
@@ -84,7 +84,7 @@ public class MensagensController {
         sb.append("]");
         return sb.toString();
     }
-    
+
     @RequestMapping("/produtos")
     public String produtos(HttpServletRequest req) throws DAOException {
         try (Conexao conn = ConnFactory.criaConexao()) {
@@ -93,6 +93,5 @@ public class MensagensController {
         }
         return "mensagens";
     }
-    
 
 }

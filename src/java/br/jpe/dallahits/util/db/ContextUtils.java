@@ -6,8 +6,10 @@
 package br.jpe.dallahits.util.db;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Properties;
 import javax.servlet.ServletContext;
 
 /**
@@ -60,6 +62,18 @@ public class ContextUtils {
      */
     public static BufferedReader getResourcesAsReader(String res) {
         return new BufferedReader(new InputStreamReader(getResourceAsStream(res)));
+    }
+
+    /**
+     * Le as propriedades da conexão
+     *
+     * @return String
+     * @throws IOException
+     */
+    public static Properties lePropriedadesConexao() throws IOException {
+        Properties pt = new Properties();
+        pt.load(getResourcesAsReader("/META-INF/conexao.properties"));
+        return pt;
     }
 
 }

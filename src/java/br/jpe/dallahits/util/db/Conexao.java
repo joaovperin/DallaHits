@@ -68,6 +68,20 @@ public class Conexao implements AutoCloseable {
     }
 
     /**
+     * Executa um comando SQL diretamente no banco
+     *
+     * @param sql Comando SQL a rodar
+     * @throws DAOException Falha ao executar comando
+     */
+    public void execSQL(String sql) throws DAOException {
+        try {
+            conn.createStatement().execute(sql);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    /**
      * Retorna verdadeiro se for uma conexão para transação
      *
      * @return boolean
