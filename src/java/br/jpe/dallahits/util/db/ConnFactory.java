@@ -102,6 +102,18 @@ public class ConnFactory {
     /**
      * Define as propriedades da conexão com o banco de dados
      *
+     * @param pt Properties
+     */
+    public static void setProperties(Properties pt) {
+        setProperties(
+                pt.getProperty("url"),
+                pt.getProperty("user"),
+                pt.getProperty("password"));
+    }
+
+    /**
+     * Define as propriedades da conexão com o banco de dados
+     *
      * @param url
      * @param user
      * @param pass
@@ -117,51 +129,48 @@ public class ConnFactory {
      * Define a URL da conexão
      */
     private static void setUrl(String url) {
-        DB_PROPERTIES.setProperty("url", url);
+        if (url != null) {
+            DB_PROPERTIES.setProperty("url", url);
+        }
     }
 
     /**
      * Define o usuário da conexão
      */
     private static void setUser(String user) {
-        DB_PROPERTIES.setProperty("user", user);
+        if (user != null) {
+            DB_PROPERTIES.setProperty("user", user);
+        }
     }
 
     /**
      * Define a senha da conexão
      */
     private static void setPassword(String password) {
-        DB_PROPERTIES.setProperty("password", password);
+        if (password != null) {
+            DB_PROPERTIES.setProperty("password", password);
+        }
     }
 
     /**
      * Retorna a URL da conexão
      */
     private static String getUrl() {
-        if (DB_PROPERTIES.containsKey("url")) {
-            return DB_PROPERTIES.getProperty("url");
-        }
-        return DB_DEF_CONN;
+        return DB_PROPERTIES.getProperty("url", DB_DEF_CONN);
     }
 
     /**
      * Retorna o usuário conexão
      */
     private static String getUsername() {
-        if (DB_PROPERTIES.containsKey("user")) {
-            return DB_PROPERTIES.getProperty("user");
-        }
-        return DB_DEF_USER;
+        return DB_PROPERTIES.getProperty("user", DB_DEF_USER);
     }
 
     /**
      * Retorna a senha da conexão
      */
     private static String getPassword() {
-        if (DB_PROPERTIES.containsKey("password")) {
-            return DB_PROPERTIES.getProperty("password");
-        }
-        return DB_DEF_PASS;
+        return DB_PROPERTIES.getProperty("password", DB_DEF_PASS);
     }
 
 }

@@ -12,8 +12,6 @@ import br.jpe.dallahits.util.db.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe MensagemDAO
@@ -33,7 +31,7 @@ public class MensagemDAO extends AbstractDAO<MensagemBean> {
     @Override
     public void insert(MensagemBean bean) throws DAOException {
         try {
-            PreparedStatement pstmt = conn.get().prepareStatement(getSqlInsert());
+            PreparedStatement pstmt = conn.prepareStatement(getSqlInsert());
             pstmt.setString(1, bean.getUsuario());
             pstmt.setString(2, bean.getMsg());
             pstmt.executeUpdate();

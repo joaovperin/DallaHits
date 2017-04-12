@@ -12,8 +12,6 @@ import br.jpe.dallahits.util.db.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe UsuarioDAO
@@ -46,14 +44,14 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean> {
         try {
             // Monta SQL de busca
             String busca = SELECT.concat(" WHERE Login = ?");
-            PreparedStatement pstmt = conn.get().prepareStatement(busca);
+            PreparedStatement pstmt = conn.prepareStatement(busca);
             pstmt.setString(1, login);
             return buscaPrimeiro(pstmt);
         } catch (SQLException e) {
             throw new DAOException(e);
         }
     }
-    
+
     /**
      * Busca um usuário à partir do seu Email
      *
@@ -65,7 +63,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean> {
         try {
             // Monta SQL de busca
             String busca = SELECT.concat(" WHERE Email = ?");
-            PreparedStatement pstmt = conn.get().prepareStatement(busca);
+            PreparedStatement pstmt = conn.prepareStatement(busca);
             pstmt.setString(1, email);
             return buscaPrimeiro(pstmt);
         } catch (SQLException e) {

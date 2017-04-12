@@ -5,16 +5,12 @@
  */
 package br.jpe.dallahits.dao;
 
-import br.jpe.dallahits.bean.MensagemBean;
 import br.jpe.dallahits.bean.ProdutoBean;
 import br.jpe.dallahits.exception.DAOException;
 import br.jpe.dallahits.util.db.AbstractDAO;
 import br.jpe.dallahits.util.db.Conexao;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe MensagemDAO
@@ -56,9 +52,8 @@ public class ProdutoDAO extends AbstractDAO<ProdutoBean> {
         ProdutoBean produto = new ProdutoBean();
         produto.setIdProduto(rs.getLong(1));
         produto.setDescricao(rs.getString(2));
+        produto.setValorUnitario(rs.getDouble(3));
         return produto;
     }
-
-    
 
 }

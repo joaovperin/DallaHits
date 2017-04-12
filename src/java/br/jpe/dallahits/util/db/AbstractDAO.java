@@ -32,10 +32,10 @@ public abstract class AbstractDAO<B> {
         this.conn = conn;
     }
 
-    public  List<B> busca() throws DAOException{
+    public List<B> busca() throws DAOException {
         List<B> list = new ArrayList<>();
         try {
-            PreparedStatement pstmt = conn.get().prepareStatement(getSqlSelect());
+            PreparedStatement pstmt = conn.prepareStatement(getSqlSelect());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(getBeanFromResultSet(rs));
@@ -72,7 +72,7 @@ public abstract class AbstractDAO<B> {
         }
         return null;
     }
-    
+
     protected abstract String getSqlSelect();
 
     /**

@@ -7,6 +7,7 @@ package br.jpe.dallahits.util.db;
 
 import br.jpe.dallahits.exception.DAOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -42,12 +43,28 @@ public class Conexao implements AutoCloseable {
     }
 
     /**
-     * Retorna a conexão
+     * Retorna a conexão do MySQL (não utilizar)
      *
      * @return Connection
      */
+    @Deprecated
     public Connection get() {
         return conn;
+    }
+
+    /**
+     * Retorna um PreparedStatement à partir de um SQL
+     *
+     * @param sql Comando SQL a rodar
+     * @return PreparedStatement
+     * @throws DAOException
+     */
+    public PreparedStatement prepareStatement(String sql) throws DAOException {
+        try {
+            return conn.prepareStatement(sql);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
     }
 
     /**

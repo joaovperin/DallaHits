@@ -16,6 +16,7 @@ public class ProdutoBean {
 
     private long idProduto;
     private String descricao;
+    private double ValorUnitario;
 
     public long getIdProduto() {
         return idProduto;
@@ -33,11 +34,20 @@ public class ProdutoBean {
         this.descricao = descricao;
     }
 
+    public double getValorUnitario() {
+        return ValorUnitario;
+    }
+
+    public void setValorUnitario(double ValorUnitario) {
+        this.ValorUnitario = ValorUnitario;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + (int) (this.idProduto ^ (this.idProduto >>> 32));
-        hash = 41 * hash + Objects.hashCode(this.descricao);
+        hash = 13 * hash + (int) (this.idProduto ^ (this.idProduto >>> 32));
+        hash = 13 * hash + Objects.hashCode(this.descricao);
+        hash = 13 * hash + (int) (Double.doubleToLongBits(this.ValorUnitario) ^ (Double.doubleToLongBits(this.ValorUnitario) >>> 32));
         return hash;
     }
 
@@ -56,6 +66,9 @@ public class ProdutoBean {
         if (this.idProduto != other.idProduto) {
             return false;
         }
+        if (Double.doubleToLongBits(this.ValorUnitario) != Double.doubleToLongBits(other.ValorUnitario)) {
+            return false;
+        }
         if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
@@ -64,7 +77,7 @@ public class ProdutoBean {
 
     @Override
     public String toString() {
-        return "ProdutoBean{" + "idProduto=" + idProduto + ", descricao=" + descricao + '}';
+        return "ProdutoBean{" + "idProduto=" + idProduto + ", descricao=" + descricao + ", ValorUnitario=" + ValorUnitario + '}';
     }
 
 }
