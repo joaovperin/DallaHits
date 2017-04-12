@@ -15,11 +15,17 @@ import javax.servlet.http.HttpServlet;
  */
 public class InitServlet extends HttpServlet {
 
+    /**
+     * Realiza a inicialização da aplicação
+     *
+     * @param config Configurações do Servlet
+     * @throws javax.servlet.ServletException
+     */
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ContextUtils.setServletContext(config.getServletContext());
-        System.out.println("Inicializado com sucesso!");
+        System.out.println("Aplicação inicializada com sucesso!");
     }
 
 }

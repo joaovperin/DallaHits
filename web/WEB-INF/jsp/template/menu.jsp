@@ -11,15 +11,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand topnav" href="#">Início</a>
+            <spring:url value="/index" var="homeUrl" htmlEscape="true" />
+            <a class="navbar-brand topnav" href="${homeUrl}">Início</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <%--<spring:url value="/index" var="homeUrl" htmlEscape="true" />--%>
-                    <!--<a href="${homeUrl}">Início</a>-->
-                    <a href="#about">Sobre</a>
+                    <spring:url value="/mensagens" var="mensagensUrl" htmlEscape="true" />
+                    <a href="${mensagensUrl}">Mensagens</a>
                 </li>
                 <li>
                     <a href="#services">Serviços</a>

@@ -20,11 +20,11 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 public class InicializadorDB {
 
     /** Diretório base */
-    private static final String DIR_BASE = "D:\\1-Projetos\\_Feevale\\DallaHits\\";
+    private static final String DIR_BASE = "D:\\1-Projetos\\_Feevale\\DallaHits\\web\\";
     /** Diretório relativo do script de criação das tabelas */
-    private static final String SC_TABLES = "web\\WEB-INF\\modelo\\BD_Tables.sql";
+    private static final String SC_TABLES = "/META-INF/modelo/BD_Tables.sql";
     /** Diretório relativo do script de inicialização de dados */
-    private static final String SC_INIT = "web\\WEB-INF\\modelo\\BD_Init.sql";
+    private static final String SC_INIT = "/META-INF/modelo/BD_Init.sql";
 
     /**
      * Executa criação das tabelas do banco
@@ -77,7 +77,11 @@ public class InicializadorDB {
      * @throws FileNotFoundException
      */
     private BufferedReader getReaderFor(String fileName) throws FileNotFoundException {
-        return new BufferedReader(new FileReader(DIR_BASE + fileName));
+        try {
+            return ContextUtils.getResourcesAsReader(fileName);
+        } catch (Exception e) {
+            return new BufferedReader(new FileReader(DIR_BASE + fileName));
+        }
     }
 
 }

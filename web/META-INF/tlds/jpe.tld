@@ -24,4 +24,16 @@
     <name>message</name>
     <path>/WEB-INF/tags/message.tag</path>
   </tag-file>
+  <tag-file>
+    <name>field</name>
+    <path>/WEB-INF/tags/field.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>fieldText</name>
+    <path>/WEB-INF/tags/fieldText.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>fieldSenha</name>
+    <path>/WEB-INF/tags/fieldSenha.tag</path>
+  </tag-file>
 </taglib>

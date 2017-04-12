@@ -1,9 +1,13 @@
 /*
- * DallaHits
- * CopyRight Rech Informática Ltda. Todos os direitos reservados.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package br.jpe.dallahits.util.db;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import javax.servlet.ServletContext;
 
 /**
@@ -31,11 +35,31 @@ public class ContextUtils {
      *
      * @return ServletContext
      */
-    public static final ServletContext getServletContext() {
-        if (context != null) {
+    private static ServletContext getServletContext() {
+        if (context == null) {
             throw new RuntimeException("Contexto Servlet não definido!");
         }
         return context;
+    }
+
+    /**
+     * Retorna um resource como Stream
+     *
+     * @param res
+     * @return InputStream
+     */
+    public static InputStream getResourceAsStream(String res) {
+        return getServletContext().getResourceAsStream(res);
+    }
+
+    /**
+     * Retorna um resource como BufferedReader
+     *
+     * @param res
+     * @return BufferedReader
+     */
+    public static BufferedReader getResourcesAsReader(String res) {
+        return new BufferedReader(new InputStreamReader(getResourceAsStream(res)));
     }
 
 }

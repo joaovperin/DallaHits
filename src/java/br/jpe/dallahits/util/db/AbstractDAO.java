@@ -9,6 +9,7 @@ import br.jpe.dallahits.exception.DAOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +32,19 @@ public abstract class AbstractDAO<B> {
         this.conn = conn;
     }
 
-    public abstract List<B> busca() throws DAOException;
+    public  List<B> busca() throws DAOException{
+        List<B> list = new ArrayList<>();
+        try {
+            PreparedStatement pstmt = conn.get().prepareStatement(getSqlSelect());
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                list.add(getBeanFromResultSet(rs));
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
 
     public abstract void insert(B bean) throws DAOException;
 
@@ -59,6 +72,8 @@ public abstract class AbstractDAO<B> {
         }
         return null;
     }
+    
+    protected abstract String getSqlSelect();
 
     /**
      * Cria um novo Bean e popula a partir do ResultSet

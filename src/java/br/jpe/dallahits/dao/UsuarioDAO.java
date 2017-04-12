@@ -73,27 +73,6 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean> {
         }
     }
 
-    /**
-     * Busca todos os usuários
-     *
-     * @return UsuarioBean
-     * @throws DAOException
-     */
-    @Override
-    public List<UsuarioBean> busca() throws DAOException {
-        List<UsuarioBean> list = new ArrayList<>();
-        try {
-            PreparedStatement pstmt = conn.get().prepareStatement(SELECT);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                list.add(getBeanFromResultSet(rs));
-            }
-            return list;
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-    }
-
     @Override
     public void insert(UsuarioBean bean) throws DAOException {
         throw new UnsupportedOperationException("UsuarioDAO.insert() nao suportado.");
@@ -125,6 +104,11 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean> {
         bean.setNome(rs.getString(4));
         bean.setTipo(rs.getString(5));
         return bean;
+    }
+
+    @Override
+    protected String getSqlSelect() {
+        return SELECT;
     }
 
 }

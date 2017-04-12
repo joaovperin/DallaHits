@@ -1,4 +1,4 @@
-M�dulos:
+Módulos:
 
 1.Cadastros:
 1.1-Clientes
@@ -6,8 +6,8 @@ M�dulos:
 1.3-Fornecedores
 
 2.Gerenciamento
-2.1-Funcion�rios
-2.2-Atra��es
+2.1-Funcionários
+2.2-Atrações
 2.3-Marketing/Publicidade
 
 3.Comercial
@@ -21,64 +21,64 @@ Requisitos funcionais:
 1.LOGIN;
 2.VENDAS;
 
-Requisitos Opcionais (se sobrar tempo):
-GRUPO PRODUTO POR N�VEIS:
+Requisitos não funcionais:
+GRUPO PRODUTO POR NÍVEIS:
   Tudo(Bebidas(Cervejas(Bud,Skol), Destilados(Vodka, Whisky)), Alimentos(Salgados, Doces))
 BANCO DE DADOS;
-MANUTEN��O COMANDAS (Listagem/Consulta fechadas);
-CADASTRO CLIENTES (Todos, Criar bot�o Add na manuten��o da comanda);
-N�VEIS DE USU�RIO (Admin/Representante);
-CADASTRO PRODUTOS (S� Admin);
+MANUTENÇÃO COMANDAS (Listagem/Consulta fechadas);
+CADASTRO CLIENTES (Todos, Criar botão Add na manutenção da comanda);
+NÍVEIS DE USUÁRIO (Admin/Representante);
+CADASTRO PRODUTOS (Só Admin);
 
 Etapas:
-1.Prototipa��o:
-  Defini��o tecnologias
+1.Prototipação:
+  Definição tecnologias
      JSP/Servlets/jQuery/jQueryUI/MySQL/MVC.
-  Cria��o projeto
+  Criação projeto
      ...
-  Cria��o de classes
+  Criação de classes
      Controllers, Beans, DAOs, Utils.
-  Defini��o usabilidade
-     Navbar Comandas -> Links para as a��es
-     Grid listar� as 20 �ltimas comandas criadas com a��es para redirecionar � consulta/altera��o/finaliza��o
-     Bot�o criar comanda: S� Gera um n�mero e pede o Cliente(cod? + nome + SEXO) -> Deve inicializar a DtHoraEntrada
-  Cria��o do Layout de Venda
-     Tudo em uma p�gina
+  Definição usabilidade
+     Navbar Comandas -> Links para as ações
+     Grid listará as 20 últimas comandas criadas com ações para redirecionar à consulta/alteração/finalização
+     Botão criar comanda: Só Gera um número e pede o Cliente(cod? + nome + SEXO) -> Deve inicializar a DtHoraEntrada
+  Criação do Layout de Venda
+     Tudo em uma página
      Campos:
-       Cliente     (cod/nome/DtHoraEntrada) /SOMENTE EXIBI��O/,
+       Cliente     (cod/nome/DtHoraEntrada) /SOMENTE EXIBIÇÃO/,
        Lista itens (cod/desc/val un/qtd/total/'thrash'Action),
-       Bt. Add -> Abre Modal para inclus�o de item:        
+       Bt. Add -> Abre Modal para inclusão de item:        
           Prod (cod/desc/valor/'+'Action)
        Totalizador (Vl.Ing/Vl.Itens/Vl.Tot)
-       Bt.Gravar (Salva altera��es feitas e retorna � listagem comandas)
+       Bt.Gravar (Salva alterações feitas e retorna à listagem comandas)
        Bt.Fechar Comanda -> Abre Modal para acertar valores:
           Exibe Cliente(cod/nome/DtHoraEntrada)
           Exibe Valor Ingresso
           Exibe Valor total itens
           Exibe lista itens
-          Condi��es Pgto (Dinheiro/cart�o):
+          Condições Pgto (Dinheiro/cartão):
              Se dinheiro: Pede valor e calcula troco.
           Ao Confirmar:
             Grava DtHoraSaida e Muda Status (vai servir pra listagem/consulta).   
-  Cria��o das Views
+  Criação das Views
      ...
 
-Obs.: Inicialmente, DAOs ter�o Maps com valores pr�-definidos.
-MYSQL � UM REQUISITO N�O FUNCIONAL.
+Obs.: Inicialmente, DAOs terão Maps com valores pré-definidos.
+MYSQL É UM REQUISITO NÃO FUNCIONAL.
 
 2. Desenvolvimento:
-  Iniciar na p�gina de vendas:
+  Iniciar na página de vendas:
     Beans (Usuario/Cliente/Produto/Comanda)
-    DAOs  (   0   /   3   /   5   /   0   ) -> N�mero de valores a pr�-definir
+    DAOs  (   0   /   3   /   5   /   0   ) -> Número de valores a pré-definir
     Views -> 
        Janela principal (alt. comanda),
        Modal Itens,
        Modal Finalizar comanda,
-    Simples: solicita usu�rio e senha, valida num Map pr�-definidos no fonte.
+    Simples: solicita usuário e senha, valida num Map pré-definidos no fonte.
        Tela Login (add 2 usu nos DAOS)
-    Criar sistema de a��es (alt/con) -> Somente desabilitar campos/bot�es na consulta.
+    Criar sistema de ações (alt/con) -> Somente desabilitar campos/botões na consulta.
  ---------
-    Iniciar an�lise das atra��es.
+    Iniciar análise das atrações.
 
 
 
@@ -90,5 +90,5 @@ https://www.youtube.com/watch?v=lGbPwwoKdwI
 https://www.google.com.br/search?q=sistema+erp+casa+noturna&oq=sistema+erp+casa+noturna&aqs=chrome..69i57.2963j0j1&sourceid=chrome&ie=UTF-8
 
 
-// ANOTA��ES:
-(Matheus): DJ FABINHO TEM QUE TER NAS ATRA��ES -> Pre�o 100 reais
+// ANOTAÇÕES:
+(Matheus): DJ FABINHO TEM QUE TER NAS ATRAÇÕES -> Preço 100 reais

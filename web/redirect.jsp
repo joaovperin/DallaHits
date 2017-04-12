@@ -15,5 +15,4 @@ servlet but should be the only JSP outside of WEB-INF.
         // Otherwise, vai pra página inicial
         response.sendRedirect("index");
     }
-    
 %>
