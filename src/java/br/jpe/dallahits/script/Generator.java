@@ -55,6 +55,7 @@ public class Generator {
 
             data.put("countries", countries);
             
+            //http://codejen.sourceforge.net/Code_Generator_User_Guide.html
             data.put("name", "TestBean");
 
             // Console output
