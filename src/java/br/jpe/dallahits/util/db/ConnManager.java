@@ -60,6 +60,18 @@ public class ConnManager {
     /**
      * Define as propriedades da conexão com o banco de dados
      *
+     * @param url
+     * @param database
+     * @param user
+     * @param pass
+     */
+    public static void setProperties(String url, String database, String user, String pass) {
+        setProperties(null, url, database, user, pass);
+    }
+
+    /**
+     * Define as propriedades da conexão com o banco de dados
+     *
      * @param driver
      * @param url
      * @param database
@@ -85,7 +97,7 @@ public class ConnManager {
             DB_PROPERTIES.setProperty(PT_DATABASE, driver);
         }
     }
-    
+
     /**
      * Define a Database
      *

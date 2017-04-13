@@ -16,10 +16,11 @@ import java.util.List;
 public class Table {
 
     private String nome;
-    List<Field> fields;
+    private String tableName;
+    private List<Field> tableFields;
 
     public Table() {
-        fields = new ArrayList<>();
+        tableFields = new ArrayList<>();
     }
 
     public String getNome() {
@@ -30,21 +31,29 @@ public class Table {
         this.nome = nome;
     }
 
-    public List<Field> getFields() {
-        return fields;
+    public String getTableName() {
+        return tableName;
     }
 
-    public void setFields(List<Field> fields) {
-        this.fields = fields;
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public List<Field> getTableFields() {
+        return tableFields;
+    }
+
+    public void setTableFields(List<Field> tableFields) {
+        this.tableFields = tableFields;
     }
 
     public void addField(Field field) {
-        fields.add(field);
+        tableFields.add(field);
     }
 
     @Override
     public String toString() {
-        return "Table{" + "nome=" + nome + ", fields=" + fields + '}';
+        return "Table{" + "nome=" + tableName + ", fields=" + tableFields + '}';
     }
 
 }

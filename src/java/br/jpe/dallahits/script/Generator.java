@@ -6,14 +6,12 @@
 package br.jpe.dallahits.script;
 
 import br.jpe.dallahits.script.util.Table;
-import java.util.List;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +33,7 @@ public class Generator {
         this.tables = tables;
     }
 
-    public void execute() {
+    public void execute(File arqSaida) {
         //Freemarker configuration object
         Configuration cfg = new Configuration();
         try {
@@ -46,15 +44,17 @@ public class Generator {
             Map<String, Object> data = new HashMap<>();
             data.put("message", "Hello World!");
 
-            //List parsing 
-            List<String> countries = new ArrayList<>();
-            countries.add("India");
-            countries.add("United States");
-            countries.add("Germany");
-            countries.add("France");
+            data.put("tables", tables);
 
-            data.put("countries", countries);
-            
+//            //List parsing
+//            List<String> countries = new ArrayList<>();
+//            countries.add("India");
+//            countries.add("United States");
+//            countries.add("Germany");
+//            countries.add("France");
+//
+//            data.put("countries", countries);
+
             data.put("name", "TestBean");
 
             // Console output
@@ -63,8 +63,7 @@ public class Generator {
             out.flush();
 
             // File output
-            
-            Writer file = new FileWriter(new File("D:\\1-Projetos\\_Feevale\\DallaHits\\src\\java\\br\\jpe\\dallahits\\gen\\TestBean.java"));
+            Writer file = new FileWriter(arqSaida);
             template.process(data, file);
             file.flush();
             file.close();
