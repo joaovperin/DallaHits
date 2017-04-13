@@ -18,19 +18,6 @@ import java.util.Properties;
  */
 public class ConnFactory {
 
-    /** Nome do Driver do MySQL */
-    private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-    /** Propriedades da conexão com o banco */
-    private static final Properties DB_PROPERTIES = new Properties();
-
-    /** Nome da conexão com o BD */
-    private static final String DB_DEF_CONN = "jdbc:mysql://localhost/dallahits";
-    /** Nome do usuário no BD */
-    private static final String DB_DEF_USER = "admin";
-    /** Senha do usuário no BD */
-    private static final String DB_DEF_PASS = "senhaAdmin12";
-    /** Database padrão */
-    private static final String DB_DEF_DATABASE = "dallahits";
     /** Controle - indica se já registrou o driver do MySQL */
     private static boolean registrouDriver = false;
 
@@ -43,7 +30,7 @@ public class ConnFactory {
     public static Conexao criaConexao() throws DAOException {
         // Cria a conexão
         try {
-            Connection conn = getMySQLConn();
+            Connection conn = getJDBCConn();
             conn.setAutoCommit(false);
             return new Conexao(conn);
         } catch (SQLException e) {
@@ -60,7 +47,7 @@ public class ConnFactory {
     public static Conexao criaConexaoTransacao() throws DAOException {
         // Cria a conexão
         try {
-            Connection conn = getMySQLConn();
+            Connection conn = getJDBCConn();
             conn.setAutoCommit(false);
             return new Conexao(conn, true);
         } catch (SQLException e) {
@@ -69,26 +56,33 @@ public class ConnFactory {
     }
 
     /**
-     * Cria uma conexão pelo Driver
+     * Cria uma conexão pelo Driver executando a configuração se necessário
      *
      * @return Connection
      * @throws SQLException
      */
-    private static Connection getMySQLConn() throws SQLException {
-        // Registra o Driver se precisar
-        if (registrouDriver == false) {
-            registraDriver();
-        }
-        return getConn();
+    private static Connection getJDBCConn() throws SQLException {
+        return getJDBCConn(true);
     }
 
-    private static Connection getConn() throws SQLException {
+    /**
+     * Cria uma conexão pelo Driver
+     *
+     * @param exec Indica se deve executar configuração
+     * @return Connection
+     * @throws SQLException
+     */
+    private static Connection getJDBCConn(boolean exec) throws SQLException {
+        // Registra o Driver se precisar
+        if (exec && registrouDriver == false) {
+            registraDriver();
+        }
         // Define as propriedades da conexão
         Properties pt = new Properties();
-        pt.setProperty("user", getUsername());
-        pt.setProperty("password", getPassword());
+        pt.setProperty("user", ConnManager.getUsername());
+        pt.setProperty("password", ConnManager.getPassword());
         pt.setProperty("autoReconnect", "true");
-        return DriverManager.getConnection(getUrl(), pt);
+        return DriverManager.getConnection(ConnManager.getUrl(), pt);
     }
 
     /**
@@ -96,104 +90,23 @@ public class ConnFactory {
      */
     private static void registraDriver() throws SQLException {
         registrouDriver = false;
-        Connection conn = null;
         try {
-            Class.forName(DRIVER_NAME);
-            conn = getConn();
-            conn.createStatement().execute(getSqlUseDB());
-            conn.commit();
+            Class.forName(ConnManager.getDriverName());
+            setUseDb();
             registrouDriver = true;
         } catch (ClassNotFoundException e) {
             registrouDriver = false;
             throw new RuntimeException("Falha ao registrar o Driver do MySQL JDBC!", e);
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
         }
     }
 
     /**
-     * Define as propriedades da conexão com o banco de dados
+     * Executa o comando que indica a Database a utilizar
      *
-     * @param pt Properties
+     * @throws SQLException
      */
-    public static void setProperties(Properties pt) {
-        setProperties(
-                pt.getProperty("url"),
-                pt.getProperty("user"),
-                pt.getProperty("password"));
-    }
-
-    /**
-     * Define as propriedades da conexão com o banco de dados
-     *
-     * @param url
-     * @param user
-     * @param pass
-     */
-    public static void setProperties(String url, String user, String pass) {
-        DB_PROPERTIES.clear();
-        setUrl(url);
-        setUser(user);
-        setPassword(pass);
-    }
-
-    /**
-     * Define a URL da conexão
-     */
-    private static void setUrl(String url) {
-        if (url != null) {
-            DB_PROPERTIES.setProperty("url", url);
-        }
-    }
-
-    /**
-     * Define o usuário da conexão
-     */
-    private static void setUser(String user) {
-        if (user != null) {
-            DB_PROPERTIES.setProperty("user", user);
-        }
-    }
-
-    /**
-     * Define a senha da conexão
-     */
-    private static void setPassword(String password) {
-        if (password != null) {
-            DB_PROPERTIES.setProperty("password", password);
-        }
-    }
-
-    /**
-     * Retorna a URL da conexão
-     */
-    private static String getUrl() {
-        return DB_PROPERTIES.getProperty("url", DB_DEF_CONN);
-    }
-
-    /**
-     * Retorna o usuário conexão
-     */
-    private static String getUsername() {
-        return DB_PROPERTIES.getProperty("user", DB_DEF_USER);
-    }
-
-    /**
-     * Retorna a senha da conexão
-     */
-    private static String getPassword() {
-        return DB_PROPERTIES.getProperty("password", DB_DEF_PASS);
-    }
-
-    /**
-     * Retorna o nome do banco de dados
-     *
-     * @return String Nome do database
-     */
-    public static String getDatabaseName() {
-        return DB_PROPERTIES.getProperty("database", DB_DEF_DATABASE);
+    public static void setUseDb() throws SQLException {
+        getJDBCConn(false).createStatement().execute(getSqlUseDB());
     }
 
     /**
@@ -202,7 +115,7 @@ public class ConnFactory {
      * @return String
      */
     private static String getSqlUseDB() {
-        return "USE " + getDatabaseName();
+        return "USE " + ConnManager.getDatabaseName();
     }
 
 }

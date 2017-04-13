@@ -5,7 +5,7 @@
  */
 package br.jpe.dallahits.servlet;
 
-import br.jpe.dallahits.util.db.ConnFactory;
+import br.jpe.dallahits.util.db.ConnManager;
 import br.jpe.dallahits.util.db.ContextUtils;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -38,7 +38,7 @@ public class InitServlet extends HttpServlet {
      */
     private void definePropriedadesConexao() throws ServletException {
         try {
-            ConnFactory.setProperties(ContextUtils.lePropriedadesConexao());
+            ConnManager.setProperties(ContextUtils.lePropriedadesConexao());
         } catch (IOException e) {
             throw new ServletException(e);
         }

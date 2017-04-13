@@ -6,7 +6,7 @@
 package br.jpe.dallahits.util.db;
 
 import br.jpe.dallahits.exception.DAOException;
-import static br.jpe.dallahits.util.db.ConnFactory.getDatabaseName;
+import br.jpe.dallahits.util.db.ConnManager;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -37,7 +37,7 @@ public class InicializadorDB {
         Conexao conn = null;
         try {
             // Define as propriedades da conexão
-            ConnFactory.setProperties(ContextUtils.lePropriedadesConexao());
+            ConnManager.setProperties(ContextUtils.lePropriedadesConexao());
             // Cria conexão e prepara o ScriptRunner
             conn = ConnFactory.criaConexaoTransacao();
             criaBaseDados();
@@ -94,7 +94,7 @@ public class InicializadorDB {
      * @return String
      */
     private String getSqlDropDB() {
-        return "DROP SCHEMA IF EXISTS " + getDatabaseName();
+        return "DROP SCHEMA IF EXISTS " + ConnManager.getDatabaseName();
     }
 
     /**
@@ -103,8 +103,8 @@ public class InicializadorDB {
      * @return String
      */
     private String getSqlCreateDB() {
-        return "CREATE SCHEMA IF NOT EXISTS " + getDatabaseName() +
-                " DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci";
+        return "CREATE SCHEMA IF NOT EXISTS " + ConnManager.getDatabaseName()
+                + " DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci";
     }
 
     /**
@@ -113,7 +113,7 @@ public class InicializadorDB {
      * @return String
      */
     private String getSqlUseDB() {
-        return "USE " + getDatabaseName();
+        return "USE " + ConnManager.getDatabaseName();
     }
 
     /**

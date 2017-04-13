@@ -8,6 +8,7 @@ package br.jpe.dallahits.util.db;
 import br.jpe.dallahits.exception.DAOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -76,6 +77,21 @@ public class Conexao implements AutoCloseable {
     public void execSQL(String sql) throws DAOException {
         try {
             conn.createStatement().execute(sql);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    /**
+     * Executa um comando SQL DE BUSCA diretamente no banco
+     *
+     * @param sql Comando SQL a rodar
+     * @return ResultSet
+     * @throws DAOException Falha ao executar comando
+     */
+    public ResultSet execSQLQuery(String sql) throws DAOException {
+        try {
+            return conn.createStatement().executeQuery(sql);
         } catch (SQLException e) {
             throw new DAOException(e);
         }
