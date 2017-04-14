@@ -17,6 +17,10 @@ public class Texto {
 
     /** Pattern para converter Strings Underscored para CamelCased */
     private static final Pattern PT_UNDERSCORE_TO_CAMELCASE = Pattern.compile("_(.)");
+    /** Pattern para converter Strings CamelCased para Underscored */
+    private static final Pattern PT_CAMELCASE_TO_UNDERSCORE = Pattern.compile("([^_A-Z])([A-Z])");
+    /** Pattern para detectar palavras entre parênteses */
+    private static final Pattern PT_PARENTESES = Pattern.compile("\\(.+\\)");
 
     /**
      * Capitaliza uma String
@@ -57,6 +61,70 @@ public class Texto {
             return capitalize(sb.toString());
         }
         return sb.toString();
+    }
+
+    /**
+     * Converte um texto separado por CamelCase para UnderScored
+     *
+     * @param str Texto
+     * @return String
+     */
+    public static String toUnderScore(String str) {
+        return PT_CAMELCASE_TO_UNDERSCORE.matcher(str).replaceAll("$1_$2");
+    }
+
+    /**
+     * Remove a primeira ocorrência da expressão num texto
+     *
+     * @param regex
+     * @param text
+     * @return String
+     */
+    public static String removeFirst(String regex, String text) {
+        return text.replaceFirst(regex, "");
+    }
+
+    /**
+     * Remove a última ocorrência da expressão num texto
+     *
+     * @param regex
+     * @param text
+     * @return String
+     */
+    public static String removeLast(String regex, String text) {
+        String pattern = "(?s)" + regex + "(?!.*?" + regex + ")";
+        return text.replaceFirst(pattern, "");
+    }
+
+    /**
+     * Remove o caracter na posição indicada
+     *
+     * @param text
+     * @param index
+     * @return String
+     */
+    public static String removeCharAt(String text, int index) {
+        if (index < 0 || index > text.length()) {
+            return text;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(text.substring(0, index));
+        sb.append(text.substring(index + 1, text.length()));
+        return sb.toString();
+    }
+
+    /**
+     * Remove os parênteses externos do texto (não recursivamente)
+     *
+     * @param text
+     * @return String
+     */
+    public static String removeOuterParenteses(String text) {
+        if (PT_PARENTESES.matcher(text).find()) {
+            String temp = removeCharAt(text, text.length() - 1);
+            return removeCharAt(temp, 0);
+        }
+        return text;
     }
 
 }
