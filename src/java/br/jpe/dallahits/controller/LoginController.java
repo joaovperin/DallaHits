@@ -5,9 +5,10 @@
  */
 package br.jpe.dallahits.controller;
 
-import br.jpe.dallahits.bean.UsuarioBean;
-import br.jpe.dallahits.dao.UsuarioDAO;
+import br.jpe.dallahits.gen.bean.UsuarioBean;
+import br.jpe.dallahits.gen.dao.UsuarioDAO;
 import br.jpe.dallahits.exception.DAOException;
+import br.jpe.dallahits.gen.pk.UsuarioPk;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +40,7 @@ public class LoginController {
         UsuarioBean usuarioBean = null;
         if (usuario.getLogin() != null) {
             try (Conexao conn = ConnFactory.criaConexao()) {
-                usuarioBean = new UsuarioDAO(conn).buscaLogin(usuario.getLogin());
+                usuarioBean = new UsuarioDAO(conn).buscaPk(new UsuarioPk(usuario.getLogin()));
             }
         }
         // Se o usuario e senha forem válidos, redireciona para o login

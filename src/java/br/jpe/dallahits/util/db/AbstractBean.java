@@ -12,6 +12,16 @@ package br.jpe.dallahits.util.db;
  */
 public abstract class AbstractBean<B extends AbstractBean> {
 
-    
+    /** Api para trabalhar com Jsons  */
+    private static final JpeGson GS = new JpeGson();
 
+    /** 
+     * Retorna a representação do objeto em Json
+     * 
+     * @return String
+     */
+    public String toJson(){
+        return GS.toJson(this);
+    }
+    
 }

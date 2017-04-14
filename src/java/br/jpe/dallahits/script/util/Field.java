@@ -14,6 +14,9 @@ public class Field {
 
     private String field;
     private String type;
+    private String comment;
+    private boolean pk;
+    private boolean autoIncrement;
 
     public String getField() {
         return field;
@@ -31,9 +34,33 @@ public class Field {
         this.type = type;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public boolean isPk() {
+        return pk;
+    }
+
+    public void setPk(boolean pk) {
+        this.pk = pk;
+    }
+
+    public boolean isAutoIncrement() {
+        return autoIncrement;
+    }
+
+    public void setAutoIncrement(boolean autoIncrement) {
+        this.autoIncrement = autoIncrement;
+    }
+
     @Override
     public String toString() {
-        return "Field{" + "field=" + field + ", type=" + type + '}';
+        return "Field{" + "field=" + field + ", type=" + type + ", comment=" + comment + ", pk=" + pk + ", autoIncrement=" + autoIncrement + '}';
     }
 
 }

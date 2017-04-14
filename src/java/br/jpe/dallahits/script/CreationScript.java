@@ -8,12 +8,15 @@ package br.jpe.dallahits.script;
 import br.jpe.dallahits.script.util.Field;
 import br.jpe.dallahits.exception.DAOException;
 import br.jpe.dallahits.script.util.Table;
+import br.jpe.dallahits.script.util.TemplateEntidade;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
+import br.jpe.dallahits.util.db.ConnManager;
+import br.jpe.dallahits.util.db.ContextUtils;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -23,17 +26,38 @@ import java.util.List;
  */
 public class CreationScript {
 
-    public static void main(String[] args) throws DAOException {
-        new CreationScript().exec("dallahits");
+    /** Gerador de códigos fonte */
+    private final Generator g;
+
+    /**
+     * Construtor padrão do Script
+     *
+     * @param basePath
+     */
+    public CreationScript(String basePath) {
+        this.g = new Generator(basePath);
+    }
+
+    public static void main(String[] args) throws Exception {
+        // Lê as propriedades da conexão e seta
+        try {
+            // Executa a geração dos códigos fonte
+            String basePath = "D:/1-Projetos/_Feevale/DallaHits";
+            ConnManager.setProperties(ContextUtils.lePropriedadesConexao(basePath + "/web"));
+            new CreationScript(basePath).exec(ConnManager.getDatabaseName());
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     private void exec(String dbName) throws DAOException {
-        List<Table> tables = new ArrayList<>();
         try (Conexao conn = ConnFactory.criaConexao()) {
-            tables = getTables(conn, dbName);
+            for (Table t : getTables(conn, dbName)) {
+                g.criaTplPk("br.jpe.dallahits.gen", new TemplateEntidade(t));
+                g.criaTplBean("br.jpe.dallahits.gen", new TemplateEntidade(t));
+                g.criaTplDAO("br.jpe.dallahits.gen", new TemplateEntidade(t));
+            }
         }
-        new Generator(tables).execute();
-        // CHAMAR O FREEMARKER A PARTIR DAQUI.
     }
 
     private List<Table> getTables(Conexao conn, String dbName) throws DAOException {
@@ -42,7 +66,7 @@ public class CreationScript {
             ResultSet rs = conn.execSQLQuery("SHOW TABLES FROM " + dbName);
             while (rs.next()) {
                 Table tb = getTabelaFromRs(rs);
-                tb.setFields(getFields(conn, tb.getNome()));
+                tb.setTableFields(getFields(conn, tb.getName()));
                 list.add(tb);
             }
         } catch (SQLException e) {
@@ -54,7 +78,7 @@ public class CreationScript {
     private List<Field> getFields(Conexao conn, String nome) throws DAOException {
         List<Field> list = new ArrayList<>();
         try {
-            ResultSet rs = conn.execSQLQuery("DESC " + nome);
+            ResultSet rs = conn.execSQLQuery("SHOW FULL FIELDS FROM " + nome);
             while (rs.next()) {
                 list.add(getFieldFromRs(rs));
             }
@@ -66,15 +90,18 @@ public class CreationScript {
 
     private Table getTabelaFromRs(ResultSet rs) throws SQLException {
         Table tabela = new Table();
-        tabela.setNome(rs.getString(1));
+        tabela.setName(rs.getString(1));
         return tabela;
     }
 
     private Field getFieldFromRs(ResultSet rs) throws SQLException {
-        Field tabela = new Field();
-        tabela.setField(rs.getString(1));
-        tabela.setType(rs.getString(2));
-        return tabela;
+        Field field = new Field();
+        field.setField(rs.getString(1));
+        field.setType(rs.getString(2));
+        field.setPk(rs.getString(5).equalsIgnoreCase("PRI"));
+        field.setAutoIncrement(rs.getString(7).equalsIgnoreCase("auto_increment"));
+        field.setComment(rs.getString(9));
+        return field;
     }
 
 }

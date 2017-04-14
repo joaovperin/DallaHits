@@ -5,13 +5,14 @@
  */
 package br.jpe.dallahits.controller;
 
-import br.jpe.dallahits.bean.MensagemBean;
-import br.jpe.dallahits.dao.MensagemDAO;
-import br.jpe.dallahits.dao.ProdutoDAO;
+import br.jpe.dallahits.gen.bean.MensagemBean;
+import br.jpe.dallahits.gen.dao.MensagemDAO;
+import br.jpe.dallahits.gen.dao.ProdutoDAO;
 import br.jpe.dallahits.exception.DAOException;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.DBUtils;
+import br.jpe.dallahits.util.db.JpeGson;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -26,8 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MensagensController {
 
-    // TODO: Adicionar API Gson().
-
+    /** Api para gerar Jsons */
+    private final JpeGson gson = new JpeGson();
+    
     /**
      * Url para a página inicial (index)
      *
@@ -59,30 +61,11 @@ public class MensagensController {
             DBUtils.commit(conn);
         } catch (DAOException e) {
             DBUtils.rollback(conn);
+            throw e;
         } finally {
             DBUtils.close(conn);
         }
-        return toJson(msgs);
-    }
-
-    public String toJson(List<MensagemBean> list) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        int len = list.size();
-        for (int i = 0; i < len; i++) {
-            MensagemBean bean = list.get(i);
-            sb.append("{");
-            sb.append("idMsg: '").append(bean.getIdMsg()).append("', ");
-            sb.append("usuario: '").append(bean.getUsuario()).append("', ");
-            sb.append("msg: '").append(bean.getMsg()).append("'");
-            sb.append("}");
-            //
-            if (i < len - 1) {
-                sb.append(", ");
-            }
-        }
-        sb.append("]");
-        return sb.toString();
+        return gson.toJson(msgs);
     }
 
     @RequestMapping("/produtos")

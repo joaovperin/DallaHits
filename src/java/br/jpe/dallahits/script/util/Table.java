@@ -15,36 +15,36 @@ import java.util.List;
  */
 public class Table {
 
-    private String nome;
-    List<Field> fields;
+    private String name;
+    private List<Field> tableFields;
 
     public Table() {
-        fields = new ArrayList<>();
+        tableFields = new ArrayList<>();
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<Field> getFields() {
-        return fields;
+    public List<Field> getTableFields() {
+        return tableFields;
     }
 
-    public void setFields(List<Field> fields) {
-        this.fields = fields;
+    public void setTableFields(List<Field> tableFields) {
+        this.tableFields = tableFields;
     }
 
     public void addField(Field field) {
-        fields.add(field);
+        tableFields.add(field);
     }
 
     @Override
     public String toString() {
-        return "Table{" + "nome=" + nome + ", fields=" + fields + '}';
+        return "Table{" + "name=" + name + ", tableFields=" + tableFields + '}';
     }
 
 }

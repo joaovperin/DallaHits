@@ -17,8 +17,9 @@ import java.util.List;
  *
  * @author Joaov
  * @param <B> Bean
+ * @param <P> Pk
  */
-public abstract class AbstractDAO<B> {
+public abstract class AbstractDAO<B extends AbstractBean, P extends AbstractPk> {
 
     /** Conexão com o banco de dados */
     protected final Conexao conn;
@@ -74,6 +75,8 @@ public abstract class AbstractDAO<B> {
     }
 
     protected abstract String getSqlSelect();
+
+    protected abstract String getSqlInsert();
 
     /**
      * Cria um novo Bean e popula a partir do ResultSet

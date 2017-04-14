@@ -7,7 +7,7 @@ rem Define as constantes dos locais dos arquivos
    set PATH=%PATH%;C:\Program Files (x86)\MySQL\MySQL Workbench 6.3 CE\
    set MYSQL=MySQLWorkbench.exe
    set ENTRADA=%cd%\modelo\modelo.mwb
-   set SAIDA_SQL=%cd%\modelo\BD_Tables
+   set SAIDA_SQL=%cd%\modelo\BD_Tables_GEN
    set SCRIPT_PY=%cd%\script_py\script.py
 rem Inicializa vari�veis de controle
    set MAX_TENTATIVAS=3

@@ -4,8 +4,8 @@ INSERT INTO `Usuario` VALUES ('fulano', 'fulanodetal@email.com', 'senha', 'Fulan
 INSERT INTO `Usuario` VALUES ('narnia', '', '2', 'Nárnia', 'A');
 INSERT INTO `Usuario` VALUES ('viccenzo', '', '1234', 'Jesus', 'A');
 
-INSERT INTO `Mensagem` (Usuario, Msg) VALUES ('viccenzo', 'oie');
 INSERT INTO `Mensagem` (Usuario, Msg) VALUES ('joaovperin', 'batata');
+INSERT INTO `Mensagem` (Usuario, Msg) VALUES ('admin', 'Bom dia, usuários');
 
 INSERT INTO `Produto` (Descricao, ValorUnitario) VALUES ('Batata', '12.50');
 INSERT INTO `Produto` (Descricao, ValorUnitario) VALUES ('Vodka', '5.50');

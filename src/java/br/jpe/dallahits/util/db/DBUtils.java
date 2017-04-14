@@ -50,4 +50,21 @@ public class DBUtils {
         }
     }
 
+    /**
+     * Retorna a URL completa do database
+     *
+     * @param url
+     * @param db
+     * @return
+     */
+    public static String getURLCompleta(String url, String db) {
+        if (url.endsWith("/") && db.startsWith("/")) {
+            return url + db.substring(1, db.length());
+        } else if (!url.endsWith("/") && !db.startsWith("/")) {
+            return url + "/" + db;
+        } else {
+            return url + db;
+        }
+    }
+
 }

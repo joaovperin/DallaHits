@@ -22,13 +22,13 @@
             <param-name>org.apache.tiles.factory.TilesContainerFactory.MUTABLE</param-name>
             <param-value>true</param-value>
         </init-param>
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>2</load-on-startup>
     </servlet>
     <!-- Mapeia o servlet dispatcher do Spring -->
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>2</load-on-startup>
+        <load-on-startup>3</load-on-startup>
     </servlet>
     <!-- Mapeia as urls para o dispatcher do Spring -->
     <servlet-mapping>

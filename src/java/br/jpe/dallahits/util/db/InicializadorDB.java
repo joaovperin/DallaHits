@@ -6,7 +6,6 @@
 package br.jpe.dallahits.util.db;
 
 import br.jpe.dallahits.exception.DAOException;
-import br.jpe.dallahits.util.db.ConnManager;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -37,7 +36,7 @@ public class InicializadorDB {
         Conexao conn = null;
         try {
             // Define as propriedades da conexão
-            ConnManager.setProperties(ContextUtils.lePropriedadesConexao());
+            ConnManager.setProperties(ContextUtils.lePropriedadesConexao(DIR_BASE));
             // Cria conexão e prepara o ScriptRunner
             conn = ConnFactory.criaConexaoTransacao();
             criaBaseDados();

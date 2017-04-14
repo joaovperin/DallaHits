@@ -7,9 +7,11 @@ package br.jpe.dallahits.util.db;
 
 import br.jpe.dallahits.exception.DAOException;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Classe Wrapper para uma Conexao com banco de dados
@@ -63,6 +65,21 @@ public class Conexao implements AutoCloseable {
     public PreparedStatement prepareStatement(String sql) throws DAOException {
         try {
             return conn.prepareStatement(sql);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    /**
+     * Retorna um PrepareStatement pra entidades com Auto_Increment
+     *
+     * @param sql
+     * @return PreparedStatement
+     * @throws DAOException
+     */
+    public PreparedStatement prepareStatementForAutoIncrement(String sql) throws DAOException {
+        try {
+            return conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         } catch (SQLException e) {
             throw new DAOException(e);
         }
@@ -131,6 +148,34 @@ public class Conexao implements AutoCloseable {
             if (isTransaction) {
                 conn.rollback();
             }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    /**
+     * Define a Database desta conexão
+     *
+     * @param database
+     * @throws DAOException
+     */
+    public void setDatabase(String database) throws DAOException {
+        try {
+            conn.setCatalog(database);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    /**
+     * Retorna os metadados do banco
+     *
+     * @return DatabaseMetaData
+     * @throws DAOException
+     */
+    public DatabaseMetaData getMetaData() throws DAOException {
+        try {
+            return conn.getMetaData();
         } catch (SQLException e) {
             throw new DAOException(e);
         }

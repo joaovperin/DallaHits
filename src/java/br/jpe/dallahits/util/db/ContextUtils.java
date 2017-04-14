@@ -6,6 +6,8 @@
 package br.jpe.dallahits.util.db;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -51,7 +53,16 @@ public class ContextUtils {
      * @return InputStream
      */
     public static InputStream getResourceAsStream(String res) {
-        return getServletContext().getResourceAsStream(res);
+        try {
+            return getServletContext().getResourceAsStream(res);
+        } catch (Exception e) {
+            System.out.println("Contexto Servlet não encontrado! Tentando buscar do arquivo...");
+            try {
+                return new FileInputStream(res);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException("Arquivo não encontrado! Path:" + res, ex);
+            }
+        }
     }
 
     /**
@@ -71,8 +82,19 @@ public class ContextUtils {
      * @throws IOException
      */
     public static Properties lePropriedadesConexao() throws IOException {
+        return lePropriedadesConexao("");
+    }
+
+    /**
+     * Le as propriedades da conexão
+     *
+     * @param path
+     * @return String
+     * @throws IOException
+     */
+    public static Properties lePropriedadesConexao(String path) throws IOException {
         Properties pt = new Properties();
-        pt.load(getResourcesAsReader("/META-INF/conexao.properties"));
+        pt.load(getResourcesAsReader(path + "/META-INF/conexao.properties"));
         return pt;
     }
 
