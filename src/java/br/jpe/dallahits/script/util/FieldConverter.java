@@ -28,6 +28,9 @@ public class FieldConverter {
         if (field.startsWith("decimal(")){
             return "double";
         }
+        if (field.startsWith("datetime") || field.startsWith("date ")){
+            return "Date";
+        }
         return "NULL";
     }
 

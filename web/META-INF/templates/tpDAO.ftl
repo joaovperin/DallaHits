@@ -15,12 +15,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import br.jpe.dallahits.exception.DAOException;
 import java.sql.SQLException;
-<#list entidade.attrs as a>
-<#if a.tipo = 'Date'>
-import java.util.Date;
-<#break>
-</#if>
-</#list>
 
 /**
  * Classe ${entidade.nome}DAO
@@ -56,7 +50,11 @@ public class ${entidade.nome}DAO extends AbstractDAO<${entidade.nome}Bean, ${ent
 <#assign idx = 1>
 <#list entidade.attrs as a>
 <#if !a.autoIncrement>
+    <#if a.tipo = 'Date'>
+           pstmt.set${a.tipo?cap_first}(${idx}, new java.sql.Date(bean.get${a.nome?cap_first}().getTime()));
+    <#else>
            pstmt.set${a.tipo?cap_first}(${idx}, bean.get${a.nome?cap_first}());
+    </#if>
 <#assign idx++>
 </#if>
 </#list>

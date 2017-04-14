@@ -27,7 +27,7 @@ public class TemplateEntidade {
             attrs.add(new TemplateAtributo(f));
             if (f.isPk()) lastKeyAtt++;
         }
-        nome = Texto.capitalize(t.getName().replaceAll("_", ""));
+        nome = Texto.toCamelCase(t.getName(), true);
     }
 
     public String getNome() {
