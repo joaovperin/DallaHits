@@ -14,7 +14,6 @@ import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.ConnManager;
 import br.jpe.dallahits.util.db.ContextUtils;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
