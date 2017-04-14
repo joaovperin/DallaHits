@@ -5,8 +5,11 @@
  */
 package br.jpe.dallahits.controller;
 
-import br.jpe.dallahits.bean.Person;
-import java.util.List;
+import br.jpe.dallahits.exception.DAOException;
+import br.jpe.dallahits.exception.DallaHitsException;
+import br.jpe.dallahits.gen.dao.PessoasDAO;
+import br.jpe.dallahits.util.db.Conexao;
+import br.jpe.dallahits.util.db.ConnFactory;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,11 +29,15 @@ public class SpringTilesController {
      * @param model DataModel
      * @param req Request
      * @return String
+     * @throws br.jpe.dallahits.exception.DallaHitsException
      */
     @RequestMapping("/pessoas")
-    public String pessoas(Model model, HttpServletRequest req) {
-        List<Person> createPersons = Person.createPersons();
-        req.setAttribute("persons", createPersons);
+    public String pessoas(Model model, HttpServletRequest req) throws DallaHitsException {
+        try (Conexao conn = ConnFactory.criaConexao()) {
+            req.setAttribute("persons", new PessoasDAO(conn).busca());
+        } catch (DAOException e) {
+            throw new DallaHitsException(e);
+        }
         return "personList";
     }
 

@@ -32,9 +32,11 @@ public class DBUtils {
      * @param conn Conexão com o banco
      * @throws DAOException
      */
-    public static void rollback(Conexao conn) throws DAOException {
+    public static void rollback(Conexao conn) {
         if (conn != null) {
-            conn.rollback();
+            try {
+                conn.rollback();
+            } catch (DAOException e) { }
         }
     }
 
@@ -44,9 +46,11 @@ public class DBUtils {
      * @param conn Conexão com o banco
      * @throws DAOException
      */
-    public static void close(Conexao conn) throws DAOException {
+    public static void close(Conexao conn) {
         if (conn != null) {
-            conn.close();
+            try {
+                conn.close();
+            } catch (DAOException e) { }
         }
     }
 

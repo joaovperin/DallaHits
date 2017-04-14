@@ -3,9 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.jpe.dallahits.util.db;
+package br.jpe.dallahits.script.core;
 
 import br.jpe.dallahits.exception.DAOException;
+import br.jpe.dallahits.util.db.Conexao;
+import br.jpe.dallahits.util.db.ConnFactory;
+import br.jpe.dallahits.util.db.ConnManager;
+import br.jpe.dallahits.util.db.ContextUtils;
+import br.jpe.dallahits.util.db.DBUtils;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

@@ -12,3 +12,10 @@ INSERT INTO `Produto` (Descricao, ValorUnitario) VALUES ('Vodka', '5.50');
 INSERT INTO `Produto` (Descricao, ValorUnitario) VALUES ('Whisky', '11.00');
 INSERT INTO `Produto` (Descricao, ValorUnitario) VALUES ('Água', '2.50');
 INSERT INTO `Produto` (Descricao, ValorUnitario) VALUES ('Refri lata', '3.50');
+
+INSERT INTO Pessoas VALUES ('Tousif', 'tousif@mail.com', 32);
+INSERT INTO Pessoas VALUES ('Asif', 'asif@mail.com', 28);
+INSERT INTO Pessoas VALUES ('Ramiz', 'ramiz@mail.com', 26);
+INSERT INTO Pessoas VALUES ('Rizwan', 'rizwan@mail.com', 32);
+INSERT INTO Pessoas VALUES ('Amol', 'amol@mail.com', 33);
+INSERT INTO Pessoas VALUES ('Ramdas', 'ramdas@mail.com', 31);

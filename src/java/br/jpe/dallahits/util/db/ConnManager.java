@@ -45,10 +45,6 @@ public class ConnManager {
      * @param pt Properties
      */
     public static void setProperties(Properties pt) {
-        System.out.println("Definindo as propriedades da conexão....");
-        pt.forEach((k, v) -> {
-            System.out.println(k + ": " + v);
-        });
         setProperties(
                 pt.getProperty(PT_DRIVER),
                 pt.getProperty(PT_CONNECTION),
@@ -79,12 +75,17 @@ public class ConnManager {
      * @param pass
      */
     public static void setProperties(String driver, String url, String database, String user, String pass) {
+        System.out.println("Definindo as propriedades da conexão....");
         DB_PROPERTIES.clear();
         setDriver(driver);
         setUrl(url);
         setDatabase(database);
         setUser(user);
         setPassword(pass);
+        // Printa as propriedades definidas
+        DB_PROPERTIES.forEach((k, v) -> {
+            System.out.println(k + ": " + v);
+        });
     }
 
     /**

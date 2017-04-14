@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.jpe.test;
+package br.jpe.dallahits.script;
 
 import br.jpe.dallahits.exception.DAOException;
-import br.jpe.dallahits.util.db.InicializadorDB;
+import br.jpe.dallahits.script.core.InicializadorDB;
 import java.io.IOException;
 
 /**
- * Classe DatabaseInitTest
+ * Classe RecriaBancoScript
  *
  * @author Joaov
  */
-public class DatabaseInitTest {
+public class RecriaBancoScript {
 
     /**
-     * Roda o teste
+     * Executa o Script de recriação do banco de dados
      *
      * @param args
      */

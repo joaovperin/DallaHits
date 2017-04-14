@@ -17,9 +17,9 @@
                                varStatus="loopCounter">
                         <tr>
                             <td><c:out value="${loopCounter.count}" /></td>
-                            <td><c:out value="${person.name}" /></td>
+                            <td><c:out value="${person.nome}" /></td>
                             <td><c:out value="${person.email}" /></td>
-                            <td><c:out value="${person.age}" /></td>
+                            <td><c:out value="${person.idade}" /></td>
                         </tr>
                     </c:forEach>
                 </tbody>

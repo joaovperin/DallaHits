@@ -33,6 +33,12 @@ public abstract class AbstractDAO<B extends AbstractBean, P extends AbstractPk> 
         this.conn = conn;
     }
 
+    /**
+     * Realiza uma busca de todas as entidades no banco
+     *
+     * @return List Lista de beans
+     * @throws DAOException
+     */
     public List<B> busca() throws DAOException {
         List<B> list = new ArrayList<>();
         try {
@@ -47,10 +53,13 @@ public abstract class AbstractDAO<B extends AbstractBean, P extends AbstractPk> 
         }
     }
 
+    /** Insere um registro no banco */
     public abstract void insert(B bean) throws DAOException;
 
+    /** Atualiza um registro no banco */
     public abstract void update(B bean) throws DAOException;
 
+    /** Deleta um registro do banco */
     public abstract void delete(B bean) throws DAOException;
 
     /**
@@ -62,9 +71,7 @@ public abstract class AbstractDAO<B extends AbstractBean, P extends AbstractPk> 
      */
     protected B buscaPrimeiro(PreparedStatement pstmt) throws DAOException {
         try {
-            // Realiza busca
             ResultSet rs = pstmt.executeQuery();
-            // Se encontrar
             if (rs.next()) {
                 return getBeanFromResultSet(rs);
             }
@@ -74,8 +81,10 @@ public abstract class AbstractDAO<B extends AbstractBean, P extends AbstractPk> 
         return null;
     }
 
+    /** Retorna o comando SQL para leitura do registro */
     protected abstract String getSqlSelect();
-
+    
+    /** Retorna o comando SQL para inserção do registro */
     protected abstract String getSqlInsert();
 
     /**

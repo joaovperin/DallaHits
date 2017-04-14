@@ -34,7 +34,6 @@ public class ${entidade.nome}DAO extends AbstractDAO<${entidade.nome}Bean, ${ent
     /** SQL para INSERT */
     private static final String SQL_INSERT = "INSERT INTO ${entidade.nome?capitalize} (<#list entidade.attrs as a><#if !a.autoIncrement>${a.nome}<#if a_index < entidade.attrs?size - 1>, </#if></#if></#list>) VALUES (<#list entidade.attrs as a><#if !a.autoIncrement> ?<#if a_index < entidade.attrs?size - 1>, </#if></#if></#list> )";
 
-
     /** 
      * Construtor da classe ${entidade.nome?cap_first}Pk
      *
@@ -120,12 +119,12 @@ public class ${entidade.nome}DAO extends AbstractDAO<${entidade.nome}Bean, ${ent
     protected String getSqlInsert() {
         return SQL_INSERT;
     }
-
     
     /** 
      * Retorna um Bean à partir de um ResultSet
      *
      * @return ${entidade.nome?cap_first}Bean
+     * @throws java.sql.SQLException
      */
     @Override
     protected ${entidade.nome}Bean getBeanFromResultSet(ResultSet rs) throws SQLException {

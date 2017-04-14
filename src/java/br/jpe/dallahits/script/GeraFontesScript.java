@@ -5,6 +5,7 @@
  */
 package br.jpe.dallahits.script;
 
+import br.jpe.dallahits.script.core.Generator;
 import br.jpe.dallahits.script.util.Field;
 import br.jpe.dallahits.exception.DAOException;
 import br.jpe.dallahits.script.util.Table;
@@ -20,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe CreationScript
+ * Classe GeraFontesScript
  *
  * @author Joaov
  */
-public class CreationScript {
+public class GeraFontesScript {
 
     /** Gerador de códigos fonte */
     private final Generator g;
@@ -34,22 +35,37 @@ public class CreationScript {
      *
      * @param basePath
      */
-    public CreationScript(String basePath) {
+    public GeraFontesScript(String basePath) {
         this.g = new Generator(basePath);
     }
 
+    /**
+     * Método principal responsável pela execução do Script
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
-        // Lê as propriedades da conexão e seta
-        try {
-            // Executa a geração dos códigos fonte
-            String basePath = "D:/1-Projetos/_Feevale/DallaHits";
-            ConnManager.setProperties(ContextUtils.lePropriedadesConexao(basePath + "/web"));
-            new CreationScript(basePath).exec(ConnManager.getDatabaseName());
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        // Determina os parâmetros da conexão
+        String basePath = "D:/1-Projetos/_Feevale/DallaHits";
+        ConnManager.setProperties(ContextUtils.lePropriedadesConexao(basePath + "/web"));
+        long start = 0, end = 0;
+        // Inicializa execução do Script e carrega os tempos
+        System.out.println("Iniciando geração dos códigos fonte...");
+        // Executa a geração dos códigos fonte
+        start = System.currentTimeMillis();
+        new GeraFontesScript(basePath).exec(ConnManager.getDatabaseName());
+        end = System.currentTimeMillis();
+        // Mensagem de tempo decorrido
+        System.out.println("Fim. Tempo decorrido: " + (end - start) + " ms.");
     }
 
+    /**
+     * Realiza a execução do script em um banco
+     *
+     * @param dbName Nome do database
+     * @throws DAOException
+     */
     private void exec(String dbName) throws DAOException {
         try (Conexao conn = ConnFactory.criaConexao()) {
             for (Table t : getTables(conn, dbName)) {
@@ -60,6 +76,14 @@ public class CreationScript {
         }
     }
 
+    /**
+     * Busca as tabelas de um Schema
+     *
+     * @param conn
+     * @param dbName
+     * @return List
+     * @throws DAOException
+     */
     private List<Table> getTables(Conexao conn, String dbName) throws DAOException {
         List<Table> list = new ArrayList<>();
         try {
@@ -75,6 +99,14 @@ public class CreationScript {
         return list;
     }
 
+    /**
+     * Busca os campos de uma tabela
+     *
+     * @param conn
+     * @param nome
+     * @return List
+     * @throws DAOException
+     */
     private List<Field> getFields(Conexao conn, String nome) throws DAOException {
         List<Field> list = new ArrayList<>();
         try {
@@ -88,12 +120,24 @@ public class CreationScript {
         return list;
     }
 
+    /**
+     * Cria uma tabela à partir de um ResultSet
+     *
+     * @param rs
+     * @return Table
+     */
     private Table getTabelaFromRs(ResultSet rs) throws SQLException {
         Table tabela = new Table();
         tabela.setName(rs.getString(1));
         return tabela;
     }
 
+    /**
+     * Cria uma Field à partir de um ResultSet
+     *
+     * @param rs
+     * @return Field
+     */
     private Field getFieldFromRs(ResultSet rs) throws SQLException {
         Field field = new Field();
         field.setField(rs.getString(1));

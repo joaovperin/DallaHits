@@ -9,6 +9,7 @@ import br.jpe.dallahits.gen.bean.MensagemBean;
 import br.jpe.dallahits.gen.dao.MensagemDAO;
 import br.jpe.dallahits.gen.dao.ProdutoDAO;
 import br.jpe.dallahits.exception.DAOException;
+import br.jpe.dallahits.exception.DallaHitsException;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.DBUtils;
@@ -29,7 +30,7 @@ public class MensagensController {
 
     /** Api para gerar Jsons */
     private final JpeGson gson = new JpeGson();
-    
+
     /**
      * Url para a página inicial (index)
      *
@@ -38,41 +39,57 @@ public class MensagensController {
      * @throws br.jpe.dallahits.exception.DAOException
      */
     @RequestMapping("/mensagens")
-    public String mensagens(HttpServletRequest req) throws DAOException {
+    public String mensagens(HttpServletRequest req) throws DallaHitsException {
         try (Conexao conn = ConnFactory.criaConexao()) {
             MensagemDAO dao = new MensagemDAO(conn);
             req.getSession().setAttribute("mensagens", dao.busca());
+        } catch (DAOException e) {
+            throw new DallaHitsException(e);
         }
         return "mensagens";
     }
 
     /**
      * Adiciona uma mensagem na lista
+     *
+     * @param bean
+     * @param req
+     * @return String
+     * @throws DallaHitsException
      */
     @RequestMapping("/addMensagem")
     @ResponseBody
-    public String addMensagem(MensagemBean bean, HttpServletRequest req) throws DAOException {
+    public String addMensagem(MensagemBean bean, HttpServletRequest req) throws DallaHitsException {
         List<MensagemBean> msgs = (List<MensagemBean>) req.getSession().getAttribute("mensagens");
-        Conexao conn = ConnFactory.criaConexaoTransacao();
+        Conexao conn = null;
         try {
+            conn = ConnFactory.criaConexaoTransacao();
             MensagemDAO dao = new MensagemDAO(conn);
             dao.insert(bean);
             msgs = dao.busca();
             DBUtils.commit(conn);
         } catch (DAOException e) {
             DBUtils.rollback(conn);
-            throw e;
+            throw new DallaHitsException(e);
         } finally {
             DBUtils.close(conn);
         }
         return gson.toJson(msgs);
     }
 
+    /**
+     * Url para a busca de produtos
+     *
+     * @param req Request
+     * @return String
+     * @throws DallaHitsException
+     */
     @RequestMapping("/produtos")
-    public String produtos(HttpServletRequest req) throws DAOException {
+    public String produtos(HttpServletRequest req) throws DallaHitsException {
         try (Conexao conn = ConnFactory.criaConexao()) {
-            ProdutoDAO dao = new ProdutoDAO(conn);
-            req.getSession().setAttribute("produtos", dao.busca());
+            req.getSession().setAttribute("produtos", new ProdutoDAO(conn).busca());
+        } catch (DAOException e) {
+            throw new DallaHitsException(e);
         }
         return "mensagens";
     }

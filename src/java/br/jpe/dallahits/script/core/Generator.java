@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.jpe.dallahits.script;
+package br.jpe.dallahits.script.core;
 
 import br.jpe.dallahits.script.util.GeneratorException;
 import br.jpe.dallahits.script.util.TemplateEntidade;
