@@ -27,6 +27,8 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
     private static final String SQL_SELECT = "SELECT idCliente, nome, sexo, idade FROM Cliente";
     /** SQL para INSERT */
     private static final String SQL_INSERT = "INSERT INTO Cliente (nome, sexo, idade) VALUES ( ?,  ?,  ? )";
+    /** SQL para UPDATE */
+    private static final String SQL_UPDATE = "UPDATE Cliente SET nome =  ?, sexo =  ?, idade =  ?";
 
     /** 
      * Construtor da classe ClientePk
@@ -46,10 +48,7 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
     @Override
     public void insert(ClienteBean bean) throws DAOException {
         try {
-           PreparedStatement pstmt = conn.prepareStatement(getSqlInsert());
-           pstmt.setString(1, bean.getNome());
-           pstmt.setString(2, bean.getSexo());
-           pstmt.setInt(3, bean.getIdade());
+           PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlInsert()), bean);
            pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -65,10 +64,10 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
      */
     public ClienteBean buscaPk(ClientePk pk) throws DAOException {
         try {
-            String busca = SQL_SELECT.concat(
+            String sql = SQL_SELECT.concat(
             " WHERE idCliente =  ?"
             );
-            PreparedStatement pstmt = conn.prepareStatement(busca);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, pk.getIdCliente());
             return buscaPrimeiro(pstmt);
         } catch (SQLException e) {
@@ -76,9 +75,22 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
         }
     }
 
+    /**
+     * Realiza alteração de uma entidade no banco de dados
+     * 
+     * @param bean
+     * @throws DAOException
+     */
     @Override
     public void update(ClienteBean bean) throws DAOException {
-        throw new UnsupportedOperationException("ClienteDAO.update() nao suportado.");
+        try {
+            String where = " WHERE idCliente =  ?";
+            PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlUpdate(where)), bean);
+            pstmt.setLong(4, bean.getIdCliente());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
     }
 
     @Override
@@ -97,13 +109,24 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
     }
 
     /** 
-     * Retorna o comando SQL para executar uma Insert
+     * Retorna o comando SQL para executar um Insert
      *
      * @return String
      */
     @Override
     protected String getSqlInsert() {
         return SQL_INSERT;
+    }
+
+    /** 
+     * Retorna o comando SQL para executar um Update
+     *
+     * @param where Cláusula WHERE para executar filtros
+     * @return String
+     */
+    @Override
+    protected String getSqlUpdate(String where) {
+        return SQL_UPDATE.concat(where);
     }
     
     /** 
@@ -120,6 +143,22 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
         bean.setSexo(rs.getString(3));
         bean.setIdade(rs.getInt(4));
         return bean;
+    }
+
+    /** 
+     * Preenche um PreparedStatement à partir de um Bean
+     *
+     * @param pstmt PreparedStatement recém criado (vazio)
+     * @param bean Objeto com os dados a popular
+     * @return PreparedStatement Dados populados
+     * @throws java.sql.SQLException
+     */
+    @Override
+    protected PreparedStatement getPstmt(PreparedStatement pstmt, ClienteBean bean) throws SQLException {
+        pstmt.setString(1, bean.getNome());
+        pstmt.setString(2, bean.getSexo());
+        pstmt.setInt(3, bean.getIdade());
+        return pstmt;
     }
 
 }

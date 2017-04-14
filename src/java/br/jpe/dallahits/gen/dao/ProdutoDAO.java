@@ -27,6 +27,8 @@ public class ProdutoDAO extends AbstractDAO<ProdutoBean, ProdutoPk> {
     private static final String SQL_SELECT = "SELECT idProduto, descricao, valorUnitario FROM Produto";
     /** SQL para INSERT */
     private static final String SQL_INSERT = "INSERT INTO Produto (descricao, valorUnitario) VALUES ( ?,  ? )";
+    /** SQL para UPDATE */
+    private static final String SQL_UPDATE = "UPDATE Produto SET descricao =  ?, valorUnitario =  ?";
 
     /** 
      * Construtor da classe ProdutoPk
@@ -46,9 +48,7 @@ public class ProdutoDAO extends AbstractDAO<ProdutoBean, ProdutoPk> {
     @Override
     public void insert(ProdutoBean bean) throws DAOException {
         try {
-           PreparedStatement pstmt = conn.prepareStatement(getSqlInsert());
-           pstmt.setString(1, bean.getDescricao());
-           pstmt.setDouble(2, bean.getValorUnitario());
+           PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlInsert()), bean);
            pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -64,10 +64,10 @@ public class ProdutoDAO extends AbstractDAO<ProdutoBean, ProdutoPk> {
      */
     public ProdutoBean buscaPk(ProdutoPk pk) throws DAOException {
         try {
-            String busca = SQL_SELECT.concat(
+            String sql = SQL_SELECT.concat(
             " WHERE idProduto =  ?"
             );
-            PreparedStatement pstmt = conn.prepareStatement(busca);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, pk.getIdProduto());
             return buscaPrimeiro(pstmt);
         } catch (SQLException e) {
@@ -75,9 +75,22 @@ public class ProdutoDAO extends AbstractDAO<ProdutoBean, ProdutoPk> {
         }
     }
 
+    /**
+     * Realiza alteração de uma entidade no banco de dados
+     * 
+     * @param bean
+     * @throws DAOException
+     */
     @Override
     public void update(ProdutoBean bean) throws DAOException {
-        throw new UnsupportedOperationException("ProdutoDAO.update() nao suportado.");
+        try {
+            String where = " WHERE idProduto =  ?";
+            PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlUpdate(where)), bean);
+            pstmt.setLong(3, bean.getIdProduto());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
     }
 
     @Override
@@ -96,13 +109,24 @@ public class ProdutoDAO extends AbstractDAO<ProdutoBean, ProdutoPk> {
     }
 
     /** 
-     * Retorna o comando SQL para executar uma Insert
+     * Retorna o comando SQL para executar um Insert
      *
      * @return String
      */
     @Override
     protected String getSqlInsert() {
         return SQL_INSERT;
+    }
+
+    /** 
+     * Retorna o comando SQL para executar um Update
+     *
+     * @param where Cláusula WHERE para executar filtros
+     * @return String
+     */
+    @Override
+    protected String getSqlUpdate(String where) {
+        return SQL_UPDATE.concat(where);
     }
     
     /** 
@@ -118,6 +142,21 @@ public class ProdutoDAO extends AbstractDAO<ProdutoBean, ProdutoPk> {
         bean.setDescricao(rs.getString(2));
         bean.setValorUnitario(rs.getDouble(3));
         return bean;
+    }
+
+    /** 
+     * Preenche um PreparedStatement à partir de um Bean
+     *
+     * @param pstmt PreparedStatement recém criado (vazio)
+     * @param bean Objeto com os dados a popular
+     * @return PreparedStatement Dados populados
+     * @throws java.sql.SQLException
+     */
+    @Override
+    protected PreparedStatement getPstmt(PreparedStatement pstmt, ProdutoBean bean) throws SQLException {
+        pstmt.setString(1, bean.getDescricao());
+        pstmt.setDouble(2, bean.getValorUnitario());
+        return pstmt;
     }
 
 }

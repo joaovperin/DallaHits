@@ -83,9 +83,12 @@ public abstract class AbstractDAO<B extends AbstractBean, P extends AbstractPk> 
 
     /** Retorna o comando SQL para leitura do registro */
     protected abstract String getSqlSelect();
-    
+
     /** Retorna o comando SQL para inserção do registro */
     protected abstract String getSqlInsert();
+    
+    /** Retorna o comando SQL para atualizar um registro */
+    protected abstract String getSqlUpdate(String where);
 
     /**
      * Cria um novo Bean e popula a partir do ResultSet
@@ -95,5 +98,15 @@ public abstract class AbstractDAO<B extends AbstractBean, P extends AbstractPk> 
      * @throws SQLException Problema ao ler parâmetro do result set
      */
     protected abstract B getBeanFromResultSet(ResultSet rs) throws SQLException;
+
+    /**
+     * Preenche um PreparedStatement à partir de um Bean
+     *
+     * @param pstmt PreparedStatement recém criado (vazio)
+     * @param bean Objeto com os dados a popular
+     * @return PreparedStatement Dados populados
+     * @throws SQLException
+     */
+    protected abstract PreparedStatement getPstmt(PreparedStatement pstmt, B bean) throws SQLException;
 
 }

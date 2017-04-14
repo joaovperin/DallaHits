@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class TemplateEntidade {
 
+    private String tableName;
     private String nome;
     private int lastKeyAtt;
     private List<TemplateAtributo> attrs;
@@ -25,9 +26,20 @@ public class TemplateEntidade {
         lastKeyAtt = -1;
         for (Field f : t.getTableFields()) {
             attrs.add(new TemplateAtributo(f));
-            if (f.isPk()) lastKeyAtt++;
+            if (f.isPk()) {
+                lastKeyAtt++;
+            }
         }
+        tableName = t.getName();
         nome = Texto.toCamelCase(t.getName(), true);
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 
     public String getNome() {
