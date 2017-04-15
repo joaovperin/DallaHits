@@ -68,9 +68,9 @@ public class GeraFontesScript {
     private void exec(String dbName) throws DAOException {
         try (Conexao conn = ConnFactory.criaConexao()) {
             for (Table t : getTables(conn, dbName)) {
-//                g.criaTplPk("br.jpe.dallahits.gen", new TemplateEntidade(t));
-//                g.criaTplBean("br.jpe.dallahits.gen", new TemplateEntidade(t));
-//                g.criaTplDAO("br.jpe.dallahits.gen", new TemplateEntidade(t));
+                g.criaTplPk("br.jpe.dallahits.gen", new TemplateEntidade(t));
+                g.criaTplBean("br.jpe.dallahits.gen", new TemplateEntidade(t));
+                g.criaTplDAO("br.jpe.dallahits.gen", new TemplateEntidade(t));
                 g.criaTplEntidade("br.jpe.dallahits.gen", new TemplateEntidade(t));
             }
         }

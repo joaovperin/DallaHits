@@ -7,7 +7,7 @@
  */
 package ${package}.entidade;
 
-import br.jpe.dallahits.util.db.AbstractEntidade;
+import br.jpe.dallahits.generics.AbstractEntidade;
 import ${package}.bean.${entidade.nome}Bean;
 import ${package}.pk.${entidade.nome}Pk;
 import org.json.simple.JSONArray;

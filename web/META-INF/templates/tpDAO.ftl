@@ -9,7 +9,7 @@ package ${package}.dao;
 
 import ${package}.bean.${entidade.nome}Bean;
 import ${package}.pk.${entidade.nome}Pk;
-import br.jpe.dallahits.util.db.AbstractDAO;
+import br.jpe.dallahits.generics.AbstractDAO;
 import br.jpe.dallahits.util.db.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

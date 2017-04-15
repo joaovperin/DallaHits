@@ -7,7 +7,7 @@
  */
 package ${package}.pk;
 
-import br.jpe.dallahits.util.db.AbstractPk;
+import br.jpe.dallahits.generics.AbstractPk;
 <#list entidade.attrs as a>
 <#if a.tipo = 'Date'>
 import java.util.Date;
