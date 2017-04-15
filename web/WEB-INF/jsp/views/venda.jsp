@@ -5,11 +5,17 @@
 <%-- Insere o template default --%>
 <tiles:insertDefinition  name="DefaultTemplate" >
     <tiles:putAttribute name="body">
-        <div class="container">
-            <%-- Datatables --%>
-            <jpe:grid id="comandas" url="comandas" title="Comandas" />
-            <%-- Se houver mensagem, exibe --%>
-            <jpe:message msg="${msg}" />
-        </div><!-- /container -->
+        <%-- Datatables --%>
+        <jpe:grid id="gridProdutos" url="produtos" title="Produtos" clClick="pClick"/>
+        <%-- Se houver mensagem, exibe --%>
+        <jpe:message msg="${msg}" />
+        <jpe:button href="javascript:alert('oi')" title="Batata" />
+        <script>
+            $(function(){
+                $('#gridProdutos').on('pClick', function(evt, target, data){
+                    console.log('matheus feioso' + 'click no produto ' + data.idProduto);
+                });
+            });
+        </script>
     </tiles:putAttribute>
 </tiles:insertDefinition>

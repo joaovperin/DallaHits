@@ -18,9 +18,9 @@
                             <hr class="intro-divider">
                             Prod:
                             <c:forEach items="${produtos}" var="p">
-                            <li>Cod: ${p.idProduto}: ${p.descricao}</li><br>
-                            </c:forEach>                                
-                            
+                                <li>Cod: ${p.idProduto}: ${p.descricao}</li><br>
+                                </c:forEach>                                
+
                             <h3>Mensagens:</h3>
                             <ul id="msgHolder" class="list-inline intro-social-buttons">
                                 <c:forEach items="${mensagens}" var="m">
@@ -68,8 +68,8 @@
             function render(list) {
                 $('#msgHolder').find('li').remove();
 
-                list.forEach(function(e){
-                        $('#msgHolder').append(criaMsg(e));
+                list.forEach(function (e) {
+                    $('#msgHolder').append(criaMsg(e));
                 });
 
             }

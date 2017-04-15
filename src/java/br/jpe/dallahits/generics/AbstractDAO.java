@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.jpe.dallahits.util.db;
+package br.jpe.dallahits.generics;
 
 import br.jpe.dallahits.exception.DAOException;
+import br.jpe.dallahits.util.db.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

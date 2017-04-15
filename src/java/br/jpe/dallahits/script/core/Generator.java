@@ -90,6 +90,16 @@ public class Generator {
             throw new GeneratorException(e);
         }
     }
+    
+    public void criaTplEntidade(String pack, TemplateEntidade entidade) throws GeneratorException {
+        try {
+            //Load template from source folder
+            Template template = getConfig().getTemplate("web/META-INF/templates/tpEntidade.ftl");
+            execute(pack, entidade, template, "Entidade");
+        } catch (Exception e) {
+            throw new GeneratorException(e);
+        }
+    }
 
     private void execute(String pack, TemplateEntidade entidade, Template template, String sufixo) {
         try {

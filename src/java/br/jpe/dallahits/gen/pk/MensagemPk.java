@@ -7,7 +7,7 @@
  */
 package br.jpe.dallahits.gen.pk;
 
-import br.jpe.dallahits.util.db.AbstractPk;
+import br.jpe.dallahits.generics.AbstractPk;
 
 /**
  * Classe MensagemPk

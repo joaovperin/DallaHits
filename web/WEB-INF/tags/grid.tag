@@ -4,6 +4,7 @@
 <%@attribute name="url" description="URL para buscar dados do grid" required="true" %>
 <%@attribute name="title" description="Título do grid" required="false" %>
 <%@attribute name="criaFooter" description="Se deve incluir um footer" required="false" %>
+<%@attribute name="clClick" description="Evento no DOM para disparar callbacks" required="false" %>
 <%-- Importações --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- Início da Tag: --%>
@@ -42,13 +43,15 @@
             criaFooter: '${criaFooter}',
             callback: function (obj) {
                 table = obj;
-                $('#${id} tbody').on('click', 'button', function () {
+    <%-- Se definiu callback de clique --%>
+    <c:if test="${not empty clClick}">
+                $('#${id} tbody').on('click', 'a,button', function () {
                     var data = obj.row($(this).parents('tr')).data();
-                    alert("Você clicou na comanda " + data.idComanda);
+                    $('#${id}').trigger('${clClick}', [$(this), data]);
+    </c:if>
                 });
             }
         });
-
     });
 
 </script>

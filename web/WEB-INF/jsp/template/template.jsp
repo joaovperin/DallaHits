@@ -7,7 +7,8 @@
     <head>
         <tiles:insertAttribute name="header"/>
         <title><tiles:insertAttribute name="titulo"/></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     </head>
     <body>
         <div class="container tpContainer">

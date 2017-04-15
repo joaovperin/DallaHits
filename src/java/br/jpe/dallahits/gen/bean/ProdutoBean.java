@@ -7,10 +7,9 @@
  */
 package br.jpe.dallahits.gen.bean;
 
-import br.jpe.dallahits.util.db.AbstractBean;
+import br.jpe.dallahits.generics.AbstractBean;
 import br.jpe.dallahits.gen.pk.ProdutoPk;
 import java.util.Objects;
-import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
 /**
@@ -107,26 +106,6 @@ public class ProdutoBean extends AbstractBean<ProdutoBean> {
         obj.add(getDescricao());
         obj.add(getValorUnitario());
         return obj;
-    }
-
-    /**
-     * Retorna um Objeto com Nome e Descrição dos campos formato JSONObject
-     * 
-     * @return JSONObject
-     */
-    public static JSONObject getFields() {
-        JSONObject root = new JSONObject();
-        JSONArray nodes = new JSONArray();
-        nodes.add("idProduto");
-        nodes.add("descricao");
-        nodes.add("valorUnitario");
-        root.put("colunas", nodes);
-        nodes = new JSONArray();
-        nodes.add("Código");
-        nodes.add("Descrição");
-        nodes.add("Valor unitário");
-        root.put("titulos", nodes);
-        return root;
     }
 
     /**

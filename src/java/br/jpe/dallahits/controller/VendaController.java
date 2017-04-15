@@ -11,9 +11,10 @@ import br.jpe.dallahits.gen.bean.ComandaBean;
 import br.jpe.dallahits.gen.bean.ProdutoBean;
 import br.jpe.dallahits.gen.dao.ComandaDAO;
 import br.jpe.dallahits.gen.dao.ProdutoDAO;
+import br.jpe.dallahits.grid.ProdutoGrid;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
-import br.jpe.dallahits.util.db.JpeGson;
+import br.jpe.dallahits.util.GsonUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class VendaController {
 
     /** Api para gerar Jsons */
-    private final JpeGson gson = new JpeGson();
+    private final GsonUtils gson = new GsonUtils();
 
     /**
      * URL para consultar a página de vendas
@@ -41,6 +42,10 @@ public class VendaController {
         return "venda";
     }
 
+//    @RequestMapping(value = "/comanda", method = RequestMethod.GET)
+//    public String comanda() throws DallaHitsException {
+//        return "comanda";
+//    }
     @RequestMapping("/comandas/dados")
     @ResponseBody
     public String getComandas() throws DallaHitsException {
@@ -54,7 +59,8 @@ public class VendaController {
     @RequestMapping("/comandas/titulo")
     @ResponseBody
     public String getComandasTitulo() {
-        return ComandaBean.getFields().toJSONString();
+        return "";
+//        return ComandaBean.getFields().toJSONString();
     }
 
     /**
@@ -66,11 +72,7 @@ public class VendaController {
     @RequestMapping("/produtos/dados")
     @ResponseBody
     public String getProdutos() throws DallaHitsException {
-        try (Conexao conn = ConnFactory.criaConexao()) {
-            return gson.toDataTable(new ProdutoDAO(conn).busca());
-        } catch (DAOException e) {
-            throw new DallaHitsException(e);
-        }
+        return gson.toDataTable(new ProdutoGrid().getDados());
     }
 
     /**
@@ -81,7 +83,7 @@ public class VendaController {
     @RequestMapping("/produtos/titulo")
     @ResponseBody
     public String getProdutosTitulo() {
-        return ProdutoBean.getFields().toJSONString();
+        return new ProdutoGrid().createGrid().toJSONString();
     }
 
 }

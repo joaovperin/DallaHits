@@ -10,7 +10,6 @@ package ${package}.bean;
 import br.jpe.dallahits.util.db.AbstractBean;
 import ${package}.pk.${entidade.nome}Pk;
 import java.util.Objects;
-import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 <#list entidade.attrs as a>
 <#if a.tipo = 'Date'>
@@ -85,26 +84,6 @@ public class ${entidade.nome}Bean extends AbstractBean<${entidade.nome}Bean> {
         obj.add(<#if a.tipo == "boolean">is<#else>get</#if>${a.nome?cap_first}());
 </#list>
         return obj;
-    }
-
-    /**
-     * Retorna um Objeto com Nome e Descrição dos campos formato JSONObject
-     * 
-     * @return JSONObject
-     */
-    public static JSONObject getFields() {
-        JSONObject root = new JSONObject();
-        JSONArray nodes = new JSONArray();
-<#list entidade.attrs as a>
-        nodes.add("${a.nome}");
-</#list>
-        root.put("colunas", nodes);
-        nodes = new JSONArray();
-<#list entidade.attrs as a>
-        nodes.add("${a.descricao?cap_first}");
-</#list>
-        root.put("titulos", nodes);
-        return root;
     }
 
     /**

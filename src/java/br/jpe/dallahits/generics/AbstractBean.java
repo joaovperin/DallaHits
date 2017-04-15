@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.jpe.dallahits.util.db;
+package br.jpe.dallahits.generics;
 
+import br.jpe.dallahits.util.GsonUtils;
 import org.json.simple.JSONArray;
 
 /**
@@ -15,7 +16,7 @@ import org.json.simple.JSONArray;
 public abstract class AbstractBean<B extends AbstractBean> {
 
     /** Api para trabalhar com Jsons */
-    private static final JpeGson GS = new JpeGson();
+    private static final GsonUtils GS = new GsonUtils();
 
     /**
      * Retorna a representação do objeto em Json

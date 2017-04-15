@@ -35,8 +35,8 @@ public class LoginController {
      * @throws DallaHitsException
      */
     @RequestMapping("/login")
-    public String execute(UsuarioBean usuario, HttpSession session, HttpServletRequest req)
-            throws DallaHitsException {
+    public String login(UsuarioBean usuario, HttpSession session, HttpServletRequest req)
+            throws DallaHitsException {        
         // Busca usuário no banco de dados
         UsuarioBean usuarioBean = null;
         if (usuario.getLogin() != null) {

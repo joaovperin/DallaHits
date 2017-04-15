@@ -26,23 +26,17 @@ var Grid = function (externalParams) {
         table = $(param.grid).DataTable({
             "ajax": "/DallaHits/" + param.url + "/dados",
             "dataSrc": "demo",
-            "columnDefs": [
-                {
-                    "targets": -1,
-                    "data": null,
-                    "defaultContent": "<button>Click!</button>"
-                }
-            ],
+            "columnDefs": getColumnDefs(header.columnDefs),
             "initComplete": function () {
-                appendHeader(header.titulos);
-                if (param.callback){
+                appendTitulos(header.titulos);
+                if (param.callback) {
                     param.callback(table);
                 }
             },
             "info": false,
             "responsive": true,
             "order": [[0, "asc"]],
-            "columns": getColunas(header.colunas),
+            "columns": getColumns(header.colunas),
             "select": true,
             // Para adicionar novas Strings
             // http://legacy.datatables.net/usage/i18n
@@ -60,13 +54,25 @@ var Grid = function (externalParams) {
         });
     }
 
+    // Retorna as colunas default do datatable
+    function getColumnDefs(lista) {
+        var arr = [];
+        for (var i in lista) {
+            arr.push({
+                "targets": (-1 - i),
+                "data": null,
+                "defaultContent": lista[i].content
+            });
+        }
+        return arr;
+    }
+
     // Retorna as colunas do datatable no formato correto
-    function getColunas(lista) {
+    function getColumns(lista) {
         var cols = [];
         lista.forEach(function (e) {
             cols.push({"data": e});
         });
-        cols.push({"data": "acoes"});
         return cols;
     }
 
@@ -83,7 +89,7 @@ var Grid = function (externalParams) {
     }
 
     // Função auxiliar para criar o header do DataTable
-    function appendHeader(dados) {
+    function appendTitulos(dados) {
         // Busca Grid e cria um Header
         var g = $(param.grid);
         // Se já não tiver header, appenda um novo

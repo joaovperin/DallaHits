@@ -13,7 +13,7 @@ import br.jpe.dallahits.exception.DallaHitsException;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.DBUtils;
-import br.jpe.dallahits.util.db.JpeGson;
+import br.jpe.dallahits.util.GsonUtils;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MensagensController {
 
     /** Api para gerar Jsons */
-    private final JpeGson gson = new JpeGson();
+    private final GsonUtils gson = new GsonUtils();
 
     /**
      * Url para a página inicial (index)

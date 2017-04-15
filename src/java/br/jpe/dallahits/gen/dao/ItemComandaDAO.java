@@ -9,7 +9,7 @@ package br.jpe.dallahits.gen.dao;
 
 import br.jpe.dallahits.gen.bean.ItemComandaBean;
 import br.jpe.dallahits.gen.pk.ItemComandaPk;
-import br.jpe.dallahits.util.db.AbstractDAO;
+import br.jpe.dallahits.generics.AbstractDAO;
 import br.jpe.dallahits.util.db.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

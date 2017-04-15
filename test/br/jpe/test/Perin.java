@@ -5,10 +5,7 @@
  */
 package br.jpe.test;
 
-//import java.util.Date;
-//import java.sql.Date;
-import java.util.Date;
-import org.json.simple.JSONObject;
+import br.jpe.dallahits.util.HtmlTagBuilder;
 
 /**
  * Classe Perin
@@ -20,12 +17,10 @@ public class Perin {
     public static void main(String[] args) {
         System.out.println("Hello!");
 
-        String input = "Àgua";
-        
-        System.out.println(input);
-        JSONObject temp = new JSONObject();
-        temp.put("values", input);
-        System.out.println(temp.toString());
+        HtmlTagBuilder tb = new HtmlTagBuilder("a", "Alterar");
+        tb.add("id", "alterar");
+        tb.add("class", "batata");
+        System.out.println(tb.build());
 
         System.out.println("Fim.");
     }

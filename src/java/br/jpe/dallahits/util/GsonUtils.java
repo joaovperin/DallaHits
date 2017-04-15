@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.jpe.dallahits.util.db;
+package br.jpe.dallahits.util;
 
+import br.jpe.dallahits.generics.AbstractBean;
 import com.google.gson.Gson;
 import java.util.List;
 import org.json.simple.JSONObject;
@@ -12,7 +13,7 @@ import org.json.simple.JSONObject;
 /**
  * Objeto auxiliar para trabalhar com a API Gson
  */
-public class JpeGson {
+public class GsonUtils {
 
     /** Objeto da api Gson - NÃO UTILIZAR DIRETAMENTE */
     private static Gson gson;
