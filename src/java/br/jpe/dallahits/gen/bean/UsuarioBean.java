@@ -22,6 +22,8 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
 
     /** Login */
     private String login;
+    /** Código */
+    private int idUsuario;
     /** Email */
     private String email;
     /** Senha */
@@ -61,6 +63,24 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
      */
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    /** 
+     * Retorna o valor do campo Código
+     * 
+     * @return int
+     */
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    /** 
+     * Define o valor do campo Código
+     * 
+     * @param idUsuario
+     */
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     /** 
@@ -144,6 +164,7 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
     public JSONArray toArray() {
         JSONArray obj = new JSONArray();
         obj.add(getLogin());
+        obj.add(getIdUsuario());
         obj.add(getEmail());
         obj.add(getSenha());
         obj.add(getNome());
@@ -160,6 +181,7 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
         JSONObject root = new JSONObject();
         JSONArray nodes = new JSONArray();
         nodes.add("login");
+        nodes.add("idUsuario");
         nodes.add("email");
         nodes.add("senha");
         nodes.add("nome");
@@ -167,6 +189,7 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
         root.put("colunas", nodes);
         nodes = new JSONArray();
         nodes.add("Login");
+        nodes.add("Código");
         nodes.add("Email");
         nodes.add("Senha");
         nodes.add("Nome");
@@ -184,6 +207,7 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + Objects.hashCode(this.login);
+        hash = 53 * hash + Objects.hashCode(this.idUsuario);
         hash = 53 * hash + Objects.hashCode(this.email);
         hash = 53 * hash + Objects.hashCode(this.senha);
         hash = 53 * hash + Objects.hashCode(this.nome);
@@ -212,6 +236,9 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
         if (!Objects.equals(this.login, other.login)) {
             return false;
         }
+        if (!Objects.equals(this.idUsuario, other.idUsuario)) {
+            return false;
+        }
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
@@ -236,6 +263,7 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
     public String toString() {
         return "UsuarioBean{" +
                     "login=" + login + ", " +
+                    "idUsuario=" + idUsuario + ", " +
                     "email=" + email + ", " +
                     "senha=" + senha + ", " +
                     "nome=" + nome + ", " +

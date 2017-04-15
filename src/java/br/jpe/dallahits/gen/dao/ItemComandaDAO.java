@@ -24,11 +24,13 @@ import java.sql.SQLException;
 public class ItemComandaDAO extends AbstractDAO<ItemComandaBean, ItemComandaPk> {
 
     /** SQL para SELECT */
-    private static final String SQL_SELECT = "SELECT idComanda, item, produto, quantidade, valorTotalItem FROM Itemcomanda";
+    private static final String SQL_SELECT = "SELECT idComanda, item, produto, quantidade, valorTotalItem FROM item_comanda";
     /** SQL para INSERT */
-    private static final String SQL_INSERT = "INSERT INTO Itemcomanda (idComanda, item, produto, quantidade, valorTotalItem) VALUES ( ?,  ?,  ?,  ?,  ? )";
+    private static final String SQL_INSERT = "INSERT INTO item_comanda (idComanda, item, produto, quantidade, valorTotalItem) VALUES ( ?,  ?,  ?,  ?,  ? )";
     /** SQL para UPDATE */
-    private static final String SQL_UPDATE = "UPDATE Item_comanda SET produto =  ?, quantidade =  ?, valorTotalItem =  ?";
+    private static final String SQL_UPDATE = "UPDATE item_comanda SET produto =  ?, quantidade =  ?, valorTotalItem =  ?";
+    /** SQL para DELETE */
+    private static final String SQL_DELETE = "DELETE FROM item_comanda";
 
     /** 
      * Construtor da classe ItemComandaPk
@@ -95,9 +97,23 @@ public class ItemComandaDAO extends AbstractDAO<ItemComandaBean, ItemComandaPk> 
         }
     }
 
+    /**
+     * Realiza a deleção de um registro no banco de dados
+     * 
+     * @param bean
+     * @throws DAOException
+     */
     @Override
     public void delete(ItemComandaBean bean) throws DAOException {
-        throw new UnsupportedOperationException("ItemComandaDAO.delete() nao suportado.");
+        try {
+            String where = " WHERE idComanda, item =  ?,  ?";
+            PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlDelete(where)), bean);
+            pstmt.setLong(1, bean.getIdComanda());
+            pstmt.setLong(2, bean.getItem());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
     }
 
     /** 
@@ -129,6 +145,17 @@ public class ItemComandaDAO extends AbstractDAO<ItemComandaBean, ItemComandaPk> 
     @Override
     protected String getSqlUpdate(String where) {
         return SQL_UPDATE.concat(where);
+    }
+
+    /** 
+     * Retorna o comando SQL para executar um Delete
+     *
+     * @param where Cláusula WHERE para executar filtros
+     * @return String
+     */
+    @Override
+    protected String getSqlDelete(String where) {
+        return SQL_DELETE.concat(where);
     }
     
     /** 

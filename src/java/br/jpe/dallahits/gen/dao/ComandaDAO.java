@@ -24,11 +24,13 @@ import java.sql.SQLException;
 public class ComandaDAO extends AbstractDAO<ComandaBean, ComandaPk> {
 
     /** SQL para SELECT */
-    private static final String SQL_SELECT = "SELECT idComanda, idCliente, data, valorTotal FROM Comanda";
+    private static final String SQL_SELECT = "SELECT idComanda, idCliente, idUsuario, data, valorTotal FROM comanda";
     /** SQL para INSERT */
-    private static final String SQL_INSERT = "INSERT INTO Comanda (idCliente, data, valorTotal) VALUES ( ?,  ?,  ? )";
+    private static final String SQL_INSERT = "INSERT INTO comanda (idCliente, idUsuario, data, valorTotal) VALUES ( ?,  ?,  ?,  ? )";
     /** SQL para UPDATE */
-    private static final String SQL_UPDATE = "UPDATE Comanda SET idCliente =  ?, data =  ?, valorTotal =  ?";
+    private static final String SQL_UPDATE = "UPDATE comanda SET idCliente =  ?, idUsuario =  ?, data =  ?, valorTotal =  ?";
+    /** SQL para DELETE */
+    private static final String SQL_DELETE = "DELETE FROM comanda";
 
     /** 
      * Construtor da classe ComandaPk
@@ -86,16 +88,29 @@ public class ComandaDAO extends AbstractDAO<ComandaBean, ComandaPk> {
         try {
             String where = " WHERE idComanda =  ?";
             PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlUpdate(where)), bean);
-            pstmt.setLong(4, bean.getIdComanda());
+            pstmt.setLong(5, bean.getIdComanda());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
         }
     }
 
+    /**
+     * Realiza a deleção de um registro no banco de dados
+     * 
+     * @param bean
+     * @throws DAOException
+     */
     @Override
     public void delete(ComandaBean bean) throws DAOException {
-        throw new UnsupportedOperationException("ComandaDAO.delete() nao suportado.");
+        try {
+            String where = " WHERE idComanda =  ?";
+            PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlDelete(where)), bean);
+            pstmt.setLong(1, bean.getIdComanda());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
     }
 
     /** 
@@ -128,6 +143,17 @@ public class ComandaDAO extends AbstractDAO<ComandaBean, ComandaPk> {
     protected String getSqlUpdate(String where) {
         return SQL_UPDATE.concat(where);
     }
+
+    /** 
+     * Retorna o comando SQL para executar um Delete
+     *
+     * @param where Cláusula WHERE para executar filtros
+     * @return String
+     */
+    @Override
+    protected String getSqlDelete(String where) {
+        return SQL_DELETE.concat(where);
+    }
     
     /** 
      * Retorna um Bean à partir de um ResultSet
@@ -140,8 +166,9 @@ public class ComandaDAO extends AbstractDAO<ComandaBean, ComandaPk> {
         ComandaBean bean = new ComandaBean();
         bean.setIdComanda(rs.getLong(1));
         bean.setIdCliente(rs.getLong(2));
-        bean.setData(rs.getDate(3));
-        bean.setValorTotal(rs.getDouble(4));
+        bean.setIdUsuario(rs.getInt(3));
+        bean.setData(rs.getDate(4));
+        bean.setValorTotal(rs.getDouble(5));
         return bean;
     }
 
@@ -156,8 +183,9 @@ public class ComandaDAO extends AbstractDAO<ComandaBean, ComandaPk> {
     @Override
     protected PreparedStatement getPstmt(PreparedStatement pstmt, ComandaBean bean) throws SQLException {
         pstmt.setLong(1, bean.getIdCliente());
-        pstmt.setDate(2, new java.sql.Date(bean.getData().getTime()));
-        pstmt.setDouble(3, bean.getValorTotal());
+        pstmt.setInt(2, bean.getIdUsuario());
+        pstmt.setDate(3, new java.sql.Date(bean.getData().getTime()));
+        pstmt.setDouble(4, bean.getValorTotal());
         return pstmt;
     }
 

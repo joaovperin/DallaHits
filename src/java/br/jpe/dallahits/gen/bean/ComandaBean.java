@@ -25,9 +25,11 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
     private long idComanda;
     /** Cliente vinculado */
     private long idCliente;
+    /** Usuario */
+    private int idUsuario;
     /** Data */
     private Date data;
-    /** Valor unitário */
+    /** Valor Total */
     private double valorTotal;
 
     /** 
@@ -81,6 +83,24 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
     }
 
     /** 
+     * Retorna o valor do campo Usuario
+     * 
+     * @return int
+     */
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    /** 
+     * Define o valor do campo Usuario
+     * 
+     * @param idUsuario
+     */
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    /** 
      * Retorna o valor do campo Data
      * 
      * @return Date
@@ -99,7 +119,7 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
     }
 
     /** 
-     * Retorna o valor do campo Valor unitário
+     * Retorna o valor do campo Valor Total
      * 
      * @return double
      */
@@ -108,7 +128,7 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
     }
 
     /** 
-     * Define o valor do campo Valor unitário
+     * Define o valor do campo Valor Total
      * 
      * @param valorTotal
      */
@@ -126,6 +146,7 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
         JSONArray obj = new JSONArray();
         obj.add(getIdComanda());
         obj.add(getIdCliente());
+        obj.add(getIdUsuario());
         obj.add(getData());
         obj.add(getValorTotal());
         return obj;
@@ -141,15 +162,16 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
         JSONArray nodes = new JSONArray();
         nodes.add("idComanda");
         nodes.add("idCliente");
+        nodes.add("idUsuario");
         nodes.add("data");
         nodes.add("valorTotal");
         root.put("colunas", nodes);
         nodes = new JSONArray();
         nodes.add("Código");
         nodes.add("Cliente vinculado");
+        nodes.add("Usuario");
         nodes.add("Data");
-        nodes.add("Valor unitário");
-        nodes.add("Ações");
+        nodes.add("Valor Total");
         root.put("titulos", nodes);
         return root;
     }
@@ -164,6 +186,7 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
         int hash = 7;
         hash = 53 * hash + Objects.hashCode(this.idComanda);
         hash = 53 * hash + Objects.hashCode(this.idCliente);
+        hash = 53 * hash + Objects.hashCode(this.idUsuario);
         hash = 53 * hash + Objects.hashCode(this.data);
         hash = 53 * hash + Objects.hashCode(this.valorTotal);
         return hash;
@@ -193,6 +216,9 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
         if (!Objects.equals(this.idCliente, other.idCliente)) {
             return false;
         }
+        if (!Objects.equals(this.idUsuario, other.idUsuario)) {
+            return false;
+        }
         if (!Objects.equals(this.data, other.data)) {
             return false;
         }
@@ -212,6 +238,7 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
         return "ComandaBean{" +
                     "idComanda=" + idComanda + ", " +
                     "idCliente=" + idCliente + ", " +
+                    "idUsuario=" + idUsuario + ", " +
                     "data=" + data + ", " +
                     "valorTotal=" + valorTotal + "}";
     }

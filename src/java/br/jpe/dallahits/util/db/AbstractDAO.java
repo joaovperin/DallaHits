@@ -89,6 +89,9 @@ public abstract class AbstractDAO<B extends AbstractBean, P extends AbstractPk> 
     
     /** Retorna o comando SQL para atualizar um registro */
     protected abstract String getSqlUpdate(String where);
+    
+    /** Retorna o comando SQL para deletar um registro */
+    protected abstract String getSqlDelete(String where);
 
     /**
      * Cria um novo Bean e popula a partir do ResultSet

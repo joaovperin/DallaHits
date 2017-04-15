@@ -24,11 +24,13 @@ import java.sql.SQLException;
 public class PessoaDAO extends AbstractDAO<PessoaBean, PessoaPk> {
 
     /** SQL para SELECT */
-    private static final String SQL_SELECT = "SELECT nome, email, idade FROM Pessoa";
+    private static final String SQL_SELECT = "SELECT nome, email, idade FROM pessoa";
     /** SQL para INSERT */
-    private static final String SQL_INSERT = "INSERT INTO Pessoa (nome, email, idade) VALUES ( ?,  ?,  ? )";
+    private static final String SQL_INSERT = "INSERT INTO pessoa (nome, email, idade) VALUES ( ?,  ?,  ? )";
     /** SQL para UPDATE */
-    private static final String SQL_UPDATE = "UPDATE Pessoa SET email =  ?, idade =  ?";
+    private static final String SQL_UPDATE = "UPDATE pessoa SET email =  ?, idade =  ?";
+    /** SQL para DELETE */
+    private static final String SQL_DELETE = "DELETE FROM pessoa";
 
     /** 
      * Construtor da classe PessoaPk
@@ -93,9 +95,22 @@ public class PessoaDAO extends AbstractDAO<PessoaBean, PessoaPk> {
         }
     }
 
+    /**
+     * Realiza a deleção de um registro no banco de dados
+     * 
+     * @param bean
+     * @throws DAOException
+     */
     @Override
     public void delete(PessoaBean bean) throws DAOException {
-        throw new UnsupportedOperationException("PessoaDAO.delete() nao suportado.");
+        try {
+            String where = " WHERE nome =  ?";
+            PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlDelete(where)), bean);
+            pstmt.setString(1, bean.getNome());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
     }
 
     /** 
@@ -127,6 +142,17 @@ public class PessoaDAO extends AbstractDAO<PessoaBean, PessoaPk> {
     @Override
     protected String getSqlUpdate(String where) {
         return SQL_UPDATE.concat(where);
+    }
+
+    /** 
+     * Retorna o comando SQL para executar um Delete
+     *
+     * @param where Cláusula WHERE para executar filtros
+     * @return String
+     */
+    @Override
+    protected String getSqlDelete(String where) {
+        return SQL_DELETE.concat(where);
     }
     
     /** 

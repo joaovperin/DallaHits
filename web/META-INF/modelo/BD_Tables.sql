@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS Usuario (
   Login VARCHAR(80) NOT NULL COMMENT 'Login',
-  idUsuario INT(10) NOT NULL UNIQUE COMMENT 'Código',
+  idUsuario INT(10) NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'Código',
   Email VARCHAR(160) NOT NULL COMMENT 'Email',
   Senha VARCHAR(32) NOT NULL COMMENT 'Senha',
   Nome VARCHAR(120) NOT NULL COMMENT 'Nome',
@@ -31,11 +31,12 @@ CREATE TABLE IF NOT EXISTS Comanda (
   ValorTotal DECIMAL(12,2) NOT NULL COMMENT 'Valor Total',
   PRIMARY KEY (idComanda),
   INDEX Comanda_Cliente_idx (idCliente ASC),
+  INDEX Comanda_Usuario_idx (idUsuario ASC),
   CONSTRAINT FK_Comanda_Cliente
     FOREIGN KEY (idCliente)
     REFERENCES Cliente (idCliente)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION),
+    ON UPDATE NO ACTION,
   CONSTRAINT FK_Comanda_Usuario
     FOREIGN KEY (idUsuario)
     REFERENCES Usuario (idUsuario)

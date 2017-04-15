@@ -24,11 +24,13 @@ import java.sql.SQLException;
 public class ${entidade.nome}DAO extends AbstractDAO<${entidade.nome}Bean, ${entidade.nome}Pk> {
 
     /** SQL para SELECT */
-    private static final String SQL_SELECT = "SELECT <#list entidade.attrs as a>${a.nome}<#if a_index < entidade.attrs?size - 1>, </#if></#list> FROM ${entidade.nome?capitalize}";
+    private static final String SQL_SELECT = "SELECT <#list entidade.attrs as a>${a.nome}<#if a_index < entidade.attrs?size - 1>, </#if></#list> FROM ${entidade.tableName}";
     /** SQL para INSERT */
-    private static final String SQL_INSERT = "INSERT INTO ${entidade.nome?capitalize} (<#list entidade.attrs as a><#if !a.autoIncrement>${a.nome}<#if a_index < entidade.attrs?size - 1>, </#if></#if></#list>) VALUES (<#list entidade.attrs as a><#if !a.autoIncrement> ?<#if a_index < entidade.attrs?size - 1>, </#if></#if></#list> )";
+    private static final String SQL_INSERT = "INSERT INTO ${entidade.tableName} (<#list entidade.attrs as a><#if !a.autoIncrement>${a.nome}<#if a_index < entidade.attrs?size - 1>, </#if></#if></#list>) VALUES (<#list entidade.attrs as a><#if !a.autoIncrement> ?<#if a_index < entidade.attrs?size - 1>, </#if></#if></#list> )";
     /** SQL para UPDATE */
-    private static final String SQL_UPDATE = "UPDATE ${entidade.tableName?capitalize} SET <#list entidade.attrs as a><#if !a.autoIncrement && !a.isPk>${a.nome} =  ?<#if a_index < entidade.attrs?size - 1>, </#if></#if></#list>";
+    private static final String SQL_UPDATE = "UPDATE ${entidade.tableName} SET <#list entidade.attrs as a><#if !a.autoIncrement && !a.isPk>${a.nome} =  ?<#if a_index < entidade.attrs?size - 1>, </#if></#if></#list>";
+    /** SQL para DELETE */
+    private static final String SQL_DELETE = "DELETE FROM ${entidade.tableName}";
 
     /** 
      * Construtor da classe ${entidade.nome?cap_first}Pk
@@ -103,9 +105,28 @@ public class ${entidade.nome}DAO extends AbstractDAO<${entidade.nome}Bean, ${ent
         }
     }
 
+    /**
+     * Realiza a deleção de um registro no banco de dados
+     * 
+     * @param bean
+     * @throws DAOException
+     */
     @Override
     public void delete(${entidade.nome}Bean bean) throws DAOException {
-        throw new UnsupportedOperationException("${entidade.nome}DAO.delete() nao suportado.");
+        try {
+            String where = " WHERE <#list entidade.attrs as a><#if a.isPk>${a.nome}<#if a_index < entidade.lastKeyAtt>, </#if></#if></#list> = <#list entidade.attrs as a><#if a.isPk> ?<#if a_index < entidade.lastKeyAtt>, </#if></#if></#list>";
+            PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlDelete(where)), bean);
+<#assign idx = 1>
+<#list entidade.attrs as a>
+<#if a.isPk>
+            pstmt.set${a.tipo?cap_first}(${idx}, bean.get${a.nome?cap_first}());
+<#assign idx++>
+</#if>
+</#list>
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
     }
 
     /** 
@@ -137,6 +158,17 @@ public class ${entidade.nome}DAO extends AbstractDAO<${entidade.nome}Bean, ${ent
     @Override
     protected String getSqlUpdate(String where) {
         return SQL_UPDATE.concat(where);
+    }
+
+    /** 
+     * Retorna o comando SQL para executar um Delete
+     *
+     * @param where Cláusula WHERE para executar filtros
+     * @return String
+     */
+    @Override
+    protected String getSqlDelete(String where) {
+        return SQL_DELETE.concat(where);
     }
     
     /** 
