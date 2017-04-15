@@ -7,7 +7,6 @@ package br.jpe.dallahits.util.db;
 
 import com.google.gson.Gson;
 import java.util.List;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**

@@ -7,13 +7,13 @@
     <tiles:putAttribute name="body">
         <!-- Header -->
         <a name="about"></a>
-        <div class="intro-header">
+        <div class="intro-header intro-header-introimg">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="intro-message">
                             <h1>Bem vindo, ${usuarioLogado.nome}.</h1>
-                            <h3>O que deseja fazer?</h3>
+                            <h3 class="def" >O que deseja fazer?</h3>
                             <hr class="intro-divider">
                             <ul class="list-inline intro-social-buttons">
                                 <li>

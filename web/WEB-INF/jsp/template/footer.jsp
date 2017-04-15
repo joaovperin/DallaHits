@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="/META-INF/tlds/spring.tld" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script type="text/javascript" src="<c:url value="/resources/third/js/bootstrap.min.js" />"></script>
@@ -10,7 +11,7 @@
                 <ul class="list-inline">
                     <li>
                         <%--<spring:url value="/index" var="homeUrl" htmlEscape="true" />--%>
-                        <!--<a href="${homeUrl}">InÌcio</a>-->
+                        <!--<a href="${homeUrl}">In√≠cio</a>-->
                         <a href="#">Home</a>
                     </li>
                     <li class="footer-menu-divider">&sdot;</li>
@@ -26,7 +27,7 @@
                         <a href="#contact">Contact</a>
                     </li>
                 </ul>
-                <p class="copyright text-muted small">Copyright &copy; Jo„o Victor Perin 2017. All Rights Reserved</p>
+                <p class="copyright text-muted small">Copyright &copy; Jo√£o Victor Perin 2017. All Rights Reserved</p>
             </div>
         </div>
     </div>

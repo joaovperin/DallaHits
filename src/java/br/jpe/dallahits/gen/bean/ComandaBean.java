@@ -149,6 +149,7 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
         nodes.add("Cliente vinculado");
         nodes.add("Data");
         nodes.add("Valor unitário");
+        nodes.add("Ações");
         root.put("titulos", nodes);
         return root;
     }

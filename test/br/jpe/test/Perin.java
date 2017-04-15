@@ -8,6 +8,7 @@ package br.jpe.test;
 //import java.util.Date;
 //import java.sql.Date;
 import java.util.Date;
+import org.json.simple.JSONObject;
 
 /**
  * Classe Perin
@@ -18,20 +19,14 @@ public class Perin {
 
     public static void main(String[] args) {
         System.out.println("Hello!");
-//        Date now = new Date();
-//        System.out.println(now);
+
+        String input = "Àgua";
         
-//        Date now = new Date(new java.util.Date());
-//        System.out.println(now);
-        
-        Date dataUtil = new Date();
-        java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
-        
-        System.out.println(dataUtil);
-        System.out.println(dataSql);
-        
-        
-        
+        System.out.println(input);
+        JSONObject temp = new JSONObject();
+        temp.put("values", input);
+        System.out.println(temp.toString());
+
         System.out.println("Fim.");
     }
 

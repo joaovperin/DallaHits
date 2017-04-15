@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="/META-INF/tlds/spring.tld" %>
 <!-- Navigation -->
@@ -12,7 +13,7 @@
                 <span class="icon-bar"></span>
             </button>
             <spring:url value="/index" var="homeUrl" htmlEscape="true" />
-            <a class="navbar-brand topnav" href="${homeUrl}">Início</a>
+            <a class="navbar-brand topnav" href="${homeUrl}">InÃ­cio</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -22,7 +23,7 @@
                     <a href="${mensagensUrl}">Mensagens</a>
                 </li>
                 <li>
-                    <a href="#services">Serviços</a>
+                    <a href="#services">ServiÃ§os</a>
                 </li>
                 <li>
                     <a href="#contact">Contato</a>

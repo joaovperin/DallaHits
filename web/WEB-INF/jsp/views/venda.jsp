@@ -7,7 +7,7 @@
     <tiles:putAttribute name="body">
         <div class="container">
             <%-- Datatables --%>
-            <jpe:grid id="example" url="pessoasDt" title="Grid de Pessoas" />
+            <jpe:grid id="comandas" url="comandas" title="Comandas" />
             <%-- Se houver mensagem, exibe --%>
             <jpe:message msg="${msg}" />
         </div><!-- /container -->

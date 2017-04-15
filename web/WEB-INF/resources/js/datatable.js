@@ -11,8 +11,8 @@
  * 
  */
 var Grid = function (externalParams) {
-    
-    // Variável para guardar a referência do datatable
+
+// Variável para guardar a referência do datatable
     var table;
     // Objeto com os parâmetros
     var param = {
@@ -20,17 +20,43 @@ var Grid = function (externalParams) {
     };
     // Mescla os parâmetro externos com os internos
     $.extend(param, externalParams);
-
     // Realiza a criação do DataTable
-    function criaDataTable(colunas) {
+    function criaDataTable(header) {
         // Cria o Datatable e associa à variável local 'table'
         table = $(param.grid).DataTable({
             "ajax": "/DallaHits/" + param.url + "/dados",
             "dataSrc": "demo",
+            "columnDefs": [
+                {
+                    "targets": -1,
+                    "data": null,
+                    "defaultContent": "<button>Click!</button>"
+                }
+            ],
+            "initComplete": function () {
+                appendHeader(header.titulos);
+                if (param.callback){
+                    param.callback(table);
+                }
+            },
             "info": false,
             "responsive": true,
             "order": [[0, "asc"]],
-            "columns": getColunas(colunas)
+            "columns": getColunas(header.colunas),
+            "select": true,
+            // Para adicionar novas Strings
+            // http://legacy.datatables.net/usage/i18n
+            "language": {
+                "lengthMenu": "Exibindo  _MENU_  registros.",
+                "search": "Buscar",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Próximo"
+                },
+                "info": "Mostrando página _PAGE_ de _PAGES_.",
+                "zeroRecords": "Nenhum registro encontrado.",
+                "infoEmpty": "Nenhum registro disponível."
+            }
         });
     }
 
@@ -40,6 +66,7 @@ var Grid = function (externalParams) {
         lista.forEach(function (e) {
             cols.push({"data": e});
         });
+        cols.push({"data": "acoes"});
         return cols;
     }
 
@@ -50,8 +77,7 @@ var Grid = function (externalParams) {
             url: "/DallaHits/" + param.url + "/titulo",
             success: function (ret) {
                 var header = JSON.parse(ret);
-                criaDataTable(header.colunas);
-                appendHeader(header.titulos);
+                criaDataTable(header);
             }
         });
     }
@@ -60,31 +86,28 @@ var Grid = function (externalParams) {
     function appendHeader(dados) {
         // Busca Grid e cria um Header
         var g = $(param.grid);
-        var header = criaHeader(dados);
         // Se já não tiver header, appenda um novo
         if (param.criaHeader) {
-            g.find('thead').append(header);
+            g.find('thead th').each(function (e) {
+                $(this).append(criaHeader(dados[e]));
+            });
         }
         // Se já não tiver footer, appenda um novo
         if (param.criaFooter) {
-            g.find('tfoot').append(header);
+            g.find('tfoot th').each(function (e) {
+                $(this).append(criaHeader(dados[e]));
+            });
         }
     }
 
     // Função auxiliar para criar o header à partir de um array
-    function criaHeader(arr) {
-        var head = '';
-        arr.forEach(function (e) {
-            head += '<th>' + e + '</th>';
-        });
-        return head;
+    function criaHeader(head) {
+        return  '<th>' + head + '</th>';
     }
 
     // Busca o header do DataTable
     buscaHeader();
-
     return {
         table: table
     };
-
 };

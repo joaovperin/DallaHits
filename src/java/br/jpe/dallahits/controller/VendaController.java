@@ -7,8 +7,10 @@ package br.jpe.dallahits.controller;
 
 import br.jpe.dallahits.exception.DAOException;
 import br.jpe.dallahits.exception.DallaHitsException;
-import br.jpe.dallahits.gen.bean.PessoaBean;
-import br.jpe.dallahits.gen.dao.PessoaDAO;
+import br.jpe.dallahits.gen.bean.ComandaBean;
+import br.jpe.dallahits.gen.bean.ProdutoBean;
+import br.jpe.dallahits.gen.dao.ComandaDAO;
+import br.jpe.dallahits.gen.dao.ProdutoDAO;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.JpeGson;
@@ -39,31 +41,47 @@ public class VendaController {
         return "venda";
     }
 
+    @RequestMapping("/comandas/dados")
+    @ResponseBody
+    public String getComandas() throws DallaHitsException {
+        try (Conexao conn = ConnFactory.criaConexao()) {
+            return gson.toDataTable(new ComandaDAO(conn).busca());
+        } catch (DAOException e) {
+            throw new DallaHitsException(e);
+        }
+    }
+
+    @RequestMapping("/comandas/titulo")
+    @ResponseBody
+    public String getComandasTitulo() {
+        return ComandaBean.getFields().toJSONString();
+    }
+
     /**
-     * Retorna todas as pessoas do banco
+     * Retorna todos os produtos do banco
      *
-     * @return String Lista de pessoas no formato JSON
+     * @return String Lista de produtos no formato JSON
      * @throws DallaHitsException
      */
-    @RequestMapping(value = "/pessoasDt/dados")
+    @RequestMapping("/produtos/dados")
     @ResponseBody
-    public String getPessoas() throws DallaHitsException {
+    public String getProdutos() throws DallaHitsException {
         try (Conexao conn = ConnFactory.criaConexao()) {
-            return gson.toDataTable(new PessoaDAO(conn).busca());
+            return gson.toDataTable(new ProdutoDAO(conn).busca());
         } catch (DAOException e) {
             throw new DallaHitsException(e);
         }
     }
 
     /**
-     * Retorna os Títulos do Grid de pessoas
+     * Retorna os Títulos do Grid de Produtos
      *
      * @return String
      */
-    @RequestMapping(value = "/pessoasDt/titulo")
+    @RequestMapping("/produtos/titulo")
     @ResponseBody
-    public String getPessoasTitulo() {
-        return PessoaBean.getFields().toJSONString();
+    public String getProdutosTitulo() {
+        return ProdutoBean.getFields().toJSONString();
     }
 
 }
