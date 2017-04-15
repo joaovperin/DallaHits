@@ -10,6 +10,8 @@ package br.jpe.dallahits.gen.bean;
 import br.jpe.dallahits.util.db.AbstractBean;
 import br.jpe.dallahits.gen.pk.UsuarioPk;
 import java.util.Objects;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 /**
  * Classe UsuarioBean
@@ -131,6 +133,46 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
      */
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    /**
+     * Retorna o valor das propriedades do bean em um JSONArray
+     * 
+     * @return JSONArray
+     */
+    @Override
+    public JSONArray toArray() {
+        JSONArray obj = new JSONArray();
+        obj.add(getLogin());
+        obj.add(getEmail());
+        obj.add(getSenha());
+        obj.add(getNome());
+        obj.add(getTipo());
+        return obj;
+    }
+
+    /**
+     * Retorna um Objeto com Nome e Descrição dos campos formato JSONObject
+     * 
+     * @return JSONObject
+     */
+    public static JSONObject getFields() {
+        JSONObject root = new JSONObject();
+        JSONArray nodes = new JSONArray();
+        nodes.add("login");
+        nodes.add("email");
+        nodes.add("senha");
+        nodes.add("nome");
+        nodes.add("tipo");
+        root.put("colunas", nodes);
+        nodes = new JSONArray();
+        nodes.add("Login");
+        nodes.add("Email");
+        nodes.add("Senha");
+        nodes.add("Nome");
+        nodes.add("Tipo");
+        root.put("titulos", nodes);
+        return root;
     }
 
     /**

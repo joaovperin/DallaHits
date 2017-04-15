@@ -10,6 +10,8 @@ package br.jpe.dallahits.gen.bean;
 import br.jpe.dallahits.util.db.AbstractBean;
 import br.jpe.dallahits.gen.pk.MensagemPk;
 import java.util.Objects;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 /**
  * Classe MensagemBean
@@ -91,6 +93,40 @@ public class MensagemBean extends AbstractBean<MensagemBean> {
      */
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    /**
+     * Retorna o valor das propriedades do bean em um JSONArray
+     * 
+     * @return JSONArray
+     */
+    @Override
+    public JSONArray toArray() {
+        JSONArray obj = new JSONArray();
+        obj.add(getIdMsg());
+        obj.add(getUsuario());
+        obj.add(getMsg());
+        return obj;
+    }
+
+    /**
+     * Retorna um Objeto com Nome e Descrição dos campos formato JSONObject
+     * 
+     * @return JSONObject
+     */
+    public static JSONObject getFields() {
+        JSONObject root = new JSONObject();
+        JSONArray nodes = new JSONArray();
+        nodes.add("idMsg");
+        nodes.add("usuario");
+        nodes.add("msg");
+        root.put("colunas", nodes);
+        nodes = new JSONArray();
+        nodes.add("Código da mensagem");
+        nodes.add("Usuário que escreveu");
+        nodes.add("Mensagem");
+        root.put("titulos", nodes);
+        return root;
     }
 
     /**

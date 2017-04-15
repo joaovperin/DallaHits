@@ -8,15 +8,17 @@
 package br.jpe.dallahits.gen.bean;
 
 import br.jpe.dallahits.util.db.AbstractBean;
-import br.jpe.dallahits.gen.pk.PessoasPk;
+import br.jpe.dallahits.gen.pk.PessoaPk;
 import java.util.Objects;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 /**
- * Classe PessoasBean
+ * Classe PessoaBean
  *
  * @author Joaov
  */
-public class PessoasBean extends AbstractBean<PessoasBean> {
+public class PessoaBean extends AbstractBean<PessoaBean> {
 
     /** Nome */
     private String nome;
@@ -26,17 +28,17 @@ public class PessoasBean extends AbstractBean<PessoasBean> {
     private int idade;
 
     /** 
-     * Construtor da classe PessoasBean
+     * Construtor da classe PessoaBean
      */
-    public PessoasBean() {}
+    public PessoaBean() {}
  
     /** 
-     * Retorna a chave primária da entidade Pessoas
+     * Retorna a chave primária da entidade Pessoa
      * 
-     * @return PessoasPk
+     * @return PessoaPk
      */
-    public PessoasPk getPk() {
-        return new PessoasPk(getNome());
+    public PessoaPk getPk() {
+        return new PessoaPk(getNome());
     }    
 
     /** 
@@ -94,7 +96,41 @@ public class PessoasBean extends AbstractBean<PessoasBean> {
     }
 
     /**
-     * Gera e retorna um código hash para essa instância de Pessoas
+     * Retorna o valor das propriedades do bean em um JSONArray
+     * 
+     * @return JSONArray
+     */
+    @Override
+    public JSONArray toArray() {
+        JSONArray obj = new JSONArray();
+        obj.add(getNome());
+        obj.add(getEmail());
+        obj.add(getIdade());
+        return obj;
+    }
+
+    /**
+     * Retorna um Objeto com Nome e Descrição dos campos formato JSONObject
+     * 
+     * @return JSONObject
+     */
+    public static JSONObject getFields() {
+        JSONObject root = new JSONObject();
+        JSONArray nodes = new JSONArray();
+        nodes.add("nome");
+        nodes.add("email");
+        nodes.add("idade");
+        root.put("colunas", nodes);
+        nodes = new JSONArray();
+        nodes.add("Nome");
+        nodes.add("E-mail");
+        nodes.add("Idade");
+        root.put("titulos", nodes);
+        return root;
+    }
+
+    /**
+     * Gera e retorna um código hash para essa instância de Pessoa
      *
      * @return int
      */
@@ -124,7 +160,7 @@ public class PessoasBean extends AbstractBean<PessoasBean> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final PessoasBean other = (PessoasBean) obj;
+        final PessoaBean other = (PessoaBean) obj;
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
@@ -144,7 +180,7 @@ public class PessoasBean extends AbstractBean<PessoasBean> {
      */
     @Override
     public String toString() {
-        return "PessoasBean{" +
+        return "PessoaBean{" +
                     "nome=" + nome + ", " +
                     "email=" + email + ", " +
                     "idade=" + idade + "}";

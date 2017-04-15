@@ -10,26 +10,26 @@ package br.jpe.dallahits.gen.pk;
 import br.jpe.dallahits.util.db.AbstractPk;
 
 /**
- * Classe PessoasPk
+ * Classe PessoaPk
  *
  * @author Joaov
  */
-public class PessoasPk extends AbstractPk<PessoasPk> {
+public class PessoaPk extends AbstractPk<PessoaPk> {
 
     /** Nome */
     private String nome;
 
     /** 
-     * Construtor da classe PessoasPk
+     * Construtor da classe PessoaPk
      */
-    public PessoasPk() {}
+    public PessoaPk() {}
 
     /** 
-     * Construtor da classe PessoasPk
+     * Construtor da classe PessoaPk
      * 
      * @param  nome
      */
-    public PessoasPk(String nome) {
+    public PessoaPk(String nome) {
        this.nome = nome;
     }
 

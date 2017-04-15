@@ -10,6 +10,8 @@ package br.jpe.dallahits.gen.bean;
 import br.jpe.dallahits.util.db.AbstractBean;
 import br.jpe.dallahits.gen.pk.ProdutoPk;
 import java.util.Objects;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 /**
  * Classe ProdutoBean
@@ -91,6 +93,40 @@ public class ProdutoBean extends AbstractBean<ProdutoBean> {
      */
     public void setValorUnitario(double valorUnitario) {
         this.valorUnitario = valorUnitario;
+    }
+
+    /**
+     * Retorna o valor das propriedades do bean em um JSONArray
+     * 
+     * @return JSONArray
+     */
+    @Override
+    public JSONArray toArray() {
+        JSONArray obj = new JSONArray();
+        obj.add(getIdProduto());
+        obj.add(getDescricao());
+        obj.add(getValorUnitario());
+        return obj;
+    }
+
+    /**
+     * Retorna um Objeto com Nome e Descrição dos campos formato JSONObject
+     * 
+     * @return JSONObject
+     */
+    public static JSONObject getFields() {
+        JSONObject root = new JSONObject();
+        JSONArray nodes = new JSONArray();
+        nodes.add("idProduto");
+        nodes.add("descricao");
+        nodes.add("valorUnitario");
+        root.put("colunas", nodes);
+        nodes = new JSONArray();
+        nodes.add("Código");
+        nodes.add("Descrição");
+        nodes.add("Valor unitário");
+        root.put("titulos", nodes);
+        return root;
     }
 
     /**

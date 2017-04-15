@@ -10,6 +10,8 @@ package br.jpe.dallahits.gen.bean;
 import br.jpe.dallahits.util.db.AbstractBean;
 import br.jpe.dallahits.gen.pk.ClientePk;
 import java.util.Objects;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 /**
  * Classe ClienteBean
@@ -111,6 +113,43 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
      */
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    /**
+     * Retorna o valor das propriedades do bean em um JSONArray
+     * 
+     * @return JSONArray
+     */
+    @Override
+    public JSONArray toArray() {
+        JSONArray obj = new JSONArray();
+        obj.add(getIdCliente());
+        obj.add(getNome());
+        obj.add(getSexo());
+        obj.add(getIdade());
+        return obj;
+    }
+
+    /**
+     * Retorna um Objeto com Nome e Descrição dos campos formato JSONObject
+     * 
+     * @return JSONObject
+     */
+    public static JSONObject getFields() {
+        JSONObject root = new JSONObject();
+        JSONArray nodes = new JSONArray();
+        nodes.add("idCliente");
+        nodes.add("nome");
+        nodes.add("sexo");
+        nodes.add("idade");
+        root.put("colunas", nodes);
+        nodes = new JSONArray();
+        nodes.add("Código");
+        nodes.add("Nome");
+        nodes.add("Sexo");
+        nodes.add("Idade");
+        root.put("titulos", nodes);
+        return root;
     }
 
     /**

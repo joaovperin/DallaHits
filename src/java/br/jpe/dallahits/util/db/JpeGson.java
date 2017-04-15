@@ -6,6 +6,9 @@
 package br.jpe.dallahits.util.db;
 
 import com.google.gson.Gson;
+import java.util.List;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  * Objeto auxiliar para trabalhar com a API Gson
@@ -44,6 +47,18 @@ public class JpeGson {
      */
     public String toJson(Object obj) {
         return getGson().toJson(obj);
+    }
+
+    /**
+     * Retorna uma lista de beans no formato padrão para datatables
+     *
+     * @param list
+     * @return String
+     */
+    public String toDataTable(List<? extends AbstractBean> list) {
+        JSONObject obj = new JSONObject();
+        obj.put("data", list);
+        return toJson(obj);
     }
 
 }

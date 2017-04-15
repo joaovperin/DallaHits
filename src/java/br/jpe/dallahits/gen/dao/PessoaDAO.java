@@ -7,8 +7,8 @@
  */
 package br.jpe.dallahits.gen.dao;
 
-import br.jpe.dallahits.gen.bean.PessoasBean;
-import br.jpe.dallahits.gen.pk.PessoasPk;
+import br.jpe.dallahits.gen.bean.PessoaBean;
+import br.jpe.dallahits.gen.pk.PessoaPk;
 import br.jpe.dallahits.util.db.AbstractDAO;
 import br.jpe.dallahits.util.db.Conexao;
 import java.sql.PreparedStatement;
@@ -17,25 +17,25 @@ import br.jpe.dallahits.exception.DAOException;
 import java.sql.SQLException;
 
 /**
- * Classe PessoasDAO
+ * Classe PessoaDAO
  *
  * @author Joaov
  */
-public class PessoasDAO extends AbstractDAO<PessoasBean, PessoasPk> {
+public class PessoaDAO extends AbstractDAO<PessoaBean, PessoaPk> {
 
     /** SQL para SELECT */
-    private static final String SQL_SELECT = "SELECT nome, email, idade FROM Pessoas";
+    private static final String SQL_SELECT = "SELECT nome, email, idade FROM Pessoa";
     /** SQL para INSERT */
-    private static final String SQL_INSERT = "INSERT INTO Pessoas (nome, email, idade) VALUES ( ?,  ?,  ? )";
+    private static final String SQL_INSERT = "INSERT INTO Pessoa (nome, email, idade) VALUES ( ?,  ?,  ? )";
     /** SQL para UPDATE */
-    private static final String SQL_UPDATE = "UPDATE Pessoas SET email =  ?, idade =  ?";
+    private static final String SQL_UPDATE = "UPDATE Pessoa SET email =  ?, idade =  ?";
 
     /** 
-     * Construtor da classe PessoasPk
+     * Construtor da classe PessoaPk
      *
      * @param conn
      */
-    public PessoasDAO(Conexao conn) {
+    public PessoaDAO(Conexao conn) {
        super(conn);
     }
 
@@ -46,7 +46,7 @@ public class PessoasDAO extends AbstractDAO<PessoasBean, PessoasPk> {
      * @throws DAOException
      */
     @Override
-    public void insert(PessoasBean bean) throws DAOException {
+    public void insert(PessoaBean bean) throws DAOException {
         try {
            PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlInsert()), bean);
            pstmt.executeUpdate();
@@ -59,10 +59,10 @@ public class PessoasDAO extends AbstractDAO<PessoasBean, PessoasPk> {
      * Realiza uma busca no banco à partir da chave primária do elemento
      * 
      * @param pk
-     * @return PessoasBean
+     * @return PessoaBean
      * @throws DAOException
      */
-    public PessoasBean buscaPk(PessoasPk pk) throws DAOException {
+    public PessoaBean buscaPk(PessoaPk pk) throws DAOException {
         try {
             String sql = SQL_SELECT.concat(
             " WHERE nome =  ?"
@@ -82,7 +82,7 @@ public class PessoasDAO extends AbstractDAO<PessoasBean, PessoasPk> {
      * @throws DAOException
      */
     @Override
-    public void update(PessoasBean bean) throws DAOException {
+    public void update(PessoaBean bean) throws DAOException {
         try {
             String where = " WHERE nome =  ?";
             PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlUpdate(where)), bean);
@@ -94,8 +94,8 @@ public class PessoasDAO extends AbstractDAO<PessoasBean, PessoasPk> {
     }
 
     @Override
-    public void delete(PessoasBean bean) throws DAOException {
-        throw new UnsupportedOperationException("PessoasDAO.delete() nao suportado.");
+    public void delete(PessoaBean bean) throws DAOException {
+        throw new UnsupportedOperationException("PessoaDAO.delete() nao suportado.");
     }
 
     /** 
@@ -132,12 +132,12 @@ public class PessoasDAO extends AbstractDAO<PessoasBean, PessoasPk> {
     /** 
      * Retorna um Bean à partir de um ResultSet
      *
-     * @return PessoasBean
+     * @return PessoaBean
      * @throws java.sql.SQLException
      */
     @Override
-    protected PessoasBean getBeanFromResultSet(ResultSet rs) throws SQLException {
-        PessoasBean bean = new PessoasBean();
+    protected PessoaBean getBeanFromResultSet(ResultSet rs) throws SQLException {
+        PessoaBean bean = new PessoaBean();
         bean.setNome(rs.getString(1));
         bean.setEmail(rs.getString(2));
         bean.setIdade(rs.getInt(3));
@@ -153,7 +153,7 @@ public class PessoasDAO extends AbstractDAO<PessoasBean, PessoasPk> {
      * @throws java.sql.SQLException
      */
     @Override
-    protected PreparedStatement getPstmt(PreparedStatement pstmt, PessoasBean bean) throws SQLException {
+    protected PreparedStatement getPstmt(PreparedStatement pstmt, PessoaBean bean) throws SQLException {
         pstmt.setString(1, bean.getEmail());
         pstmt.setInt(2, bean.getIdade());
         return pstmt;

@@ -10,6 +10,8 @@ package br.jpe.dallahits.gen.bean;
 import br.jpe.dallahits.util.db.AbstractBean;
 import br.jpe.dallahits.gen.pk.ComandaPk;
 import java.util.Objects;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 import java.util.Date;
 
 /**
@@ -112,6 +114,43 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
      */
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    /**
+     * Retorna o valor das propriedades do bean em um JSONArray
+     * 
+     * @return JSONArray
+     */
+    @Override
+    public JSONArray toArray() {
+        JSONArray obj = new JSONArray();
+        obj.add(getIdComanda());
+        obj.add(getIdCliente());
+        obj.add(getData());
+        obj.add(getValorTotal());
+        return obj;
+    }
+
+    /**
+     * Retorna um Objeto com Nome e Descrição dos campos formato JSONObject
+     * 
+     * @return JSONObject
+     */
+    public static JSONObject getFields() {
+        JSONObject root = new JSONObject();
+        JSONArray nodes = new JSONArray();
+        nodes.add("idComanda");
+        nodes.add("idCliente");
+        nodes.add("data");
+        nodes.add("valorTotal");
+        root.put("colunas", nodes);
+        nodes = new JSONArray();
+        nodes.add("Código");
+        nodes.add("Cliente vinculado");
+        nodes.add("Data");
+        nodes.add("Valor unitário");
+        root.put("titulos", nodes);
+        return root;
     }
 
     /**

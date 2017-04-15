@@ -2,6 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="jpe" uri="/META-INF/tlds/jpe.tld" %>
+<%@ taglib prefix="spring" uri="/META-INF/tlds/spring.tld" %>
 <tiles:insertDefinition  name="DefaultTemplate" >
     <tiles:putAttribute name="body">
         <!-- Header -->
@@ -16,7 +17,8 @@
                             <hr class="intro-divider">
                             <ul class="list-inline intro-social-buttons">
                                 <li>
-                                    <a href="#Vendas" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Vendas</span></a>
+                                    <spring:url value="/venda" var="vendaUrl" htmlEscape="true" />
+                                    <a href="${vendaUrl}" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Vendas</span></a>
                                 </li>
                                 <li>
                                     <a href="#Cadastros" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Cadastros</span></a>
