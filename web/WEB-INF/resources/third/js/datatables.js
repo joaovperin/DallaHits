@@ -17043,13 +17043,14 @@ $.extend( DataTable.ext.buttons, {
 
 	// Selected columns with individual buttons - toggle column visibility
 	columnsToggle: function ( dt, conf ) {
-		var columns = dt.columns( conf.columns ).indexes().map( function ( idx ) {
+		var columns = dt.columns().indexes().map( function ( idx ) {
 			return {
 				extend: 'columnToggle',
-				columns: idx
+				columns: idx,
+                                _colunas: conf.columns[idx],
+				_idx: idx
 			};
 		} ).toArray();
-
 		return columns;
 	},
 
@@ -17063,10 +17064,10 @@ $.extend( DataTable.ext.buttons, {
 
 	// Selected columns with individual buttons - set column visibility
 	columnsVisibility: function ( dt, conf ) {
-		var columns = dt.columns( conf.columns ).indexes().map( function ( idx ) {
+		var columns = dt.columns().indexes().map( function ( idx ) {
 			return {
 				extend: 'columnVisibility',
-				columns: idx,
+				columns: conf.columns,
 				visibility: conf.visibility
 			};
 		} ).toArray();
@@ -17078,7 +17079,7 @@ $.extend( DataTable.ext.buttons, {
 	columnVisibility: {
 		columns: undefined, // column selector
 		text: function ( dt, button, conf ) {
-			return conf._columnText( dt, conf.columns );
+			return conf._columnText( dt, conf._idx, conf._colunas );
 		},
 		className: 'buttons-columnVisibility',
 		action: function ( e, dt, button, conf ) {
@@ -17124,14 +17125,14 @@ $.extend( DataTable.ext.buttons, {
 				.off( 'column-reorder.dt'+conf.namespace );
 		},
 
-		_columnText: function ( dt, col ) {
+		_columnText: function ( dt, col, coluna ) {
 			// Use DataTables' internal data structure until this is presented
 			// is a public API. The other option is to use
 			// `$( column(col).node() ).text()` but the node might not have been
 			// populated when Buttons is constructed.
 			var idx = dt.column( col ).index();
-			return dt.settings()[0].aoColumns[ idx ].sTitle
-				.replace(/\n/g," ")        // remove new lines
+                        var t = coluna || dt.settings()[0].aoColumns[ idx ].sTitle;
+			return t.replace(/\n/g," ")        // remove new lines
 				.replace( /<.*?>/g, "" )   // strip HTML
 				.replace(/^\s+|\s+$/g,""); // trim
 		}

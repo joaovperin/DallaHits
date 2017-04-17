@@ -7,14 +7,16 @@ package br.jpe.dallahits.controller;
 
 import br.jpe.dallahits.exception.DAOException;
 import br.jpe.dallahits.exception.DallaHitsException;
-import br.jpe.dallahits.gen.bean.ComandaBean;
-import br.jpe.dallahits.gen.bean.ProdutoBean;
 import br.jpe.dallahits.gen.dao.ComandaDAO;
-import br.jpe.dallahits.gen.dao.ProdutoDAO;
+import br.jpe.dallahits.gen.entidade.ComandaEntidade;
+import br.jpe.dallahits.generics.AbstractBean;
+import br.jpe.dallahits.generics.AbstractGrid;
 import br.jpe.dallahits.grid.ProdutoGrid;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.GsonUtils;
+import java.util.List;
+import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +33,31 @@ public class VendaController {
     /** Api para gerar Jsons */
     private final GsonUtils gson = new GsonUtils();
 
+    private final AbstractGrid comandasGrid;
+
+    public VendaController() {
+        comandasGrid = new AbstractGrid() {
+            @Override
+            protected JSONArray getTitulos() {
+                return new ComandaEntidade().getTitulos();
+            }
+
+            @Override
+            protected JSONArray getColunas() {
+                return new ComandaEntidade().getColunas();
+            }
+
+            @Override
+            public List<? extends AbstractBean> getDados() throws DallaHitsException {
+                try (Conexao conn = ConnFactory.criaConexao()) {
+                    return new ComandaDAO(conn).busca();
+                } catch (DAOException e) {
+                    throw new DallaHitsException(e);
+                }
+            }
+        };
+    }
+
     /**
      * URL para consultar a página de vendas
      *
@@ -42,25 +69,16 @@ public class VendaController {
         return "venda";
     }
 
-//    @RequestMapping(value = "/comanda", method = RequestMethod.GET)
-//    public String comanda() throws DallaHitsException {
-//        return "comanda";
-//    }
     @RequestMapping("/comandas/dados")
     @ResponseBody
     public String getComandas() throws DallaHitsException {
-        try (Conexao conn = ConnFactory.criaConexao()) {
-            return gson.toDataTable(new ComandaDAO(conn).busca());
-        } catch (DAOException e) {
-            throw new DallaHitsException(e);
-        }
+        return gson.toDataTable(comandasGrid.getDados());
     }
 
     @RequestMapping("/comandas/titulo")
     @ResponseBody
     public String getComandasTitulo() {
-        return "";
-//        return ComandaBean.getFields().toJSONString();
+        return comandasGrid.createGrid().toJSONString();
     }
 
     /**

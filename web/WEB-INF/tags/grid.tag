@@ -5,6 +5,10 @@
 <%@attribute name="title" description="Título do grid" required="false" %>
 <%@attribute name="criaFooter" description="Se deve incluir um footer" required="false" %>
 <%@attribute name="clClick" description="Evento no DOM para disparar callbacks" required="false" %>
+<%@attribute name="addAcaoUpdate" description="Se deve adicionar ação Update" required="false" %>
+<%@attribute name="callbackAdd" description="Ação Add - nome da função de callback" required="false" %>
+<%@attribute name="callbackAlt" description="Ação Alteração - nome da função de callback" required="false" %>
+<%@attribute name="callbackExc" description="Ação Exclusão - nome da função de callback" required="false" %>
 <%-- Importações --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- Início da Tag: --%>
@@ -35,22 +39,24 @@
     </c:if>
 </table>
 <script>
-    var table;
     $(function () {
         new Grid({
             grid: '#${id}',
             url: '${url}',
             criaFooter: '${criaFooter}',
-            callback: function (obj) {
-                table = obj;
+            callbackAdd: '${callbackAdd}',
+            callbackAlt: '${callbackAlt}',
+            callbackExc: '${callbackExc}',
+            addAcaoUpdate: '${addAcaoUpdate}'
     <%-- Se definiu callback de clique --%>
     <c:if test="${not empty clClick}">
+            ,callback: function (tableObj) {
                 $('#${id} tbody').on('click', 'a,button', function () {
-                    var data = obj.row($(this).parents('tr')).data();
+                    var data = tableObj.row($(this).parents('tr')).data();
                     $('#${id}').trigger('${clClick}', [$(this), data]);
-    </c:if>
                 });
             }
+    </c:if>
         });
     });
 

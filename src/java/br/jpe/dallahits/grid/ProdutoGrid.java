@@ -11,7 +11,6 @@ import br.jpe.dallahits.gen.dao.ProdutoDAO;
 import br.jpe.dallahits.gen.entidade.ProdutoEntidade;
 import br.jpe.dallahits.generics.AbstractBean;
 import br.jpe.dallahits.generics.AbstractGrid;
-import br.jpe.dallahits.util.HtmlTagBuilder;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import java.util.List;
@@ -24,30 +23,24 @@ import org.json.simple.JSONArray;
  */
 public class ProdutoGrid extends AbstractGrid {
 
+    /**
+     * Retorna os títulos do Grid
+     *
+     * @return JSONArray
+     */
     @Override
     protected JSONArray getTitulos() {
-        JSONArray titulos = new ProdutoEntidade().getTitulos();
-        titulos.add("Alterar");
-        titulos.add("Excluir");
-        return titulos;
+        return new ProdutoEntidade().getTitulos();
     }
 
+    /**
+     * Retorna as colunas do Grid
+     *
+     * @return JSONArray
+     */
     @Override
     protected JSONArray getColunas() {
-        JSONArray colunas = new ProdutoEntidade().getColunas();
-        colunas.add("alt");
-        colunas.add("exc");
-        return colunas;
-    }
-
-    @Override
-    protected JSONArray getCustomColumnValues() {
-        JSONArray arr = new JSONArray();
-        arr.add(criaObj(new HtmlTagBuilder("div", new HtmlTagBuilder("button", "A").addId("alt").addClass("dt-button").build())
-                .addClass("center").build()));
-        arr.add(criaObj(new HtmlTagBuilder("div", new HtmlTagBuilder("button", "E").addId("exc").addClass("dt-button").build())
-                .addClass("center").build()));
-        return arr;
+        return new ProdutoEntidade().getColunas();
     }
 
     /**

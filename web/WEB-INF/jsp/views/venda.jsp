@@ -6,14 +6,31 @@
 <tiles:insertDefinition  name="DefaultTemplate" >
     <tiles:putAttribute name="body">
         <%-- Datatables --%>
-        <jpe:grid id="gridProdutos" url="produtos" title="Produtos" clClick="pClick"/>
+        <jpe:grid id="gridProdutos" url="produtos" title="Produtos" addAcaoUpdate="true"
+                  callbackAdd="addProduto" callbackAlt="altProduto" callbackExc="excProduto" />
         <%-- Se houver mensagem, exibe --%>
         <jpe:message msg="${msg}" />
         <jpe:button href="javascript:alert('oi')" title="Batata" />
         <script>
+            
+            function addProduto(){
+                console.log('Inclusão!');
+            }
+            function altProduto(produtos){
+                console.log('Alteração!');
+                var pr = produtos[0];
+                console.log('Produto ' + pr.idProduto + ': ' + pr.descricao);
+            }
+            function excProduto(pr){
+                console.log('Exclusão!');
+                for (var i in pr){
+                    console.log('Produto ' + pr[i].idProduto + ': ' + pr[i].descricao);
+                }
+            }
+            
             $(function(){
-                $('#gridProdutos').on('pClick', function(evt, target, data){
-                    console.log('matheus feioso' + 'click no produto ' + data.idProduto);
+                $('#gridProdutos').on('pClick', function(evt, target, dado){
+                    console.log('Click: ' + dado.idProduto + ' - ' + dado.descricao);
                 });
             });
         </script>

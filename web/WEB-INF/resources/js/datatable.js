@@ -12,11 +12,17 @@
  */
 var Grid = function (externalParams) {
 
-// Variável para guardar a referência do datatable
+    // Variável para guardar a referência do datatable
     var table;
     // Objeto com os parâmetros
     var param = {
-        criaHeader: true
+        criaHeader: true,
+        addAcaoColunas: true,
+        addAcaoPrint: true,
+        addAcaoUpdate: true,
+        callbackAdd: false,
+        callbackAlt: false,
+        callbackExc: false
     };
     // Mescla os parâmetro externos com os internos
     $.extend(param, externalParams);
@@ -27,6 +33,9 @@ var Grid = function (externalParams) {
             "ajax": "/DallaHits/" + param.url + "/dados",
             "dataSrc": "demo",
             "columnDefs": getColumnDefs(header.columnDefs),
+            "sPaginationType": "simple_numbers",
+            "dom": 'Bfrtip',
+            "buttons": createButtons(header),
             "initComplete": function () {
                 appendTitulos(header.titulos);
                 if (param.callback) {
@@ -44,14 +53,101 @@ var Grid = function (externalParams) {
                 "lengthMenu": "Exibindo  _MENU_  registros.",
                 "search": "Buscar",
                 "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
                     "previous": "Anterior",
                     "next": "Próximo"
                 },
+                "processing": "Carregando...",
                 "info": "Mostrando página _PAGE_ de _PAGES_.",
                 "zeroRecords": "Nenhum registro encontrado.",
                 "infoEmpty": "Nenhum registro disponível."
             }
         });
+    }
+
+    // Cria os botões no cabeçalho do Grid
+    function createButtons(header) {
+        var arr = [];
+        // Se deve incluir ação de configurar colunas
+        if (param.addAcaoColunas) {
+            arr.push({
+                extend: 'colvis',
+                text: 'Colunas',
+                columns: header.titulos
+            });
+        }
+        // Se deve incluir ação de impressão
+        if (param.addAcaoPrint) {
+            arr.push({
+                extend: 'print',
+                text: 'Imprimir'
+            });
+        }
+        // Se deve incluir ação de atualizar grid
+        if (param.addAcaoUpdate) {
+            arr.push({
+                text: 'Atualizar',
+                action: function (e, dt, node, config) {
+                    dt.ajax.reload();
+                }
+            });
+        }
+        // Se deve incluir ação de inclusão
+        if (param.callbackAdd) {
+            arr.push({
+                name: 'add',
+                text: 'Add',
+                action: function (e, dt, node, config) {
+                    var arr = createDataArray(dt.rows({selected: true}).data());
+                    doCallback(param.callbackAdd, arr);
+                }
+            });
+        }
+        // Se deve incluir ação de alteração
+        if (param.callbackAlt) {
+            arr.push({
+                extend: 'selected',
+                text: 'Alterar',
+                name: 'edit',
+                action: function (e, dt, node, config) {
+                    var arr = createDataArray(dt.rows({selected: true}).data());
+                    doCallback(param.callbackAlt, arr);
+                }
+            });
+        }
+        // Se deve incluir ação de exclusão
+        if (param.callbackExc) {
+            arr.push({
+                extend: 'selected',
+                text: 'Excluir',
+                name: 'delete',
+                action: function (e, dt, node, config) {
+                    var arr = createDataArray(dt.rows({selected: true}).data());
+                    doCallback(param.callbackExc, arr);
+                }
+            });
+        }
+        return arr;
+    }
+
+    // Chama um callback passando os argumentos
+    function doCallback(callName) {
+        // Se não definiu o callback, retorna
+        if (!callName || typeof window[callName] !== 'function'){
+            return console.log('É necessário definir um callback.');
+        }
+        var args = [].slice.call(arguments).splice(1);
+        return window[callName].apply(null, args);
+    }
+
+    // Cria um array baseado em um conjunto de dados
+    function createDataArray(data) {
+        var arr = [];
+        for (var i = 0; i < data.length; i++) {
+            arr.push(data[i]);
+        }
+        return arr;
     }
 
     // Retorna as colunas default do datatable
