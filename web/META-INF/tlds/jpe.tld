@@ -41,6 +41,10 @@
     <path>/WEB-INF/tags/grid.tag</path>
   </tag-file>
   <tag-file>
+    <name>modal</name>
+    <path>/WEB-INF/tags/modal.tag</path>
+  </tag-file>
+  <tag-file>
     <name>button</name>
     <path>/WEB-INF/tags/button.tag</path>
   </tag-file>

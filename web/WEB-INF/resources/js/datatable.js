@@ -43,6 +43,7 @@ var Grid = function (externalParams) {
                 }
             },
             "info": false,
+            "processing": true,
             "responsive": true,
             "order": [[0, "asc"]],
             "columns": getColumns(header.colunas),
@@ -134,7 +135,7 @@ var Grid = function (externalParams) {
     // Chama um callback passando os argumentos
     function doCallback(callName) {
         // Se não definiu o callback, retorna
-        if (!callName || typeof window[callName] !== 'function'){
+        if (!callName || typeof window[callName] !== 'function') {
             return console.log('É necessário definir um callback.');
         }
         var args = [].slice.call(arguments).splice(1);

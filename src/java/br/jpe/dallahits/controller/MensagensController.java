@@ -7,9 +7,9 @@ package br.jpe.dallahits.controller;
 
 import br.jpe.dallahits.gen.bean.MensagemBean;
 import br.jpe.dallahits.gen.dao.MensagemDAO;
-import br.jpe.dallahits.gen.dao.ProdutoDAO;
 import br.jpe.dallahits.exception.DAOException;
 import br.jpe.dallahits.exception.DallaHitsException;
+import br.jpe.dallahits.grid.MensagemGrid;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.DBUtils;
@@ -36,17 +36,34 @@ public class MensagensController {
      *
      * @param req
      * @return String
-     * @throws br.jpe.dallahits.exception.DAOException
+     * @throws DallaHitsException
      */
     @RequestMapping("/mensagens")
     public String mensagens(HttpServletRequest req) throws DallaHitsException {
-        try (Conexao conn = ConnFactory.criaConexao()) {
-            MensagemDAO dao = new MensagemDAO(conn);
-            req.getSession().setAttribute("mensagens", dao.busca());
-        } catch (DAOException e) {
-            throw new DallaHitsException(e);
-        }
         return "mensagens";
+    }
+
+    /**
+     * Retorna todos os produtos do banco
+     *
+     * @return String Lista de produtos no formato JSON
+     * @throws DallaHitsException
+     */
+    @RequestMapping("/mensagens/dados")
+    @ResponseBody
+    public String getMensagens() throws DallaHitsException {
+        return gson.toDataTable(new MensagemGrid().getDados());
+    }
+
+    /**
+     * Retorna os Títulos do Grid de Produtos
+     *
+     * @return String
+     */
+    @RequestMapping("/mensagens/titulo")
+    @ResponseBody
+    public String getMensagensTitulo() {
+        return new MensagemGrid().createGrid().toJSONString();
     }
 
     /**
@@ -75,23 +92,6 @@ public class MensagensController {
             DBUtils.close(conn);
         }
         return gson.toJson(msgs);
-    }
-
-    /**
-     * Url para a busca de produtos
-     *
-     * @param req Request
-     * @return String
-     * @throws DallaHitsException
-     */
-    @RequestMapping("/produtos")
-    public String produtos(HttpServletRequest req) throws DallaHitsException {
-        try (Conexao conn = ConnFactory.criaConexao()) {
-            req.getSession().setAttribute("produtos", new ProdutoDAO(conn).busca());
-        } catch (DAOException e) {
-            throw new DallaHitsException(e);
-        }
-        return "mensagens";
     }
 
 }

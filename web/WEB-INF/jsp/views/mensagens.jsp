@@ -4,88 +4,45 @@
 <%@ taglib prefix="jpe" uri="/META-INF/tlds/jpe.tld" %>
 <tiles:insertDefinition  name="DefaultTemplate" >
     <tiles:putAttribute name="body">
-        <!-- Header -->
-        <a name="about"></a>
-        <div class="intro-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="intro-message">
-                            <h2>Oi, ${usuarioLogado.nome}.</h2>
-                            <hr class="intro-divider">
-                            <jpe:fieldText name="newMsg" placeholder="Mensagem"/>
-                            <button id="addMsg" class="form-control" >Add</button>
-                            <hr class="intro-divider">
-                            Prod:
-                            <c:forEach items="${produtos}" var="p">
-                                <li>Cod: ${p.idProduto}: ${p.descricao}</li><br>
-                                </c:forEach>                                
-
-                            <h3>Mensagens:</h3>
-                            <ul id="msgHolder" class="list-inline intro-social-buttons">
-                                <c:forEach items="${mensagens}" var="m">
-                                    <li>Msg from ${m.usuario}:               ${m.msg}</li><br>
-                                    </c:forEach>                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- /.container -->
+        <%-- Título --%>
+        <div class="content" style="padding-bottom:50px;">
+            <h2 class="text-center">Oi, ${usuarioLogado.nome}.</h2>
         </div>
-
+        <%-- Formulário -> Add mensagem --%>
+        <div class="content" style="width:400px; padding-bottom: 30px">
+            <jpe:fieldText name="newMsg" placeholder="Mensagem"/>
+            <button id="addMsg" class="form-control" >Add</button>
+        </div>
+        <%-- Grid de mensagens --%>
+        <jpe:grid id="msg" url="mensagens" addAcaoUpdate="true" />
         <script>
-
             $(function () {
+                // Ao clicar no botão addMsg, cria uma nova
                 $('#addMsg').click(function () {
                     var msg = $('#newMsg').val();
-                    addMensagem(msg);
+                    includeMsgPost(createMsgObject(msg));
                 });
             });
 
-            function addMensagem(msg) {
+            // Cria um objeto de mensagem
+            function createMsgObject(msg) {
                 var msgObj = {};
                 msgObj.usuario = '${usuarioLogado.login}';
                 msgObj.msg = msg;
-                sendPost(msgObj);
+                return msgObj;
             }
 
-            var dadosRecebidos;
-
-            function sendPost(dataObj) {
+            // Envia um HttpPost para incluir a mensagem
+            function includeMsgPost(dataObj) {
                 $.ajax({
                     type: "POST",
                     url: "/DallaHits/addMensagem",
                     data: dataObj,
-                    success: function (ret) {
-                        dadosRecebidos = ret;
-                        render([].concat(eval(ret)));
+                    success: function () {
+                        $('#msg').DataTable().ajax.reload();
                     }
                 });
             }
-
-            function render(list) {
-                $('#msgHolder').find('li').remove();
-
-                list.forEach(function (e) {
-                    $('#msgHolder').append(criaMsg(e));
-                });
-
-            }
-
-            function criaMsg(msg) {
-                console.log(msg);
-                var elm = '<li>Msg From ';
-                elm += msg.usuario;
-                elm += ': ';
-                elm += msg.msg;
-                elm += '</li><br>';
-                return elm;
-            }
-
         </script>
-
-        <!-- /.intro-header -->
     </tiles:putAttribute>
 </tiles:insertDefinition>

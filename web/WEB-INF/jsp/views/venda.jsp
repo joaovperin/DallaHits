@@ -6,33 +6,34 @@
 <tiles:insertDefinition  name="DefaultTemplate" >
     <tiles:putAttribute name="body">
         <%-- Datatables --%>
-        <jpe:grid id="gridProdutos" url="produtos" title="Produtos" addAcaoUpdate="true"
-                  callbackAdd="addProduto" callbackAlt="altProduto" callbackExc="excProduto" />
+        <jpe:modal id="myModal" title="tituloo">
+            <button type="button" class="btn btn-info btn-lg" id="myBtn">Botão</button>
+        </jpe:modal>
+        <jpe:grid id="gridComandas" url="comandas" title="Comandas" addAcaoUpdate="true"
+                  callbackAdd="addComanda" callbackAlt="altComanda" callbackExc="excComanda" />
         <%-- Se houver mensagem, exibe --%>
         <jpe:message msg="${msg}" />
-        <jpe:button href="javascript:alert('oi')" title="Batata" />
         <script>
-            
-            function addProduto(){
+
+            function addComanda() {
                 console.log('Inclusão!');
+                $("#myModal").modal();
             }
-            function altProduto(produtos){
+            
+            function altComanda(comandas) {
                 console.log('Alteração!');
-                var pr = produtos[0];
-                console.log('Produto ' + pr.idProduto + ': ' + pr.descricao);
+                var cmd = comandas[0];
+                console.log('Comanda ' + cmd.idComanda + ' -> Cliente ' + cmd.cliente);
             }
-            function excProduto(pr){
+            
+            function excComanda(cmds) {
                 console.log('Exclusão!');
-                for (var i in pr){
-                    console.log('Produto ' + pr[i].idProduto + ': ' + pr[i].descricao);
+                for (var i in cmds) {
+                    var cmd = cmds[i];
+                    console.log('Comanda ' + cmd.idComanda + ' -> Cliente ' + cmd.cliente);
                 }
             }
             
-            $(function(){
-                $('#gridProdutos').on('pClick', function(evt, target, dado){
-                    console.log('Click: ' + dado.idProduto + ' - ' + dado.descricao);
-                });
-            });
         </script>
     </tiles:putAttribute>
 </tiles:insertDefinition>

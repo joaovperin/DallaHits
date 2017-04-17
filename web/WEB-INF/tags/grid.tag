@@ -25,6 +25,8 @@
         </div>
     </div>
     <br>
+    <jsp:doBody/>
+    <br>
 </c:if>
 <%-- Datatable --%>
 <table id="${id}" class="display" cellspacing="0" width="100%">
@@ -39,9 +41,10 @@
     </c:if>
 </table>
 <script>
+    var table;
     $(function () {
-        new Grid({
-            grid: '#${id}',
+    table = new Grid({
+    grid: '#${id}',
             url: '${url}',
             criaFooter: '${criaFooter}',
             callbackAdd: '${callbackAdd}',
@@ -50,14 +53,14 @@
             addAcaoUpdate: '${addAcaoUpdate}'
     <%-- Se definiu callback de clique --%>
     <c:if test="${not empty clClick}">
-            ,callback: function (tableObj) {
-                $('#${id} tbody').on('click', 'a,button', function () {
-                    var data = tableObj.row($(this).parents('tr')).data();
-                    $('#${id}').trigger('${clClick}', [$(this), data]);
-                });
-            }
+    , callback: function (tableObj) {
+    $('#${id} tbody').on('click', 'a,button', function () {
+    var data = tableObj.row($(this).parents('tr')).data();
+    $('#${id}').trigger('${clClick}', [$(this), data]);
+    });
+    }
     </c:if>
-        });
+    });
     });
 
 </script>

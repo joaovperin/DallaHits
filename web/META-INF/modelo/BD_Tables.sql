@@ -25,8 +25,8 @@ ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS Comanda (
   idComanda BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT 'Código',
-  idCliente BIGINT(20) NOT NULL COMMENT 'Cliente vinculado',
-  idUsuario INT(10) NOT NULL COMMENT 'Usuario',
+  idCliente BIGINT(20) NOT NULL COMMENT 'Código do cliente',
+  idUsuario INT(10) NOT NULL COMMENT 'Código do Usuário',
   Data DATETIME NOT NULL COMMENT 'Data',
   ValorTotal DECIMAL(12,2) NOT NULL COMMENT 'Valor Total',
   PRIMARY KEY (idComanda),
@@ -47,7 +47,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS Item_Comanda (
   idComanda BIGINT(20) NOT NULL COMMENT 'Código',
   Item BIGINT(20) NOT NULL COMMENT 'Item',
-  Produto BIGINT(20) NOT NULL COMMENT 'Produto',
+  Produto BIGINT(20) NOT NULL COMMENT 'Código do produto',
   Quantidade INT(10) NOT NULL COMMENT 'Quantidade',
   ValorTotalItem DECIMAL(12,2) NOT NULL COMMENT 'Total do Item',
   PRIMARY KEY (idComanda, Item),
