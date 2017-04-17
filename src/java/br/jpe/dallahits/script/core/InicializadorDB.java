@@ -24,12 +24,22 @@ import org.apache.ibatis.jdbc.ScriptRunner;
  */
 public class InicializadorDB {
 
-    /** Diretório base */
-    private static final String DIR_BASE = "D:\\1-Projetos\\_Feevale\\DallaHits\\web\\";
     /** Diretório relativo do script de criação das tabelas */
     private static final String SC_TABLES = "/META-INF/modelo/BD_Tables.sql";
     /** Diretório relativo do script de inicialização de dados */
     private static final String SC_INIT = "/META-INF/modelo/BD_Init.sql";
+
+    /** Diretório base */
+    private final String dirBase;
+
+    /**
+     * Construtor default que recebe o diretório base
+     *
+     * @param dirBase
+     */
+    public InicializadorDB(String dirBase) {
+        this.dirBase = dirBase;
+    }
 
     /**
      * Executa criação das tabelas do banco
@@ -37,11 +47,11 @@ public class InicializadorDB {
      * @throws IOException Falha ao ler Script SQL de geração das tabelas
      * @throws DAOException Falha ao executar a criação das tabelas
      */
-    public void executaCriacaoBanco() throws IOException, DAOException {
+    public void exec() throws IOException, DAOException {
         Conexao conn = null;
         try {
             // Define as propriedades da conexão
-            ConnManager.setProperties(ContextUtils.lePropriedadesConexao(DIR_BASE));
+            ConnManager.setProperties(ContextUtils.lePropriedadesConexao(dirBase));
             // Cria conexão e prepara o ScriptRunner
             conn = ConnFactory.criaConexaoTransacao();
             criaBaseDados();
@@ -88,7 +98,7 @@ public class InicializadorDB {
         try {
             return ContextUtils.getResourcesAsReader(fileName);
         } catch (Exception e) {
-            return new BufferedReader(new FileReader(DIR_BASE + fileName));
+            return new BufferedReader(new FileReader(dirBase + fileName));
         }
     }
 
@@ -107,8 +117,8 @@ public class InicializadorDB {
      * @return String
      */
     private String getSqlCreateDB() {
-        return "CREATE SCHEMA IF NOT EXISTS " + ConnManager.getDatabaseName()
-                + " DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci";
+        return "CREATE SCHEMA IF NOT EXISTS " + ConnManager.getDatabaseName() +
+                " DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci";
     }
 
     /**

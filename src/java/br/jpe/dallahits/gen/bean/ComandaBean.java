@@ -22,9 +22,9 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
 
     /** Código */
     private long idComanda;
-    /** Cliente vinculado */
+    /** Código do cliente */
     private long idCliente;
-    /** Usuario */
+    /** Código do Usuário */
     private int idUsuario;
     /** Data */
     private Date data;
@@ -64,7 +64,7 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
     }
 
     /** 
-     * Retorna o valor do campo Cliente vinculado
+     * Retorna o valor do campo Código do cliente
      * 
      * @return long
      */
@@ -73,7 +73,7 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
     }
 
     /** 
-     * Define o valor do campo Cliente vinculado
+     * Define o valor do campo Código do cliente
      * 
      * @param idCliente
      */
@@ -82,7 +82,7 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
     }
 
     /** 
-     * Retorna o valor do campo Usuario
+     * Retorna o valor do campo Código do Usuário
      * 
      * @return int
      */
@@ -91,7 +91,7 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
     }
 
     /** 
-     * Define o valor do campo Usuario
+     * Define o valor do campo Código do Usuário
      * 
      * @param idUsuario
      */

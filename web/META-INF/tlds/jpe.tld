@@ -4,7 +4,7 @@
   <short-name>jpe</short-name>
   <uri>/WEB-INF/tlds/jpe</uri>
   <!-- A validator verifies that the tags are used correctly at JSP
-          translation time. Validator entries look like this: 
+          translation time. Validator entries look like this:
        <validator>
            <validator-class>com.mycompany.TagLibValidator</validator-class>
            <init-param>
@@ -15,9 +15,9 @@
     -->
   <!-- A tag library can register Servlet Context event listeners in
          case it needs to react to such events. Listener entries look
-         like this: 
+         like this:
       <listener>
-          <listener-class>com.mycompany.TagLibListener</listener-class> 
+          <listener-class>com.mycompany.TagLibListener</listener-class>
       </listener>
     -->
   <tag-file>
@@ -37,6 +37,10 @@
     <path>/WEB-INF/tags/fieldSenha.tag</path>
   </tag-file>
   <tag-file>
+    <name>button</name>
+    <path>/WEB-INF/tags/button.tag</path>
+  </tag-file>
+  <tag-file>
     <name>grid</name>
     <path>/WEB-INF/tags/grid.tag</path>
   </tag-file>
@@ -45,7 +49,7 @@
     <path>/WEB-INF/tags/modal.tag</path>
   </tag-file>
   <tag-file>
-    <name>button</name>
-    <path>/WEB-INF/tags/button.tag</path>
+    <name>form</name>
+    <path>/WEB-INF/tags/form.tag</path>
   </tag-file>
 </taglib>

@@ -23,10 +23,11 @@ public class RecriaBancoScript {
      */
     public static void main(String[] args) {
         System.out.println("Inicializando criação do banco de dados...");
+        String dirBase = "C:\\Users\\Perin\\Documents\\NetBeansProjects\\DallaHits\\web";
         long start = 0, end = 0;
         try {
             start = System.currentTimeMillis();
-            new InicializadorDB().executaCriacaoBanco();
+            new InicializadorDB(dirBase).exec();
             end = System.currentTimeMillis();
         } catch (IOException e) {
             System.out.println("Ocorreu um problema ao ler o script de geraçao do BD!");

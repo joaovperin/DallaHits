@@ -23,7 +23,7 @@ public class ItemComandaBean extends AbstractBean<ItemComandaBean> {
     private long idComanda;
     /** Item */
     private long item;
-    /** Produto */
+    /** Código do produto */
     private long produto;
     /** Quantidade */
     private int quantidade;
@@ -81,7 +81,7 @@ public class ItemComandaBean extends AbstractBean<ItemComandaBean> {
     }
 
     /** 
-     * Retorna o valor do campo Produto
+     * Retorna o valor do campo Código do produto
      * 
      * @return long
      */
@@ -90,7 +90,7 @@ public class ItemComandaBean extends AbstractBean<ItemComandaBean> {
     }
 
     /** 
-     * Define o valor do campo Produto
+     * Define o valor do campo Código do produto
      * 
      * @param produto
      */

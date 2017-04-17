@@ -14,6 +14,7 @@ import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.ConnManager;
 import br.jpe.dallahits.util.db.ContextUtils;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class GeraFontesScript {
 
     /** Gerador de códigos fonte */
     private final Generator g;
+    /** Diretório base */
+    private final String dirBase;
 
     /**
      * Construtor padrão do Script
@@ -36,6 +39,7 @@ public class GeraFontesScript {
      */
     public GeraFontesScript(String basePath) {
         this.g = new Generator(basePath);
+        this.dirBase = basePath;
     }
 
     /**
@@ -46,14 +50,13 @@ public class GeraFontesScript {
      */
     public static void main(String[] args) throws Exception {
         // Determina os parâmetros da conexão
-        String basePath = "D:/1-Projetos/_Feevale/DallaHits";
-        ConnManager.setProperties(ContextUtils.lePropriedadesConexao(basePath + "/web"));
+        String basePath = "C:/Users/Perin/Documents/NetBeansProjects/DallaHits";
         long start = 0, end = 0;
         // Inicializa execução do Script e carrega os tempos
         System.out.println("Iniciando geração dos códigos fonte...");
         // Executa a geração dos códigos fonte
         start = System.currentTimeMillis();
-        new GeraFontesScript(basePath).exec(ConnManager.getDatabaseName());
+        new GeraFontesScript(basePath).exec();
         end = System.currentTimeMillis();
         // Mensagem de tempo decorrido
         System.out.println("Fim. Tempo decorrido: " + (end - start) + " ms.");
@@ -62,12 +65,12 @@ public class GeraFontesScript {
     /**
      * Realiza a execução do script em um banco
      *
-     * @param dbName Nome do database
      * @throws DAOException
      */
-    private void exec(String dbName) throws DAOException {
+    private void exec() throws DAOException, IOException {
+        ConnManager.setProperties(ContextUtils.lePropriedadesConexao(dirBase + "/web"));
         try (Conexao conn = ConnFactory.criaConexao()) {
-            for (Table t : getTables(conn, dbName)) {
+            for (Table t : getTables(conn, ConnManager.getDatabaseName())) {
                 g.criaTplPk("br.jpe.dallahits.gen", new TemplateEntidade(t));
                 g.criaTplBean("br.jpe.dallahits.gen", new TemplateEntidade(t));
                 g.criaTplDAO("br.jpe.dallahits.gen", new TemplateEntidade(t));

@@ -29,7 +29,7 @@ public class ItemComandaEntidade extends AbstractEntidade<ItemComandaBean, ItemC
        JSONArray titulos = new JSONArray();       
         titulos.add("Código");
         titulos.add("Item");
-        titulos.add("Produto");
+        titulos.add("Código do produto");
         titulos.add("Quantidade");
         titulos.add("Total do Item");
        return titulos;

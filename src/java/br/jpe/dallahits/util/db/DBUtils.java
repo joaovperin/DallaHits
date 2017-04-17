@@ -62,6 +62,10 @@ public class DBUtils {
      * @return
      */
     public static String getURLCompleta(String url, String db) {
+        // Se já estiver montado
+        if (url.endsWith(db)){
+            return url;
+        }
         if (url.endsWith("/") && db.startsWith("/")) {
             return url + db.substring(1, db.length());
         } else if (!url.endsWith("/") && !db.startsWith("/")) {

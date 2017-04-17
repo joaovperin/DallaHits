@@ -28,8 +28,8 @@ public class ComandaEntidade extends AbstractEntidade<ComandaBean, ComandaPk> {
     public JSONArray getTitulos() {
        JSONArray titulos = new JSONArray();       
         titulos.add("Código");
-        titulos.add("Cliente vinculado");
-        titulos.add("Usuario");
+        titulos.add("Código do cliente");
+        titulos.add("Código do Usuário");
         titulos.add("Data");
         titulos.add("Valor Total");
        return titulos;

@@ -82,7 +82,7 @@ public class ConnFactory {
         pt.setProperty("user", ConnManager.getUsername());
         pt.setProperty("password", ConnManager.getPassword());
         pt.setProperty("autoReconnect", "true");
-        return DriverManager.getConnection(ConnManager.getUrl(), pt);
+        return DriverManager.getConnection(DBUtils.getURLCompleta(ConnManager.getUrl(), ConnManager.getDatabaseName()), pt);
     }
 
     /**
@@ -106,7 +106,10 @@ public class ConnFactory {
      * @throws SQLException
      */
     public static void setUseDb() throws SQLException {
-        getJDBCConn(false).createStatement().execute(getSqlUseDB());
+        try (Connection jdbcConn = getJDBCConn(false)) {
+            jdbcConn.createStatement().execute(getSqlUseDB());
+            jdbcConn.setCatalog(ConnManager.getDatabaseName());
+        }
     }
 
     /**
