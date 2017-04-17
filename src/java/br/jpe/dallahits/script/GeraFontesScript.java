@@ -70,13 +70,30 @@ public class GeraFontesScript {
     private void exec() throws DAOException, IOException {
         ConnManager.setProperties(ContextUtils.lePropriedadesConexao(dirBase + "/web"));
         try (Conexao conn = ConnFactory.criaConexao()) {
+            // Gera os fontes das Views
             for (Table t : getTables(conn, ConnManager.getDatabaseName())) {
                 g.criaTplPk("br.jpe.dallahits.gen", new TemplateEntidade(t));
                 g.criaTplBean("br.jpe.dallahits.gen", new TemplateEntidade(t));
                 g.criaTplDAO("br.jpe.dallahits.gen", new TemplateEntidade(t));
                 g.criaTplEntidade("br.jpe.dallahits.gen", new TemplateEntidade(t));
             }
+            // Gera os fontes das Views
+            for (Table t : getViews(conn, ConnManager.getDatabaseName())) {
+                String prefix = "View";
+                g.criaTplPk("br.jpe.dallahits.gen.view", new TemplateEntidade(t));
+                g.criaTplBean("br.jpe.dallahits.gen.view", new TemplateEntidade(t));
+                g.criaTplDAO("br.jpe.dallahits.gen.view", new TemplateEntidade(t));
+                g.criaTplEntidade("br.jpe.dallahits.gen.view", new TemplateEntidade(t));
+            }
         }
+    }
+
+    private List<Table> getTables(Conexao conn, String dbName) throws DAOException {
+        return getEntities(conn, dbName, "BASE_TABLE");
+    }
+
+    private List<Table> getViews(Conexao conn, String dbName) throws DAOException {
+        return getEntities(conn, dbName, "VIEW");
     }
 
     /**
@@ -87,10 +104,10 @@ public class GeraFontesScript {
      * @return List
      * @throws DAOException
      */
-    private List<Table> getTables(Conexao conn, String dbName) throws DAOException {
+    private List<Table> getEntities(Conexao conn, String dbName, String tType) throws DAOException {
         List<Table> list = new ArrayList<>();
         try {
-            ResultSet rs = conn.execSQLQuery("SHOW TABLES FROM " + dbName);
+            ResultSet rs = conn.execSQLQuery("SHOW FULL TABLES FROM " + dbName + "WHERE TABLE_TYPE = '" + tType + "'");
             while (rs.next()) {
                 Table tb = getTabelaFromRs(rs);
                 tb.setTableFields(getFields(conn, tb.getName()));

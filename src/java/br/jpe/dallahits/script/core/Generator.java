@@ -56,7 +56,7 @@ public class Generator {
             throw new GeneratorException(e);
         }
     }
-    
+
     /**
      * Cria template para um Bean
      *
@@ -73,7 +73,7 @@ public class Generator {
             throw new GeneratorException(e);
         }
     }
-    
+
     /**
      * Cria template para um DAO
      *
@@ -90,7 +90,7 @@ public class Generator {
             throw new GeneratorException(e);
         }
     }
-    
+
     public void criaTplEntidade(String pack, TemplateEntidade entidade) throws GeneratorException {
         try {
             //Load template from source folder
@@ -102,6 +102,10 @@ public class Generator {
     }
 
     private void execute(String pack, TemplateEntidade entidade, Template template, String sufixo) {
+        execute(pack, entidade, template, "", sufixo);
+    }
+
+    private void execute(String pack, TemplateEntidade entidade, Template template, String prefix, String sufixo) {
         try {
             // Build the data-model
             Map<String, Object> data = new HashMap<>();
@@ -114,7 +118,7 @@ public class Generator {
             out.flush();
 
             // Saída em arquivo
-            try (Writer file = new FileWriter(getOutputFile(pack, entidade.getNome(), sufixo))) {
+            try (Writer file = new FileWriter(getOutputFile(pack, entidade.getNome(), prefix, sufixo))) {
                 template.process(data, file);
                 file.flush();
             }
@@ -123,21 +127,21 @@ public class Generator {
         }
     }
 
-    private File getOutputFile(String pack, String table, String suffix) {
+    private File getOutputFile(String pack, String table, String prefix, String suffix) {
         StringBuilder sb = new StringBuilder(basePath);
         sb.append("/src/java/");
         sb.append(pack.replaceAll("\\.", "/").concat("/"));
         sb.append(suffix.toLowerCase().concat("/"));
-        sb.append(montaNome(table, suffix).concat(".java"));
+        sb.append(montaNome(table, prefix, suffix).concat(".java"));
         System.out.println("Using pkg = " + sb.toString());
         return new File(sb.toString().concat("/"));
     }
-    
-    private Configuration getConfig(){
+
+    private Configuration getConfig() {
         return new Configuration(new Version("2.3"));
     }
 
-    private String montaNome(String table, String suffix) {
-        return Texto.capitalize(table).concat(Texto.capitalize(suffix));
+    private String montaNome(String table, String prefix, String suffix) {
+        return prefix.concat(Texto.capitalize(table).concat(Texto.capitalize(suffix)));
     }
 }

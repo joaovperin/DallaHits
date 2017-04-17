@@ -7,6 +7,7 @@ package br.jpe.dallahits.util;
 
 import br.jpe.dallahits.generics.AbstractBean;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.List;
 import org.json.simple.JSONObject;
 
@@ -35,7 +36,9 @@ public class GsonUtils {
      */
     private static synchronized void instantiate() {
         if (gson == null) {
-            gson = new Gson();
+            gson = new GsonBuilder()
+                    .setDateFormat("dd/MM/yyyy")
+                    .create();
         }
     }
 
