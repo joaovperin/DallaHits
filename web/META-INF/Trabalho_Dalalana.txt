@@ -92,3 +92,42 @@ https://www.google.com.br/search?q=sistema+erp+casa+noturna&oq=sistema+erp+casa+
 
 // ANOTAÇÕES:
 (Matheus): DJ FABINHO TEM QUE TER NAS ATRAÇÕES -> Preço 100 reais
+
+
+
+
+
+Editor do DataTables | Criar algo parecido com JSP / Java Servlet:
+https://datatables.net/forums/discussion/28124/editor-jsp-java-servlet-examples
+
+Spring MVC -> Exemplo com Flash Attributes:
+http://viralpatel.net/blogs/spring-mvc-flash-attribute-example/
+
+DataTables - Reference:
+https://legacy.datatables.net/ref#fnServerData
+
+Integração Vraptor + DataTables | Fórum alura:
+https://cursos.alura.com.br/forum/topico-integracao-vraptor-datatables-17837 
+
+Criar tabela editável com jQuery: 
+https://www.youtube.com/watch?v=4mTJ2qY1Pa8
+
+GRID TOPZÃO -> DataTables example - Customised control buttons:
+https://editor.datatables.net/examples/api/triggerButton.html
+
+AÇÕES -> DataTables example - Generated content for a column:
+https://datatables.net/examples/ajax/null_data_source.html
+
+Modal Form (jQueryUI):
+https://jqueryui.com/dialog/#modal-form
+
+Modal Creation (Bootstrap):
+https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp
+
+Select / Button Integration:
+https://datatables.net/extensions/select/integration
+https://datatables.net/extensions/buttons/custom
+https://datatables.net/reference/button/
+
+Visibilidade das colunas:
+https://datatables.net/extensions/buttons/examples/column_visibility/columnText.html
