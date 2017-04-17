@@ -8,12 +8,13 @@ package br.jpe.dallahits.controller;
 import br.jpe.dallahits.exception.DallaHitsException;
 import br.jpe.dallahits.generics.AbstractGrid;
 import br.jpe.dallahits.grid.ComandaGrid;
-import br.jpe.dallahits.grid.ProdutoGrid;
+import br.jpe.dallahits.gen.bean.ComandaBean;
 import br.jpe.dallahits.util.GsonUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Classe VendaController
@@ -41,6 +42,12 @@ public class VendaController {
     @RequestMapping(value = "/venda", method = RequestMethod.GET)
     public String venda() throws DallaHitsException {
         return "venda";
+    }
+
+    @RequestMapping(value = "/comanda/incluir", method = RequestMethod.POST)
+    public void comandaIncluir(ComandaBean comanda, RedirectAttributes flashAttr)
+            throws DallaHitsException {
+
     }
 
     @RequestMapping("/comandas/dados")

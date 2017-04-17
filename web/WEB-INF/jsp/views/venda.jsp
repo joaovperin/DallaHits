@@ -5,9 +5,13 @@
 <%-- Insere o template default --%>
 <tiles:insertDefinition  name="DefaultTemplate" >
     <tiles:putAttribute name="body">
-        <%-- Datatables --%>
-        <jpe:modal id="myModal" title="tituloo">
-            <button type="button" class="btn btn-info btn-lg" id="myBtn">Botão</button>
+        <%-- Modal para manutenção de comandas --%>
+        <jpe:modal id="modComanda" title="tituloo">
+            <jpe:form titulo="Comandas" action="comanda/add" submit="Gravar" >
+                <jpe:fieldText name="idCliente" placeholder="Cód. Cliente" />
+                <jpe:fieldText name="cliente" placeholder="Nome Cliente" />
+            </jpe:form>
+            <!--<button type="button" class="btn btn-info btn-lg" id="myBtn">Botão</button>-->
         </jpe:modal>
         <jpe:grid id="gridComandas" url="comandas" title="Comandas" addAcaoUpdate="true"
                   callbackAdd="addComanda" callbackAlt="altComanda" callbackExc="excComanda" />
@@ -17,15 +21,15 @@
 
             function addComanda() {
                 console.log('Inclusão!');
-                $("#myModal").modal();
+                $("#modComanda").modal();
             }
-            
+
             function altComanda(comandas) {
                 console.log('Alteração!');
                 var cmd = comandas[0];
                 console.log('Comanda ' + cmd.idComanda + ' -> Cliente ' + cmd.cliente);
             }
-            
+
             function excComanda(cmds) {
                 console.log('Exclusão!');
                 for (var i in cmds) {
@@ -33,7 +37,7 @@
                     console.log('Comanda ' + cmd.idComanda + ' -> Cliente ' + cmd.cliente);
                 }
             }
-            
+
         </script>
     </tiles:putAttribute>
 </tiles:insertDefinition>
