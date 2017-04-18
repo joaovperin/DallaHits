@@ -9,6 +9,7 @@
         <jpe:modal id="modComanda" title="tituloo">
             <jpe:form titulo="Comandas" action="comanda/incluir" submit="Gravar" >
                 <jpe:fieldText name="idCliente" placeholder="Cód. Cliente" />
+                <p class="text-center">OU</p>
                 <jpe:fieldText name="cliente" placeholder="Nome Cliente" />
             </jpe:form>
             <!--<button type="button" class="btn btn-info btn-lg" id="myBtn">Botão</button>-->

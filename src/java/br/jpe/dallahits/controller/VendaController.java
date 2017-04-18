@@ -18,6 +18,7 @@ import br.jpe.dallahits.util.GsonUtils;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.DBUtils;
+import java.util.Date;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,21 +70,29 @@ public class VendaController {
 
         Conexao conn = null;
         try {
+            // Cria conexão e instancia DAOs
             conn = ConnFactory.criaConexaoTransacao();
-            ComandaDAO dao = new ComandaDAO(conn);
+            ComandaDAO comandaDao = new ComandaDAO(conn);
             ComandaBean bean = new ComandaBean();
 
+            // Se informou código do cliente
             if (cmd.getIdCliente() != 0){
                 bean.setIdCliente(cmd.getIdCliente());
-
             } else {
+                // Grava um nome cliente
                 ClienteDAO cliDao = new ClienteDAO(conn);
                 ClienteBean cliBean = new ClienteBean();
                 cliBean.setNome(cmd.getCliente());
+                cliBean.setIdade(21);
+                cliBean.setSexo("M");
                 cliDao.insert(cliBean);
+                DBUtils.commit(conn);
             }
 
-            dao.insert(bean);
+            bean.setData(new Date());
+            bean.setValorTotal(0);
+            bean.setIdUsuario(1);
+            comandaDao.insert(bean);
             DBUtils.commit(conn);
         } catch (DAOException e) {
             DBUtils.rollback(conn);
