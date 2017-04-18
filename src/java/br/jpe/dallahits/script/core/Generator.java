@@ -101,6 +101,16 @@ public class Generator {
         }
     }
 
+    public void criaTplViewDAO(String pack, TemplateEntidade entidade) throws GeneratorException {
+        try {
+            //Load template from source folder
+            Template template = getConfig().getTemplate("web/META-INF/templates/tpViewDAO.ftl");
+            execute(pack, entidade, template, "DAO");
+        } catch (Exception e) {
+            throw new GeneratorException(e);
+        }
+    }
+
     private void execute(String pack, TemplateEntidade entidade, Template template, String sufixo) {
         execute(pack, entidade, template, "", sufixo);
     }

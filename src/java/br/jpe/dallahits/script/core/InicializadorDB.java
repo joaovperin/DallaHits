@@ -28,6 +28,8 @@ public class InicializadorDB {
     private static final String SC_TABLES = "/META-INF/modelo/BD_Tables.sql";
     /** Diretório relativo do script de inicialização de dados */
     private static final String SC_INIT = "/META-INF/modelo/BD_Init.sql";
+    /** Diretório relativo do script de criação das views */
+    private static final String SC_VIEWS = "/META-INF/modelo/BD_Views.sql";
 
     /** Diretório base */
     private final String dirBase;
@@ -59,6 +61,7 @@ public class InicializadorDB {
             // Roda os scripts
             criaTabelas(sr);
             inicializaDados(sr);
+            criaViews(sr);
         } catch (IOException e) {
             throw e;
         } finally {
@@ -87,6 +90,16 @@ public class InicializadorDB {
         sr.runScript(getReaderFor(SC_INIT));
     }
 
+    /**
+     * Roda o script de criação das tabelas
+     *
+     * @param sr ScriptRunner
+     * @throws FileNotFoundException
+     */
+    private void criaViews(ScriptRunner sr) throws FileNotFoundException {
+        sr.runScript(getReaderFor(SC_VIEWS));
+    }
+    
     /**
      * Cria um Reader(leitor) para determinado arquivo
      *

@@ -50,7 +50,7 @@ public class GeraFontesScript {
      */
     public static void main(String[] args) throws Exception {
         // Determina os parâmetros da conexão
-        String basePath = "C:/Users/Perin/Documents/NetBeansProjects/DallaHits";
+        String basePath = "D:\\1-Projetos\\_Feevale\\DallaHits";
         long start = 0, end = 0;
         // Inicializa execução do Script e carrega os tempos
         System.out.println("Iniciando geração dos códigos fonte...");
@@ -79,10 +79,8 @@ public class GeraFontesScript {
             }
             // Gera os fontes das Views
             for (Table t : getViews(conn, ConnManager.getDatabaseName())) {
-                String prefix = "View";
-                g.criaTplPk("br.jpe.dallahits.gen.view", new TemplateEntidade(t));
                 g.criaTplBean("br.jpe.dallahits.gen.view", new TemplateEntidade(t));
-                g.criaTplDAO("br.jpe.dallahits.gen.view", new TemplateEntidade(t));
+                g.criaTplViewDAO("br.jpe.dallahits.gen.view", new TemplateEntidade(t));
                 g.criaTplEntidade("br.jpe.dallahits.gen.view", new TemplateEntidade(t));
             }
         }
@@ -107,7 +105,7 @@ public class GeraFontesScript {
     private List<Table> getEntities(Conexao conn, String dbName, String tType) throws DAOException {
         List<Table> list = new ArrayList<>();
         try {
-            ResultSet rs = conn.execSQLQuery("SHOW FULL TABLES FROM " + dbName + "WHERE TABLE_TYPE = '" + tType + "'");
+            ResultSet rs = conn.execSQLQuery("SHOW FULL TABLES FROM " + dbName + " WHERE TABLE_TYPE = '" + tType + "'");
             while (rs.next()) {
                 Table tb = getTabelaFromRs(rs);
                 tb.setTableFields(getFields(conn, tb.getName()));
@@ -149,6 +147,7 @@ public class GeraFontesScript {
     private Table getTabelaFromRs(ResultSet rs) throws SQLException {
         Table tabela = new Table();
         tabela.setName(rs.getString(1));
+        tabela.setType(rs.getString(2));
         return tabela;
     }
 

@@ -23,7 +23,7 @@ public class RecriaBancoScript {
      */
     public static void main(String[] args) {
         System.out.println("Inicializando criação do banco de dados...");
-        String dirBase = "C:\\Users\\Perin\\Documents\\NetBeansProjects\\DallaHits\\web";
+        String dirBase = "D:\\1-Projetos\\_Feevale\\DallaHits\\web";
         long start = 0, end = 0;
         try {
             start = System.currentTimeMillis();

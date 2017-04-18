@@ -16,6 +16,7 @@ import java.util.List;
 public class Table {
 
     private String name;
+    private String type;
     private List<Field> tableFields;
 
     public Table() {
@@ -28,6 +29,14 @@ public class Table {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public List<Field> getTableFields() {
@@ -44,7 +53,7 @@ public class Table {
 
     @Override
     public String toString() {
-        return "Table{" + "name=" + name + ", tableFields=" + tableFields + '}';
+        return "Table{" + "name=" + name + ", type=" + type + ", tableFields=" + tableFields + '}';
     }
 
 }

@@ -7,9 +7,13 @@
  */
 package ${package}.entidade;
 
+<#if entidade.isTable()>
 import br.jpe.dallahits.generics.AbstractEntidade;
-import ${package}.bean.${entidade.nome}Bean;
 import ${package}.pk.${entidade.nome}Pk;
+<#else>
+import br.jpe.dallahits.generics.AbstractViewEntidade;
+</#if>
+import ${package}.bean.${entidade.nome}Bean;
 import org.json.simple.JSONArray;
 
 /**
@@ -17,7 +21,11 @@ import org.json.simple.JSONArray;
  *
  * @author Joaov
  */
+<#if entidade.isTable()>
 public class ${entidade.nome}Entidade extends AbstractEntidade<${entidade.nome}Bean, ${entidade.nome}Pk> {
+<#else>
+public class ${entidade.nome}Entidade extends AbstractViewEntidade<${entidade.nome}Bean> {
+</#if>
 
     /** 
      * Construtor da classe ${entidade.nome?cap_first}Entidade

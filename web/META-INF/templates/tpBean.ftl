@@ -8,7 +8,9 @@
 package ${package}.bean;
 
 import br.jpe.dallahits.generics.AbstractBean;
+<#if entidade.isTable()>
 import ${package}.pk.${entidade.nome}Pk;
+</#if>
 import java.util.Objects;
 import org.json.simple.JSONArray;
 <#list entidade.attrs as a>
@@ -34,7 +36,8 @@ public class ${entidade.nome}Bean extends AbstractBean<${entidade.nome}Bean> {
      * Construtor da classe ${entidade.nome?cap_first}Bean
      */
     public ${entidade.nome}Bean() {}
- 
+ <#if entidade.isTable()>
+   
     /** 
      * Retorna a chave primária da entidade ${entidade.nome?cap_first}
      * 
@@ -43,6 +46,7 @@ public class ${entidade.nome}Bean extends AbstractBean<${entidade.nome}Bean> {
     public ${entidade.nome}Pk getPk() {
         return new ${entidade.nome}Pk(<#list entidade.attrs as a><#if a.isPk>get${a.nome?cap_first}()<#if a_index < entidade.lastKeyAtt>, </#if></#if></#list>);
     }    
+</#if>
 <#list entidade.attrs as a>
 
     /** 

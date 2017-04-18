@@ -17,6 +17,7 @@ import java.util.List;
 public class TemplateEntidade {
 
     private String tableName;
+    private String tableType;
     private String nome;
     private int lastKeyAtt;
     private List<TemplateAtributo> attrs;
@@ -31,6 +32,7 @@ public class TemplateEntidade {
             }
         }
         tableName = t.getName();
+        tableType = t.getType();
         nome = Texto.toCamelCase(t.getName(), true);
     }
 
@@ -40,6 +42,22 @@ public class TemplateEntidade {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
+    }
+
+    public String getTableType() {
+        return tableType;
+    }
+
+    public void setTableType(String tableType) {
+        this.tableType = tableType;
+    }
+    
+    public boolean isView(){
+        return getTableType().equals("VIEW");
+    }
+    
+    public boolean isTable(){
+        return getTableType().equals("BASE_TABLE");
     }
 
     public String getNome() {
