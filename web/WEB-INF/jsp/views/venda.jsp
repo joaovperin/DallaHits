@@ -7,7 +7,7 @@
     <tiles:putAttribute name="body">
         <%-- Modal para manutenção de comandas --%>
         <jpe:modal id="modComanda" title="tituloo">
-            <jpe:form titulo="Comandas" action="comanda/add" submit="Gravar" >
+            <jpe:form titulo="Comandas" action="comanda/incluir" submit="Gravar" >
                 <jpe:fieldText name="idCliente" placeholder="Cód. Cliente" />
                 <jpe:fieldText name="cliente" placeholder="Nome Cliente" />
             </jpe:form>

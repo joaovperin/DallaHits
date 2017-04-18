@@ -21,6 +21,8 @@ public class ViewComandasBean extends AbstractBean<ViewComandasBean> {
 
     /** Código */
     private long idComanda;
+    /** Código do cliente */
+    private long idCliente;
     /** Nome */
     private String cliente;
     /** Nome */
@@ -51,6 +53,24 @@ public class ViewComandasBean extends AbstractBean<ViewComandasBean> {
      */
     public void setIdComanda(long idComanda) {
         this.idComanda = idComanda;
+    }
+
+    /** 
+     * Retorna o valor do campo Código do cliente
+     * 
+     * @return long
+     */
+    public long getIdCliente() {
+        return idCliente;
+    }
+
+    /** 
+     * Define o valor do campo Código do cliente
+     * 
+     * @param idCliente
+     */
+    public void setIdCliente(long idCliente) {
+        this.idCliente = idCliente;
     }
 
     /** 
@@ -134,6 +154,7 @@ public class ViewComandasBean extends AbstractBean<ViewComandasBean> {
     public JSONArray toArray() {
         JSONArray obj = new JSONArray();
         obj.add(getIdComanda());
+        obj.add(getIdCliente());
         obj.add(getCliente());
         obj.add(getUsuario());
         obj.add(getData());
@@ -150,6 +171,7 @@ public class ViewComandasBean extends AbstractBean<ViewComandasBean> {
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + Objects.hashCode(this.idComanda);
+        hash = 53 * hash + Objects.hashCode(this.idCliente);
         hash = 53 * hash + Objects.hashCode(this.cliente);
         hash = 53 * hash + Objects.hashCode(this.usuario);
         hash = 53 * hash + Objects.hashCode(this.data);
@@ -178,6 +200,9 @@ public class ViewComandasBean extends AbstractBean<ViewComandasBean> {
         if (!Objects.equals(this.idComanda, other.idComanda)) {
             return false;
         }
+        if (!Objects.equals(this.idCliente, other.idCliente)) {
+            return false;
+        }
         if (!Objects.equals(this.cliente, other.cliente)) {
             return false;
         }
@@ -202,6 +227,7 @@ public class ViewComandasBean extends AbstractBean<ViewComandasBean> {
     public String toString() {
         return "ViewComandasBean{" +
                     "idComanda=" + idComanda + ", " +
+                    "idCliente=" + idCliente + ", " +
                     "cliente=" + cliente + ", " +
                     "usuario=" + usuario + ", " +
                     "data=" + data + ", " +

@@ -27,6 +27,7 @@ public class ViewComandasEntidade extends AbstractViewEntidade<ViewComandasBean>
     public JSONArray getTitulos() {
        JSONArray titulos = new JSONArray();       
         titulos.add("Código");
+        titulos.add("Código do cliente");
         titulos.add("Nome");
         titulos.add("Nome");
         titulos.add("Data");
@@ -38,6 +39,7 @@ public class ViewComandasEntidade extends AbstractViewEntidade<ViewComandasBean>
     public JSONArray getColunas() {
        JSONArray colunas = new JSONArray();
         colunas.add("idComanda");
+        colunas.add("idCliente");
         colunas.add("cliente");
         colunas.add("usuario");
         colunas.add("data");

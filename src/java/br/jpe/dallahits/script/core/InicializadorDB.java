@@ -99,7 +99,7 @@ public class InicializadorDB {
     private void criaViews(ScriptRunner sr) throws FileNotFoundException {
         sr.runScript(getReaderFor(SC_VIEWS));
     }
-    
+
     /**
      * Cria um Reader(leitor) para determinado arquivo
      *
@@ -131,6 +131,7 @@ public class InicializadorDB {
      */
     private String getSqlCreateDB() {
         return "CREATE SCHEMA IF NOT EXISTS " + ConnManager.getDatabaseName() +
+//                " CHARACTER SET utf8 COLLATE utf8_general_ci;";
                 " DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci";
     }
 
