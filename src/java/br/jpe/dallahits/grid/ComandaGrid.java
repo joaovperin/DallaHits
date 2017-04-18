@@ -15,7 +15,6 @@ import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import java.util.List;
 import org.json.simple.JSONArray;
-
 /**
  * Classe ProdutoGrid
  *

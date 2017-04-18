@@ -47,7 +47,7 @@ public class VendaController {
     @RequestMapping(value = "/comanda/incluir", method = RequestMethod.POST)
     public void comandaIncluir(ComandaBean comanda, RedirectAttributes flashAttr)
             throws DallaHitsException {
-
+        System.out.println("Inclusão: " + comanda.getIdCliente());
     }
 
     @RequestMapping("/comandas/dados")
