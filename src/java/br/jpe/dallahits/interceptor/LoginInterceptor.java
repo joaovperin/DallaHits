@@ -28,6 +28,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res,
             Object controller) throws Exception {
+        // Teste -> Codificação
+        System.out.println("Request! " + req.getRequestURI());
+        res.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        req.setAttribute("tstT", "--¨&?/ª]Çç*áÈé--");
         // Se for uma requisição à página de login ou a algum recurso, permite
         String uri = req.getRequestURI();
         if (uri.endsWith("login") || uri.contains("resources")) {

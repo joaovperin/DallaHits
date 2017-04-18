@@ -26,7 +26,7 @@ public class VendaController {
 
     /** Api para gerar Jsons */
     private final GsonUtils gson = new GsonUtils();
-
+    /** Grid de comandas */
     private final AbstractGrid comandasGrid;
 
     public VendaController() {

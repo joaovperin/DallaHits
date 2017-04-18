@@ -9,7 +9,6 @@ import br.jpe.dallahits.generics.AbstractBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.List;
-import org.json.simple.JSONObject;
 
 /**
  * Objeto auxiliar para trabalhar com a API Gson
@@ -59,9 +58,34 @@ public class GsonUtils {
      * @return String
      */
     public String toDataTable(List<? extends AbstractBean> list) {
-        JSONObject obj = new JSONObject();
-        obj.put("data", list);
-        return toJson(obj);
+        return toJson(new DataTableBean(list));
+    }
+
+    /**
+     * Bean para trabalhar com DataTables
+     */
+    private class DataTableBean {
+
+        /**
+         * Construtor default que recebe uma lista de dados
+         */
+        public DataTableBean(List data) {
+            this.data = data;
+        }
+
+        /** Lista de dados */
+        private List data;
+
+        /** Define os dados */
+        public List getData() {
+            return data;
+        }
+
+        /** Retorna os dados */
+        public void setData(List data) {
+            this.data = data;
+        }
+
     }
 
 }

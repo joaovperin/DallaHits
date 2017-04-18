@@ -5,7 +5,13 @@
  */
 package br.jpe.test;
 
+import br.jpe.dallahits.exception.DAOException;
+import br.jpe.dallahits.gen.dao.ProdutoDAO;
+import br.jpe.dallahits.util.GsonUtils;
 import br.jpe.dallahits.util.HtmlTagBuilder;
+import br.jpe.dallahits.util.db.Conexao;
+import br.jpe.dallahits.util.db.ConnFactory;
+import java.util.List;
 
 /**
  * Classe Perin
@@ -14,15 +20,30 @@ import br.jpe.dallahits.util.HtmlTagBuilder;
  */
 public class Perin {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DAOException {
         System.out.println("Hello!");
 
-        HtmlTagBuilder tb = new HtmlTagBuilder("a", "Alterar");
-        tb.add("id", "alterar");
-        tb.add("class", "batata");
-        System.out.println(tb.build());
+        GsonUtils g = new GsonUtils();
+        
+        try (Conexao conn = ConnFactory.criaConexao()){
+            System.out.println(g.toDataTable(new ProdutoDAO(conn).busca()));
+        }
 
         System.out.println("Fim.");
+    }
+
+    private class Bean {
+
+        private List data;
+
+        public List getData() {
+            return data;
+        }
+
+        public void setData(List data) {
+            this.data = data;
+        }
+
     }
 
 }
