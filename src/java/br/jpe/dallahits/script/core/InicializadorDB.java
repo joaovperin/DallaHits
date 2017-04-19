@@ -15,10 +15,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Scanner;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 /**

@@ -8,7 +8,6 @@ package br.jpe.dallahits.util;
 import br.jpe.dallahits.generics.AbstractBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -35,6 +34,7 @@ public class GsonUtils {
      * Instancia o Gson
      */
     private static synchronized void instantiate() {
+        // Realiza double-checked locking para evitar problemas de concorrência
         if (gson == null) {
             gson = new GsonBuilder()
                     .setDateFormat("dd/MM/yyyy")
@@ -50,19 +50,7 @@ public class GsonUtils {
      */
     public String toJson(Object obj) {
         // http://wiki.task.com.br/index.php/Como_Resolver_Problemas_de_Acentua%C3%A7%C3%B5es_em_seu_Site
-        String encoded = getGson().toJson(obj);
-        try {
-
-            for (byte b : encoded.getBytes("UTF-8")){
-                System.out.println(b);
-            }
-
-
-//            return new String(encoded.getBytes("UTF-8"));
-            return encoded;
-        } catch (UnsupportedEncodingException e) {
-            return encoded;
-        }
+        return getGson().toJson(obj);
     }
 
     /**

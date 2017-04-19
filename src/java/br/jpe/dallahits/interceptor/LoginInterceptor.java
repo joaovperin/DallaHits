@@ -28,8 +28,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res,
             Object controller) throws Exception {
-        // Teste -> Codificação
-        System.out.println("Request! " + req.getRequestURI());
+        // Define a codificação dos caracteres do request e da resposta
         res.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
         // Se for uma requisição à página de login ou a algum recurso, permite
@@ -45,4 +44,5 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         res.sendRedirect("login");
         return false;
     }
+    
 }

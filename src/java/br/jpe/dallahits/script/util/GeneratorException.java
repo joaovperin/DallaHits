@@ -11,6 +11,11 @@ package br.jpe.dallahits.script.util;
  * @author Joaov
  */
 public class GeneratorException extends RuntimeException {
+    
+        
+    /** 
+     * COMENTAR ISSO AQUI
+     */
 
     public GeneratorException(Throwable cause) {
         super(cause);

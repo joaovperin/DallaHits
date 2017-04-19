@@ -11,6 +11,11 @@ package br.jpe.dallahits.script.util;
  * @author Joaov
  */
 public class Field {
+    
+        
+    /** 
+     * COMENTAR ISSO AQUI
+     */
 
     private String field;
     private String type;

@@ -15,6 +15,11 @@ import java.io.IOException;
  * @author Joaov
  */
 public class RecriaBancoScript {
+    
+        
+    /** 
+     * COMENTAR ISSO AQUI
+     */
 
     /**
      * Executa o Script de recriação do banco de dados

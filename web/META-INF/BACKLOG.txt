@@ -1,0 +1,69 @@
+// --------------------------------- /*
+// Product Backlog do projeto!!!     //
+// --------------------------------- */
+
+-> Criar mecanismo de Filtro para os DAOs
+   montagem dinâmica SQL para os WHERE
+   métodos busca() que recebem filtro como parâmetro
+   
+-> Reestruturar rotinas de Grid
+   utilizar abordagem de processador
+   percorrer os dados lidos e montar json em ponto centralizado
+
+-> Permitir a utilização de formatadores
+   aplicar nos grids
+
+-> Definir e construir menu e footer da página
+   ...
+
+-> Criar recurso de dropdowns nos menus superiores
+   ...
+
+-> Melhorar o sistema de modais
+   preencher modal à pt. de atributos vindos de request
+   se necessário, utilizar abordagem jQueryUI e jsp dedicados
+
+-> Criar tags e reestruturas demais pontos:
+   modal
+   form
+   fieldText
+   fieldNumber
+   fieldCombo
+
+-> Criar mecanismo de validação Front-End
+   ...
+
+-> Criar mecanismo de validação Back-End
+   classe ValidaUtils
+   centralizar envio de mensagens de erro/resposta
+
+-> Criar recurso OpenMessage
+   deve ser fullscreen e "piscar" a tela, com animação
+   aplicar mensagem de sucesso ao fechar modais
+
+-> Criar mecanismo de encriptação
+   classe CryptUtils
+   aplicar na senha do usuário ao gravar e validar login
+
+-> Reduzir acoplamento com banco de dados
+   transformar Conexao em interface;
+   apenas ConnFactory deve instanciar conexões
+
+-> Implementar conceitos de abstração e polimorfismo
+   refatorar código fonte para utilização de interfaces
+
+-> Eliminar código html nativo das views
+   centralizar tudo com JSTL
+   refatorar views
+
+-> Criação do menu de listagens
+   ...
+
+-> Criação do componente Accordeon
+   ...
+
+
+
+//.......................................................... //
+//. TO BE CONTINUED...                                     . //
+//.......................................................... //

@@ -15,6 +15,11 @@ import java.util.List;
  * @author Joaov
  */
 public class TemplateEntidade {
+    
+        
+    /** 
+     * COMENTAR ISSO AQUI
+     */
 
     private String tableName;
     private String tableType;

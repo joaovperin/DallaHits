@@ -16,8 +16,10 @@ import org.json.simple.JSONArray;
  */
 public abstract class AbstractEntidade <B extends AbstractBean, P extends AbstractPk> {
 
+    /** Retorna um array com os títulos dos campos */
     public abstract JSONArray getTitulos();
 
+    /** Retorna um array com os nomes dos campos */
     public abstract JSONArray getColunas();
     
 }

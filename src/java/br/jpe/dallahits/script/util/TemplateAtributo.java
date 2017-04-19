@@ -13,6 +13,11 @@ import br.jpe.dallahits.util.Texto;
  * @author Joaov
  */
 public class TemplateAtributo {
+    
+        
+    /** 
+     * COMENTAR ISSO AQUI
+     */
 
     private String acesso;
     private String nome;

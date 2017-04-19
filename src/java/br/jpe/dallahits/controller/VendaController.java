@@ -112,7 +112,7 @@ public class VendaController {
      * @return String
      * @throws DallaHitsException
      */
-    @RequestMapping("/comandas/dados")
+    @RequestMapping(value = "/comandas/dados",  produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String getComandas() throws DallaHitsException {
         return gson.toDataTable(comandasGrid.getDados());

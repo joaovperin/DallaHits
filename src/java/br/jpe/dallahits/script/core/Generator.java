@@ -27,6 +27,11 @@ import freemarker.template.Version;
  * @author Joaov
  */
 public class Generator {
+    
+        
+    /** 
+     * COMENTAR ISSO AQUI
+     */
 
     /** Caminho base para este gerador */
     private final String basePath;

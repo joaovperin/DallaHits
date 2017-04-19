@@ -26,6 +26,10 @@ import java.util.List;
  * @author Joaov
  */
 public class GeraFontesScript {
+    
+    /** 
+     * COMENTAR ISSO AQUI
+     */
 
     /** Gerador de códigos fonte */
     private final Generator g;
