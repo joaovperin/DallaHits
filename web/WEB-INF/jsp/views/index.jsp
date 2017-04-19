@@ -16,7 +16,6 @@
                             <h3 class="def" >O que deseja fazer?</h3>
                             <hr class="intro-divider">
                             <ul class="list-inline intro-social-buttons">
-                                ${tstT}
                                 <li>
                                     <spring:url value="/venda" var="vendaUrl" htmlEscape="true" />
                                     <a href="${vendaUrl}" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Vendas</span></a>

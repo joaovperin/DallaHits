@@ -15,6 +15,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 /**
@@ -130,9 +134,8 @@ public class InicializadorDB {
      * @return String
      */
     private String getSqlCreateDB() {
-        return "CREATE SCHEMA IF NOT EXISTS " + ConnManager.getDatabaseName() +
-//                " CHARACTER SET utf8 COLLATE utf8_general_ci;";
-                " DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci";
+        return "CREATE SCHEMA IF NOT EXISTS " + ConnManager.getDatabaseName()
+                + " DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci";
     }
 
     /**

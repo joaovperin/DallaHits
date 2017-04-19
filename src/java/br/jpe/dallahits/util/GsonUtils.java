@@ -8,6 +8,7 @@ package br.jpe.dallahits.util;
 import br.jpe.dallahits.generics.AbstractBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -48,7 +49,12 @@ public class GsonUtils {
      * @return String
      */
     public String toJson(Object obj) {
-        return getGson().toJson(obj);
+        String encoded = getGson().toJson(obj);
+        try {
+            return new String(encoded.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            return encoded;
+        }
     }
 
     /**
