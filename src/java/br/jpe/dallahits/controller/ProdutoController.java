@@ -88,7 +88,7 @@ public class ProdutoController {
      * @return String Lista de produtos no formato JSON
      * @throws DallaHitsException
      */
-    @RequestMapping("/produto/listagem/dados")
+    @RequestMapping(value = "/produto/listagem/dados",  produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String getProdutos(HttpServletResponse res) throws DallaHitsException {
             String dados = gson.toDataTable(new ProdutoGrid().getDados());
