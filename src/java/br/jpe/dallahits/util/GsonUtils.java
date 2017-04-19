@@ -49,9 +49,17 @@ public class GsonUtils {
      * @return String
      */
     public String toJson(Object obj) {
+        // http://wiki.task.com.br/index.php/Como_Resolver_Problemas_de_Acentua%C3%A7%C3%B5es_em_seu_Site
         String encoded = getGson().toJson(obj);
         try {
-            return new String(encoded.getBytes("UTF-8"));
+
+            for (byte b : encoded.getBytes("UTF-8")){
+                System.out.println(b);
+            }
+
+
+//            return new String(encoded.getBytes("UTF-8"));
+            return encoded;
         } catch (UnsupportedEncodingException e) {
             return encoded;
         }

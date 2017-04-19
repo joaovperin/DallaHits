@@ -10,6 +10,7 @@ import br.jpe.dallahits.exception.DallaHitsException;
 import br.jpe.dallahits.gen.bean.ProdutoBean;
 import br.jpe.dallahits.grid.ProdutoGrid;
 import br.jpe.dallahits.util.GsonUtils;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -89,8 +90,17 @@ public class ProdutoController {
      */
     @RequestMapping("/produto/listagem/dados")
     @ResponseBody
-    public String getProdutos() throws DallaHitsException {
-        return gson.toDataTable(new ProdutoGrid().getDados());
+    public String getProdutos(HttpServletResponse res) throws DallaHitsException {
+            String dados = gson.toDataTable(new ProdutoGrid().getDados());
+        try {
+            System.out.println("entrou");
+//            res.getWriter().print(dados);
+            System.out.println("saiu");
+        } catch (Exception e) {
+            throw new DallaHitsException(e);
+        }
+
+        return dados;
     }
 
     /**

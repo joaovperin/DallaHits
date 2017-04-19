@@ -19,7 +19,7 @@
 
     <!-- Handler do Spring MVC -->
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
-    
+
     <!-- Interceptador de requisições -->
     <mvc:interceptors>
         <bean class="br.jpe.dallahits.interceptor.LoginInterceptor" />
@@ -34,7 +34,7 @@
 
     <!-- ViewResolver do Apache Tiles -->
     <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.tiles3.TilesViewResolver " />
+          class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
 
     <!--ViewResolver do Spring MVC -->
     <bean id="springViewResolver"

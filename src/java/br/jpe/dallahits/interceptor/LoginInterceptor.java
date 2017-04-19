@@ -5,10 +5,6 @@
  */
 package br.jpe.dallahits.interceptor;
 
-import br.jpe.dallahits.gen.dao.ProdutoDAO;
-import br.jpe.dallahits.util.GsonUtils;
-import br.jpe.dallahits.util.db.Conexao;
-import br.jpe.dallahits.util.db.ConnFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
