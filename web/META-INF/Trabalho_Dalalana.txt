@@ -131,3 +131,7 @@ https://datatables.net/reference/button/
 
 Visibilidade das colunas:
 https://datatables.net/extensions/buttons/examples/column_visibility/columnText.html
+
+
+UTF-8 ENCODING:
+http://stackoverflow.com/questions/5649329/utf-8-encoding-problem-in-spring-mvc
