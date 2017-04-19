@@ -1,16 +1,16 @@
 INSERT INTO Usuario (Login, Email, Senha, Nome, Tipo) VALUES 
-   ('joaovperin', 'joaovperin@live.com', '1234', 'JoÃ£o Victor', 'A'),
+   ('joaovperin', 'joaovperin@live.com', '1234', 'João Victor', 'A'),
    ('admin', 'admin@dallahits.com', 'admin', 'Administrador', 'A'),
    ('fulano', 'fulanodetal@email.com', 'senha', 'Fulano de tal', 'R'),
-   ('narnia', '', '2', 'NÃ¡rnia', 'A'),
+   ('narnia', '', '2', 'Nárnia', 'A'),
    ('viccenzo', '', '1234', 'Jesus', 'A');
 
 INSERT INTO Mensagem (Usuario, Msg) VALUES 
    ('joaovperin', 'batata'),
-   ('admin', 'Bom dia, usuÃ¡rios');
+   ('admin', 'Bom dia, usuários');
 
 INSERT INTO Produto (Descricao, ValorUnitario) VALUES 
-   ('Batata', '12.50'), ('Vodka', '5.50'), ('Whisky', '11.00'), ('Àguááééa', '2.50'), ('Refri lata', '3.50'),
+   ('Batata', '12.50'), ('Vodka', '5.50'), ('Whisky', '11.00'), ('Água', '2.50'), ('Refri lata', '3.50'),
    ('FAR. AMIZADE A71	FARINHAS	', '10.99'),
    ('RLC 250 GR	EMBALAGENS - BOBINAS	', '10.99'),
    ('BERCO COQUETEL INTEGRAL LIGHT	BERCO DE PLASTICO	', '10.99'),
@@ -102,7 +102,7 @@ INSERT INTO Cliente (Nome, Sexo, Idade) VALUES
    ('Matheus', 'F', 21),
    ('Juca', 'M', 23),
    ('Andressa', 'F', 21),
-   ('JÃºlia', 'F', 19),
+   ('Júlia', 'F', 19),
    ('Eduarda', 'F', 20);
 
 INSERT INTO Comanda (idCliente, idUsuario, Data, ValorTotal) VALUES 

@@ -19,8 +19,9 @@
             $(function () {
                 // Ao clicar no botão addMsg, cria uma nova
                 $('#addMsg').click(function () {
-                    var msg = $('#newMsg').val();
-                    includeMsgPost(createMsgObject(msg));
+                    var msgField = $('#newMsg');
+                    includeMsgPost(createMsgObject(msgField.val()));
+                    msgField.val('');
                 });
             });
 
