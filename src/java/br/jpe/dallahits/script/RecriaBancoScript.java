@@ -5,9 +5,8 @@
  */
 package br.jpe.dallahits.script;
 
-import br.jpe.dallahits.exception.DAOException;
 import br.jpe.dallahits.script.core.InicializadorDB;
-import java.io.IOException;
+import br.jpe.dallahits.util.db.ContextUtils;
 
 /**
  * Classe RecriaBancoScript
@@ -15,30 +14,19 @@ import java.io.IOException;
  * @author Joaov
  */
 public class RecriaBancoScript {
-    
-        
-    /** 
-     * COMENTAR ISSO AQUI
-     */
 
     /**
      * Executa o Script de recriação do banco de dados
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         System.out.println("Inicializando criação do banco de dados...");
-        String dirBase = "D:\\1-Projetos\\_Feevale\\DallaHits\\web";
+        String dirBase = ContextUtils.getDirBas().concat("\\web");
         long start = 0, end = 0;
-        try {
-            start = System.currentTimeMillis();
-            new InicializadorDB(dirBase).exec();
-            end = System.currentTimeMillis();
-        } catch (IOException e) {
-            System.out.println("Ocorreu um problema ao ler o script de geraçao do BD!");
-        } catch (DAOException e) {
-            System.out.println("Ocorreu um problema no acesso aos dados!");
-        }
+        start = System.currentTimeMillis();
+        new InicializadorDB(dirBase).exec();
+        end = System.currentTimeMillis();
         // Mensagem de tempo decorrido
         System.out.println("Fim. Tempo decorrido: " + (end - start) + " ms.");
     }
