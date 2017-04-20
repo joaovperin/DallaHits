@@ -8,7 +8,6 @@
 package br.jpe.dallahits.gen.bean;
 
 import br.jpe.dallahits.generics.AbstractBean;
-import br.jpe.dallahits.gen.pk.UsuarioPk;
 import java.util.Objects;
 import org.json.simple.JSONArray;
 
@@ -36,15 +35,6 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
      * Construtor da classe UsuarioBean
      */
     public UsuarioBean() {}
- 
-    /** 
-     * Retorna a chave primária da entidade Usuario
-     * 
-     * @return UsuarioPk
-     */
-    public UsuarioPk getPk() {
-        return new UsuarioPk(getLogin());
-    }    
 
     /** 
      * Retorna o valor do campo Login

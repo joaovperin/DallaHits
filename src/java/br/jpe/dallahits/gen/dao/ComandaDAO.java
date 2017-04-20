@@ -58,6 +58,27 @@ public class ComandaDAO extends AbstractDAO<ComandaBean, ComandaPk> {
     }
 
     /**
+     * Realiza o comando Insert na entidade à partir de um bean
+     * 
+     * @param bean
+     * @return ComandaBean
+     * @throws DAOException
+     */
+    public ComandaBean insertAi(ComandaBean bean) throws DAOException {
+        try {
+           PreparedStatement pstmt = getPstmt(conn.prepareStatementForAutoIncrement(getSqlInsert()), bean);
+           pstmt.executeUpdate();
+           ResultSet rs = pstmt.getGeneratedKeys();
+           if (rs.next()){
+              bean.setIdComanda(rs.getLong(1));
+           }
+           return bean;
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    /**
      * Realiza uma busca no banco à partir da chave primária do elemento
      * 
      * @param pk

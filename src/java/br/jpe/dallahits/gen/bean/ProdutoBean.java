@@ -8,7 +8,6 @@
 package br.jpe.dallahits.gen.bean;
 
 import br.jpe.dallahits.generics.AbstractBean;
-import br.jpe.dallahits.gen.pk.ProdutoPk;
 import java.util.Objects;
 import org.json.simple.JSONArray;
 
@@ -30,15 +29,6 @@ public class ProdutoBean extends AbstractBean<ProdutoBean> {
      * Construtor da classe ProdutoBean
      */
     public ProdutoBean() {}
- 
-    /** 
-     * Retorna a chave primária da entidade Produto
-     * 
-     * @return ProdutoPk
-     */
-    public ProdutoPk getPk() {
-        return new ProdutoPk(getIdProduto());
-    }    
 
     /** 
      * Retorna o valor do campo Código

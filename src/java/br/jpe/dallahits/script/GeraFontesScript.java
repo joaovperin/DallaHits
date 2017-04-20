@@ -109,7 +109,7 @@ public class GeraFontesScript {
     private List<Table> getEntities(Conexao conn, String dbName, String tType) throws DAOException {
         List<Table> list = new ArrayList<>();
         try {
-            ResultSet rs = conn.execSQLQuery("SHOW FULL TABLES FROM " + dbName + " WHERE TABLE_TYPE = '" + tType + "'");
+            ResultSet rs = conn.execSQLQuery("SHOW FULL TABLES FROM " + dbName + " WHERE TABLE_TYPE LIKE '" + tType + "'");
             while (rs.next()) {
                 Table tb = getTabelaFromRs(rs);
                 tb.setTableFields(getFields(conn, tb.getName()));

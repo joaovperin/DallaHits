@@ -7,9 +7,8 @@
  */
 package br.jpe.dallahits.gen.entidade;
 
-import br.jpe.dallahits.generics.AbstractEntidade;
+import br.jpe.dallahits.generics.AbstractViewEntidade;
 import br.jpe.dallahits.gen.bean.UsuarioBean;
-import br.jpe.dallahits.gen.pk.UsuarioPk;
 import org.json.simple.JSONArray;
 
 /**
@@ -17,7 +16,7 @@ import org.json.simple.JSONArray;
  *
  * @author Joaov
  */
-public class UsuarioEntidade extends AbstractEntidade<UsuarioBean, UsuarioPk> {
+public class UsuarioEntidade extends AbstractViewEntidade<UsuarioBean> {
 
     /** 
      * Construtor da classe UsuarioEntidade

@@ -67,6 +67,9 @@ public class VendaController {
     @RequestMapping(value = "/comanda/incluir", method = RequestMethod.POST)
     public String comandaIncluir(ViewComandasBean cmd, RedirectAttributes flashAttr)
             throws DallaHitsException {
+        
+        System.out.println("Entrou!!");
+        System.out.println(cmd);
 
         Conexao conn = null;
         try {
@@ -85,7 +88,7 @@ public class VendaController {
                 cliBean.setNome(cmd.getCliente());
                 cliBean.setIdade(21);
                 cliBean.setSexo("M");
-                cliDao.insert(cliBean);
+                bean.setIdCliente(cliDao.insertAi(cliBean).getIdCliente());
                 DBUtils.commit(conn);
             }
 
@@ -96,6 +99,7 @@ public class VendaController {
             DBUtils.commit(conn);
         } catch (DAOException e) {
             DBUtils.rollback(conn);
+            flashAttr.addAttribute("msg", "Falha na gravação da comanda! Motivo:\n" + e.getMessage());
             throw new DallaHitsException(e);
         } finally {
             DBUtils.close(conn);

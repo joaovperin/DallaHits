@@ -8,7 +8,6 @@
 package br.jpe.dallahits.gen.bean;
 
 import br.jpe.dallahits.generics.AbstractBean;
-import br.jpe.dallahits.gen.pk.ComandaPk;
 import java.util.Objects;
 import org.json.simple.JSONArray;
 import java.util.Date;
@@ -35,15 +34,6 @@ public class ComandaBean extends AbstractBean<ComandaBean> {
      * Construtor da classe ComandaBean
      */
     public ComandaBean() {}
- 
-    /** 
-     * Retorna a chave primária da entidade Comanda
-     * 
-     * @return ComandaPk
-     */
-    public ComandaPk getPk() {
-        return new ComandaPk(getIdComanda());
-    }    
 
     /** 
      * Retorna o valor do campo Código

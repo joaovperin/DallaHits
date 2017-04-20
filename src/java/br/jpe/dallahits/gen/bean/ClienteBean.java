@@ -8,7 +8,6 @@
 package br.jpe.dallahits.gen.bean;
 
 import br.jpe.dallahits.generics.AbstractBean;
-import br.jpe.dallahits.gen.pk.ClientePk;
 import java.util.Objects;
 import org.json.simple.JSONArray;
 
@@ -32,15 +31,6 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
      * Construtor da classe ClienteBean
      */
     public ClienteBean() {}
- 
-    /** 
-     * Retorna a chave primária da entidade Cliente
-     * 
-     * @return ClientePk
-     */
-    public ClientePk getPk() {
-        return new ClientePk(getIdCliente());
-    }    
 
     /** 
      * Retorna o valor do campo Código

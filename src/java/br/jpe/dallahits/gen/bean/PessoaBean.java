@@ -8,7 +8,6 @@
 package br.jpe.dallahits.gen.bean;
 
 import br.jpe.dallahits.generics.AbstractBean;
-import br.jpe.dallahits.gen.pk.PessoaPk;
 import java.util.Objects;
 import org.json.simple.JSONArray;
 
@@ -30,15 +29,6 @@ public class PessoaBean extends AbstractBean<PessoaBean> {
      * Construtor da classe PessoaBean
      */
     public PessoaBean() {}
- 
-    /** 
-     * Retorna a chave primária da entidade Pessoa
-     * 
-     * @return PessoaPk
-     */
-    public PessoaPk getPk() {
-        return new PessoaPk(getNome());
-    }    
 
     /** 
      * Retorna o valor do campo Nome

@@ -7,9 +7,8 @@
  */
 package br.jpe.dallahits.gen.entidade;
 
-import br.jpe.dallahits.generics.AbstractEntidade;
+import br.jpe.dallahits.generics.AbstractViewEntidade;
 import br.jpe.dallahits.gen.bean.ComandaBean;
-import br.jpe.dallahits.gen.pk.ComandaPk;
 import org.json.simple.JSONArray;
 
 /**
@@ -17,7 +16,7 @@ import org.json.simple.JSONArray;
  *
  * @author Joaov
  */
-public class ComandaEntidade extends AbstractEntidade<ComandaBean, ComandaPk> {
+public class ComandaEntidade extends AbstractViewEntidade<ComandaBean> {
 
     /** 
      * Construtor da classe ComandaEntidade

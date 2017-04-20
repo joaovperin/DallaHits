@@ -57,6 +57,44 @@ public class ${entidade.nome}DAO extends AbstractDAO<${entidade.nome}Bean, ${ent
         }
     }
 
+<#list entidade.attrs as xxx>
+<#if xxx.isAutoIncrement()>
+    /**
+     * Realiza o comando Insert na entidade à partir de um bean
+     * 
+     * @param bean
+     * @return ${entidade.nome}Bean
+     * @throws DAOException
+     */
+    public ${entidade.nome}Bean insertAi(${entidade.nome}Bean bean) throws DAOException {
+        try {
+           PreparedStatement pstmt = getPstmt(conn.prepareStatementForAutoIncrement(getSqlInsert()), bean);
+           pstmt.executeUpdate();
+           ResultSet rs = pstmt.getGeneratedKeys();
+           if (rs.next()){
+<#assign idx = 1>
+<#list entidade.attrs as a>
+<#if a.isAutoIncrement()>
+    <#if a.tipo = 'Date'>
+              throw new UnsupportedOperationException("NÃO FUNCIONA CAMPOS DATA DE PK");
+    <#else>
+              bean.set${a.nome?cap_first}(rs.get${a.tipo?cap_first}(${idx}));
+    </#if>
+<#if a.isPk>
+    <#assign idx++>
+</#if>
+</#if>
+</#list>
+           }
+           return bean;
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+<#break>
+</#if>
+</#list>
     /**
      * Realiza uma busca no banco à partir da chave primária do elemento
      * 

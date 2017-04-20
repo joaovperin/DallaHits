@@ -8,7 +8,6 @@
 package br.jpe.dallahits.gen.bean;
 
 import br.jpe.dallahits.generics.AbstractBean;
-import br.jpe.dallahits.gen.pk.MensagemPk;
 import java.util.Objects;
 import org.json.simple.JSONArray;
 
@@ -30,15 +29,6 @@ public class MensagemBean extends AbstractBean<MensagemBean> {
      * Construtor da classe MensagemBean
      */
     public MensagemBean() {}
- 
-    /** 
-     * Retorna a chave primária da entidade Mensagem
-     * 
-     * @return MensagemPk
-     */
-    public MensagemPk getPk() {
-        return new MensagemPk(getIdMsg());
-    }    
 
     /** 
      * Retorna o valor do campo Código da mensagem

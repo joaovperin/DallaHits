@@ -58,6 +58,27 @@ public class ProdutoDAO extends AbstractDAO<ProdutoBean, ProdutoPk> {
     }
 
     /**
+     * Realiza o comando Insert na entidade à partir de um bean
+     * 
+     * @param bean
+     * @return ProdutoBean
+     * @throws DAOException
+     */
+    public ProdutoBean insertAi(ProdutoBean bean) throws DAOException {
+        try {
+           PreparedStatement pstmt = getPstmt(conn.prepareStatementForAutoIncrement(getSqlInsert()), bean);
+           pstmt.executeUpdate();
+           ResultSet rs = pstmt.getGeneratedKeys();
+           if (rs.next()){
+              bean.setIdProduto(rs.getLong(1));
+           }
+           return bean;
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+    /**
      * Realiza uma busca no banco à partir da chave primária do elemento
      * 
      * @param pk
