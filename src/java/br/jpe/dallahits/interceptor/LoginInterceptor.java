@@ -44,5 +44,5 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         res.sendRedirect("login");
         return false;
     }
-    
+
 }

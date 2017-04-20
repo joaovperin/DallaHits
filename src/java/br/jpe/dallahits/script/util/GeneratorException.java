@@ -14,6 +14,8 @@ public class GeneratorException extends RuntimeException {
 
     /**
      * Construtor padrão da exceção
+     *
+     * @param cause
      */
     public GeneratorException(Throwable cause) {
         super(cause);

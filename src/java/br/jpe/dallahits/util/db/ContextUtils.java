@@ -109,7 +109,10 @@ public class ContextUtils {
      * @return String
      */
     public static String getDirBas() {
-        return DIRBASE_R;
+        if ("Perin".equals(System.getenv("USERNAME"))) {
+            return DIRBASE_R;
+        }
+        return DIRBASE_J;
     }
 
 }

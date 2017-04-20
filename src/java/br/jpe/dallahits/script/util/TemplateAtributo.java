@@ -14,9 +14,6 @@ import br.jpe.dallahits.util.Texto;
  */
 public class TemplateAtributo {
 
-    /**
-     * COMENTAR ISSO AQUI
-     */
     /** Tipo de acesso do campo */
     private String acesso;
     /** Nome do campo */
@@ -44,50 +41,110 @@ public class TemplateAtributo {
         autoIncrement = f.isAutoIncrement();
     }
 
+    /**
+     * Retorna o modificador de acesso do atributo
+     *
+     * @return String
+     */
     public String getAcesso() {
         return acesso;
     }
 
+    /**
+     * Define o modificador de acesso do campo
+     *
+     * @param acesso
+     */
     public void setAcesso(String acesso) {
         this.acesso = acesso;
     }
 
+    /**
+     * Retorna o nome do campo
+     *
+     * @return String
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Define o nome do campo
+     *
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     * Retorna a descrição do campo
+     *
+     * @return String
+     */
     public String getDescricao() {
         return descricao;
     }
 
+    /**
+     * Define a descrição do campo
+     *
+     * @param descricao
+     */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
+    /**
+     * Retorna o tipo do campo
+     *
+     * @return String
+     */
     public String getTipo() {
         return tipo;
     }
 
+    /**
+     * Define o tipo do campo
+     *
+     * @param tipo
+     */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     * Retorna verdadeiro se o campo é Chave Primária
+     *
+     * @return boolean
+     */
     public boolean isIsPk() {
         return isPk;
     }
 
+    /**
+     * Define se o campo é chave primária
+     *
+     * @param isPk
+     */
     public void setIsPk(boolean isPk) {
         this.isPk = isPk;
     }
 
+    /**
+     * Retorna verdadeiro se o campo é auto incremento
+     *
+     * @return boolean
+     */
     public boolean isAutoIncrement() {
         return autoIncrement;
     }
 
+    /**
+     * Define se o campo é auto incremento
+     *
+     * @param autoIncrement
+     */
     public void setAutoIncrement(boolean autoIncrement) {
         this.autoIncrement = autoIncrement;
     }
