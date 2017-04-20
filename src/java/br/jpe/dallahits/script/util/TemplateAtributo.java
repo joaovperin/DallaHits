@@ -13,19 +13,28 @@ import br.jpe.dallahits.util.Texto;
  * @author Joaov
  */
 public class TemplateAtributo {
-    
-        
-    /** 
+
+    /**
      * COMENTAR ISSO AQUI
      */
-
+    /** Tipo de acesso do campo */
     private String acesso;
+    /** Nome do campo */
     private String nome;
+    /** Descrição do campo */
     private String descricao;
+    /** Descrição do campo */
     private String tipo;
+    /** Se o campo é chave primária */
     private boolean isPk;
+    /** Se o campo é auto incremento */
     private boolean autoIncrement;
 
+    /**
+     * Construtor padrão do atributo
+     *
+     * @param f
+     */
     public TemplateAtributo(Field f) {
         acesso = "private";
         nome = Texto.uncaptalize(f.getField());

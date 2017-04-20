@@ -13,7 +13,10 @@ package br.jpe.dallahits.script.util;
 public class FieldConverter {
 
     /**
-     * COMENTAR ISSO AQUI
+     * Realiza a conversão de um tipo de campo MySql -> Java
+     *
+     * @param field
+     * @return String
      */
     public static String get(String field) {
         if (field.startsWith("varchar(") || field.startsWith("string")) {
@@ -34,7 +37,8 @@ public class FieldConverter {
         if (field.startsWith("datetime") || field.startsWith("date ")) {
             return "Date";
         }
-        return "NULL";
+        throw new UnsupportedOperationException("Tipo de campo ".concat(field).
+                concat(" NÃO SUPORTADO! FieldConverter.java."));
     }
 
 }

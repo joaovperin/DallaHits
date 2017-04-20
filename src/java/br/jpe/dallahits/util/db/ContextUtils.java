@@ -19,6 +19,11 @@ import javax.servlet.ServletContext;
  */
 public class ContextUtils {
 
+    /** Diretório base - R */
+    private static final String DIRBASE_R = "C:\\Users\\Perin\\Documents\\NetBeansProjects\\DallaHits";
+    /** Diretório base - J */
+    private static final String DIRBASE_J = "D:\\1-Projetos\\_Feevale\\DallaHits";
+
     /** Contexto Servlet da aplicação */
     private static ServletContext context;
 
@@ -96,6 +101,15 @@ public class ContextUtils {
         Properties pt = new Properties();
         pt.load(getResourcesAsReader(path + "/META-INF/conexao.properties"));
         return pt;
+    }
+
+    /**
+     * Retorna o diretório base do projeto
+     *
+     * @return String
+     */
+    public static String getDirBas() {
+        return DIRBASE_R;
     }
 
 }
