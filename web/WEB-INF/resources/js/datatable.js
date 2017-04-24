@@ -1,14 +1,14 @@
 /*
  * Objeto para trabalhar com datatables
- *   
+ *
  * Formato esperado:
  * {
  *   grid: '#gridId',
- *   url:  '/pessoas/',
+ *   url:  '/produtos/',
  *   criaHeader: false,
  *   criaFooter: false
  * }
- * 
+ *
  */
 var Grid = function (externalParams) {
 

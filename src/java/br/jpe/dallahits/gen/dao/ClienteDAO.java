@@ -24,11 +24,11 @@ import java.sql.SQLException;
 public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
 
     /** SQL para SELECT */
-    private static final String SQL_SELECT = "SELECT idCliente, nome, sexo, idade FROM cliente";
+    private static final String SQL_SELECT = "SELECT idCliente, nome, sexo, idade, cPF FROM cliente";
     /** SQL para INSERT */
-    private static final String SQL_INSERT = "INSERT INTO cliente (nome, sexo, idade) VALUES ( ?,  ?,  ? )";
+    private static final String SQL_INSERT = "INSERT INTO cliente (nome, sexo, idade, cPF) VALUES ( ?,  ?,  ?,  ? )";
     /** SQL para UPDATE */
-    private static final String SQL_UPDATE = "UPDATE cliente SET nome =  ?, sexo =  ?, idade =  ?";
+    private static final String SQL_UPDATE = "UPDATE cliente SET nome =  ?, sexo =  ?, idade =  ?, cPF =  ?";
     /** SQL para DELETE */
     private static final String SQL_DELETE = "DELETE FROM cliente";
 
@@ -109,7 +109,7 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
         try {
             String where = " WHERE idCliente =  ?";
             PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlUpdate(where)), bean);
-            pstmt.setLong(4, bean.getIdCliente());
+            pstmt.setLong(5, bean.getIdCliente());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -189,6 +189,7 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
         bean.setNome(rs.getString(2));
         bean.setSexo(rs.getString(3));
         bean.setIdade(rs.getInt(4));
+        bean.setCPF(rs.getLong(5));
         return bean;
     }
 
@@ -205,6 +206,7 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
         pstmt.setString(1, bean.getNome());
         pstmt.setString(2, bean.getSexo());
         pstmt.setInt(3, bean.getIdade());
+        pstmt.setLong(4, bean.getCPF());
         return pstmt;
     }
 

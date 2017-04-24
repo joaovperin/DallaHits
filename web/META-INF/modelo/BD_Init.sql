@@ -1,15 +1,15 @@
-INSERT INTO Usuario (Login, Email, Senha, Nome, Tipo) VALUES 
+INSERT INTO Usuario (Login, Email, Senha, Nome, Tipo) VALUES
    ('joaovperin', 'joaovperin@live.com', '1234', 'João Victor', 'A'),
    ('admin', 'admin@dallahits.com', 'admin', 'Administrador', 'A'),
    ('fulano', 'fulanodetal@email.com', 'senha', 'Fulano de tal', 'R'),
    ('narnia', '', '2', 'Nárnia', 'A'),
    ('viccenzo', '', '1234', 'Jesus', 'A');
 
-INSERT INTO Mensagem (Usuario, Msg) VALUES 
+INSERT INTO Mensagem (Usuario, Msg) VALUES
    ('joaovperin', 'batata'),
    ('admin', 'Bom dia, usuários');
 
-INSERT INTO Produto (Descricao, ValorUnitario) VALUES 
+INSERT INTO Produto (Descricao, ValorUnitario) VALUES
    ('Batata', '12.50'), ('Vodka', '5.50'), ('Whisky', '11.00'), ('Água', '2.50'), ('Refri lata', '3.50'),
    ('FAR. AMIZADE A71	FARINHAS	', '10.99'),
    ('RLC 250 GR	EMBALAGENS - BOBINAS	', '10.99'),
@@ -89,15 +89,7 @@ INSERT INTO Produto (Descricao, ValorUnitario) VALUES
    ('BATATA PALHA', '10.99'),
    ('BATATA PALHA', '10.99');
 
-INSERT INTO Pessoa VALUES 
-   ('Tousif', 'tousif@mail.com', 32), 
-   ('Asif', 'asif@mail.com', 28),
-   ('Ramiz', 'ramiz@mail.com', 26),
-   ('Rizwan', 'rizwan@mail.com', 32),
-   ('Amol', 'amol@mail.com', 33),
-   ('Ramdas', 'ramdas@mail.com', 31);
-
-INSERT INTO Cliente (Nome, Sexo, Idade) VALUES 
+INSERT INTO Cliente (Nome, Sexo, Idade) VALUES
    ('Fabinho', 'M', 23),
    ('Matheus', 'F', 21),
    ('Juca', 'M', 23),
@@ -105,7 +97,7 @@ INSERT INTO Cliente (Nome, Sexo, Idade) VALUES
    ('Júlia', 'F', 19),
    ('Eduarda', 'F', 20);
 
-INSERT INTO Comanda (idCliente, idUsuario, Data, ValorTotal) VALUES 
+INSERT INTO Comanda (idCliente, idUsuario, Data, ValorTotal) VALUES
    (1, 1, '2017-02-14 19:13:55', '23.50'),
    (2, 1, '2017-02-14 20:32:11', '28.90'),
    (3, 2, '2017-03-14 21:13:10', '32.00'),
@@ -113,8 +105,8 @@ INSERT INTO Comanda (idCliente, idUsuario, Data, ValorTotal) VALUES
    (5, 2, '2017-04-14 18:32:49', '0.00'),
    (6, 3, '2017-04-14 18:33:11', '0');
 
-INSERT INTO Item_Comanda (idComanda, Item, Produto, Quantidade, ValorTotalItem) 
+INSERT INTO Item_Comanda (idComanda, Item, Produto, Quantidade, ValorTotalItem)
    VALUES (1, 1, 1, 2, '5.00'), (1, 2, 2, 1, '12.00'), (1, 3, 4, 1, '5.00');
 
-INSERT INTO Item_Comanda (idComanda, Item, Produto, Quantidade, ValorTotalItem) 
+INSERT INTO Item_Comanda (idComanda, Item, Produto, Quantidade, ValorTotalItem)
    VALUES (2, 1, 1, 2, '2.40'), (2, 2, 2, 1, '8.99'), (2, 3, 4, 1, '52.00');

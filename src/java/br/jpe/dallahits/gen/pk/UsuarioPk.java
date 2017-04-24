@@ -16,8 +16,8 @@ import br.jpe.dallahits.generics.AbstractPk;
  */
 public class UsuarioPk extends AbstractPk<UsuarioPk> {
 
-    /** Login */
-    private String login;
+    /** Código */
+    private int idUsuario;
 
     /** 
      * Construtor da classe UsuarioPk
@@ -27,28 +27,28 @@ public class UsuarioPk extends AbstractPk<UsuarioPk> {
     /** 
      * Construtor da classe UsuarioPk
      * 
-     * @param  login
+     * @param  idUsuario
      */
-    public UsuarioPk(String login) {
-       this.login = login;
+    public UsuarioPk(int idUsuario) {
+       this.idUsuario = idUsuario;
     }
 
     /** 
-     * Retorna o valor do campo Login
+     * Retorna o valor do campo Código
      * 
-     * @return String
+     * @return int
      */
-    public String getLogin() {
-        return login;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
     /** 
-     * Define o valor do campo Login
+     * Define o valor do campo Código
      * 
-     * @param login
+     * @param idUsuario
      */
-    public void setLogin(String login) {
-        this.login = login;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
 }

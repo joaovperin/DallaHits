@@ -26,8 +26,8 @@ public class UsuarioEntidade extends AbstractViewEntidade<UsuarioBean> {
     @Override
     public JSONArray getTitulos() {
        JSONArray titulos = new JSONArray();       
-        titulos.add("Login");
         titulos.add("Código");
+        titulos.add("Login");
         titulos.add("Email");
         titulos.add("Senha");
         titulos.add("Nome");
@@ -38,8 +38,8 @@ public class UsuarioEntidade extends AbstractViewEntidade<UsuarioBean> {
     @Override
     public JSONArray getColunas() {
        JSONArray colunas = new JSONArray();
-        colunas.add("login");
         colunas.add("idUsuario");
+        colunas.add("login");
         colunas.add("email");
         colunas.add("senha");
         colunas.add("nome");

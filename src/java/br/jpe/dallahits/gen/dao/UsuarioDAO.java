@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- * 
+ *
  * ESTE FONTE É GERADO E NÃO DEVE SER ALTERADO.
  */
 package br.jpe.dallahits.gen.dao;
@@ -24,15 +24,15 @@ import java.sql.SQLException;
 public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /** SQL para SELECT */
-    private static final String SQL_SELECT = "SELECT login, idUsuario, email, senha, nome, tipo FROM usuario";
+    private static final String SQL_SELECT = "SELECT idUsuario, login, email, senha, nome, tipo FROM usuario";
     /** SQL para INSERT */
     private static final String SQL_INSERT = "INSERT INTO usuario (login, email, senha, nome, tipo) VALUES ( ?,  ?,  ?,  ?,  ? )";
     /** SQL para UPDATE */
-    private static final String SQL_UPDATE = "UPDATE usuario SET email =  ?, senha =  ?, nome =  ?, tipo =  ?";
+    private static final String SQL_UPDATE = "UPDATE usuario SET login =  ?, email =  ?, senha =  ?, nome =  ?, tipo =  ?";
     /** SQL para DELETE */
     private static final String SQL_DELETE = "DELETE FROM usuario";
 
-    /** 
+    /**
      * Construtor da classe UsuarioPk
      *
      * @param conn
@@ -43,7 +43,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /**
      * Realiza o comando Insert na entidade à partir de um bean
-     * 
+     *
      * @param bean
      * @throws DAOException
      */
@@ -59,7 +59,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /**
      * Realiza o comando Insert na entidade à partir de um bean
-     * 
+     *
      * @param bean
      * @return UsuarioBean
      * @throws DAOException
@@ -80,7 +80,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /**
      * Realiza uma busca no banco à partir da chave primária do elemento
-     * 
+     *
      * @param pk
      * @return UsuarioBean
      * @throws DAOException
@@ -88,10 +88,10 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
     public UsuarioBean buscaPk(UsuarioPk pk) throws DAOException {
         try {
             String sql = SQL_SELECT.concat(
-            " WHERE login =  ?"
+            " WHERE idUsuario =  ?"
             );
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, pk.getLogin());
+            pstmt.setInt(1, pk.getIdUsuario());
             return buscaPrimeiro(pstmt);
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -100,16 +100,16 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /**
      * Realiza alteração de uma entidade no banco de dados
-     * 
+     *
      * @param bean
      * @throws DAOException
      */
     @Override
     public void update(UsuarioBean bean) throws DAOException {
         try {
-            String where = " WHERE login =  ?";
+            String where = " WHERE idUsuario =  ?";
             PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlUpdate(where)), bean);
-            pstmt.setString(6, bean.getLogin());
+            pstmt.setInt(6, bean.getIdUsuario());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -118,23 +118,23 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /**
      * Realiza a deleção de um registro no banco de dados
-     * 
+     *
      * @param bean
      * @throws DAOException
      */
     @Override
     public void delete(UsuarioBean bean) throws DAOException {
         try {
-            String where = " WHERE login =  ?";
+            String where = " WHERE idUsuario =  ?";
             PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlDelete(where)), bean);
-            pstmt.setString(1, bean.getLogin());
+            pstmt.setInt(1, bean.getIdUsuario());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
         }
     }
 
-    /** 
+    /**
      * Retorna o comando SQL para executar uma SELECT
      *
      * @return String
@@ -144,7 +144,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
         return SQL_SELECT;
     }
 
-    /** 
+    /**
      * Retorna o comando SQL para executar um Insert
      *
      * @return String
@@ -154,7 +154,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
         return SQL_INSERT;
     }
 
-    /** 
+    /**
      * Retorna o comando SQL para executar um Update
      *
      * @param where Cláusula WHERE para executar filtros
@@ -165,7 +165,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
         return SQL_UPDATE.concat(where);
     }
 
-    /** 
+    /**
      * Retorna o comando SQL para executar um Delete
      *
      * @param where Cláusula WHERE para executar filtros
@@ -175,8 +175,8 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
     protected String getSqlDelete(String where) {
         return SQL_DELETE.concat(where);
     }
-    
-    /** 
+
+    /**
      * Retorna um Bean à partir de um ResultSet
      *
      * @return UsuarioBean
@@ -185,8 +185,8 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
     @Override
     protected UsuarioBean getBeanFromResultSet(ResultSet rs) throws SQLException {
         UsuarioBean bean = new UsuarioBean();
-        bean.setLogin(rs.getString(1));
-        bean.setIdUsuario(rs.getInt(2));
+        bean.setIdUsuario(rs.getInt(1));
+        bean.setLogin(rs.getString(2));
         bean.setEmail(rs.getString(3));
         bean.setSenha(rs.getString(4));
         bean.setNome(rs.getString(5));
@@ -194,7 +194,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
         return bean;
     }
 
-    /** 
+    /**
      * Preenche um PreparedStatement à partir de um Bean
      *
      * @param pstmt PreparedStatement recém criado (vazio)
@@ -204,7 +204,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
      */
     @Override
     protected PreparedStatement getPstmt(PreparedStatement pstmt, UsuarioBean bean) throws SQLException {
-        pstmt.setInt(1, bean.getIdUsuario());
+        pstmt.setString(1, bean.getLogin());
         pstmt.setString(2, bean.getEmail());
         pstmt.setString(3, bean.getSenha());
         pstmt.setString(4, bean.getNome());

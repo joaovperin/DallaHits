@@ -54,14 +54,26 @@ public abstract class AbstractDAO<B extends AbstractBean, P extends AbstractPk> 
         }
     }
 
-    /** Insere um registro no banco */
-    public abstract void insert(B bean) throws DAOException;
-
-    /** Atualiza um registro no banco */
-    public abstract void update(B bean) throws DAOException;
-
-    /** Deleta um registro do banco */
-    public abstract void delete(B bean) throws DAOException;
+    /**
+     * Realiza uma busca de todas as entidades no banco
+     *
+     * @param filtro String com um filtro a passar para o banco (Cláusula Where)
+     * @return List Lista de beans
+     * @throws DAOException
+     */
+    public List<B> busca(String filtro) throws DAOException {
+        List<B> list = new ArrayList<>();
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(getSqlSelect().concat(filtro));
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                list.add(getBeanFromResultSet(rs));
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
 
     /**
      * Busca o primeiro registro através do PreparedStatement
@@ -82,15 +94,35 @@ public abstract class AbstractDAO<B extends AbstractBean, P extends AbstractPk> 
         return null;
     }
 
+    /**
+     * Busca o primeiro registro através do filtro passado
+     *
+     * @param filtro String com um filtro a passar para o banco (Cláusula Where)
+     * @return B Bean populado
+     * @throws DAOException
+     */
+    public B buscaPrimeiro(String filtro) throws DAOException {
+        return buscaPrimeiro(conn.prepareStatement(getSqlSelect().concat(filtro)));
+    }
+
+    /** Insere um registro no banco */
+    public abstract void insert(B bean) throws DAOException;
+
+    /** Atualiza um registro no banco */
+    public abstract void update(B bean) throws DAOException;
+
+    /** Deleta um registro do banco */
+    public abstract void delete(B bean) throws DAOException;
+
     /** Retorna o comando SQL para leitura do registro */
     protected abstract String getSqlSelect();
 
     /** Retorna o comando SQL para inserção do registro */
     protected abstract String getSqlInsert();
-    
+
     /** Retorna o comando SQL para atualizar um registro */
     protected abstract String getSqlUpdate(String where);
-    
+
     /** Retorna o comando SQL para deletar um registro */
     protected abstract String getSqlDelete(String where);
 

@@ -9,7 +9,6 @@ import br.jpe.dallahits.gen.bean.UsuarioBean;
 import br.jpe.dallahits.gen.dao.UsuarioDAO;
 import br.jpe.dallahits.exception.DAOException;
 import br.jpe.dallahits.exception.DallaHitsException;
-import br.jpe.dallahits.gen.pk.UsuarioPk;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import javax.servlet.http.HttpServletRequest;
@@ -36,13 +35,13 @@ public class LoginController {
      */
     @RequestMapping("/login")
     public String login(UsuarioBean usuario, HttpSession session, HttpServletRequest req)
-            throws DallaHitsException {        
+            throws DallaHitsException {
         // Busca usuário no banco de dados
         UsuarioBean usuarioBean = null;
         if (usuario.getLogin() != null) {
             // Se recebeu um login de usuário, tenta buscá-lo no banco
             try (Conexao conn = ConnFactory.criaConexao()) {
-                usuarioBean = new UsuarioDAO(conn).buscaPk(new UsuarioPk(usuario.getLogin()));
+                usuarioBean = new UsuarioDAO(conn).buscaPrimeiro(" WHERE Login = '" + usuario.getLogin() + "'");
             } catch (DAOException e) {
                 throw new DallaHitsException(e);
             }

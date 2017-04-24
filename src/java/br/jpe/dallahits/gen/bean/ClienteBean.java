@@ -26,6 +26,8 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
     private String sexo;
     /** Idade */
     private int idade;
+    /** Cpf */
+    private long cPF;
 
     /** 
      * Construtor da classe ClienteBean
@@ -104,6 +106,24 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
         this.idade = idade;
     }
 
+    /** 
+     * Retorna o valor do campo Cpf
+     * 
+     * @return long
+     */
+    public long getCPF() {
+        return cPF;
+    }
+
+    /** 
+     * Define o valor do campo Cpf
+     * 
+     * @param cPF
+     */
+    public void setCPF(long cPF) {
+        this.cPF = cPF;
+    }
+
     /**
      * Retorna o valor das propriedades do bean em um JSONArray
      * 
@@ -116,6 +136,7 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
         obj.add(getNome());
         obj.add(getSexo());
         obj.add(getIdade());
+        obj.add(getCPF());
         return obj;
     }
 
@@ -131,6 +152,7 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
         hash = 53 * hash + Objects.hashCode(this.nome);
         hash = 53 * hash + Objects.hashCode(this.sexo);
         hash = 53 * hash + Objects.hashCode(this.idade);
+        hash = 53 * hash + Objects.hashCode(this.cPF);
         return hash;
     }
 
@@ -164,6 +186,9 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
         if (!Objects.equals(this.idade, other.idade)) {
             return false;
         }
+        if (!Objects.equals(this.cPF, other.cPF)) {
+            return false;
+        }
         return true;
     }
 
@@ -178,7 +203,8 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
                     "idCliente=" + idCliente + ", " +
                     "nome=" + nome + ", " +
                     "sexo=" + sexo + ", " +
-                    "idade=" + idade + "}";
+                    "idade=" + idade + ", " +
+                    "cPF=" + cPF + "}";
     }
 
 }

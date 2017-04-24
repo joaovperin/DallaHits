@@ -30,6 +30,7 @@ public class ClienteEntidade extends AbstractViewEntidade<ClienteBean> {
         titulos.add("Nome");
         titulos.add("Sexo");
         titulos.add("Idade");
+        titulos.add("Cpf");
        return titulos;
     }
      
@@ -40,6 +41,7 @@ public class ClienteEntidade extends AbstractViewEntidade<ClienteBean> {
         colunas.add("nome");
         colunas.add("sexo");
         colunas.add("idade");
+        colunas.add("cPF");
        return colunas;
     }
 
