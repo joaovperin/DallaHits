@@ -21,12 +21,12 @@
                                     <a href="${vendaUrl}" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Vendas</span></a>
                                 </li>
                                 <li>
-                                    <spring:url value="/produto" var="produtosUrl" htmlEscape="true" />
-                                    <a href="${produtosUrl}" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Produtos</span></a>
-                                    <!--<a href="${produtosUrl}" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Cadastros</span></a>-->
+                                    <spring:url value="/produto" var="produtoUrl" htmlEscape="true" />
+                                    <a href="${produtoUrl}" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Produtos</span></a>
                                 </li>
                                 <li>
-                                    <a href="#Listagens" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Listagens</span></a>
+                                    <spring:url value="/cliente" var="clienteUrl" htmlEscape="true" />
+                                    <a href="${clienteUrl}" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Clientes</span></a>
                                 </li>
                             </ul>
                         </div>

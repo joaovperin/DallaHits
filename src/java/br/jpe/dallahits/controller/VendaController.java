@@ -33,6 +33,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class VendaController {
 
+    // REMOVER DEPENDÊNCIA CLIENTE
+
     /** Api para gerar Jsons */
     private final GsonUtils gson = new GsonUtils();
     /** Grid de comandas */
@@ -67,7 +69,7 @@ public class VendaController {
     @RequestMapping(value = "/comanda/incluir", method = RequestMethod.POST)
     public String comandaIncluir(ViewComandasBean cmd, RedirectAttributes flashAttr)
             throws DallaHitsException {
-        
+
         System.out.println("Entrou!!");
         System.out.println(cmd);
 

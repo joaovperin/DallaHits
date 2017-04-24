@@ -14,7 +14,6 @@ import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.DBUtils;
 import br.jpe.dallahits.util.GsonUtils;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,19 +70,15 @@ public class MensagensController {
      *
      * @param bean
      * @param req
-     * @return String
      * @throws DallaHitsException
      */
     @RequestMapping("/addMensagem")
     @ResponseBody
-    public String addMensagem(MensagemBean bean, HttpServletRequest req) throws DallaHitsException {
-        List<MensagemBean> msgs = (List<MensagemBean>) req.getSession().getAttribute("mensagens");
+    public void addMensagem(MensagemBean bean, HttpServletRequest req) throws DallaHitsException {
         Conexao conn = null;
         try {
             conn = ConnFactory.criaConexaoTransacao();
-            MensagemDAO dao = new MensagemDAO(conn);
-            dao.insert(bean);
-            msgs = dao.busca();
+            new MensagemDAO(conn).insert(bean);
             DBUtils.commit(conn);
         } catch (DAOException e) {
             DBUtils.rollback(conn);
@@ -91,7 +86,6 @@ public class MensagensController {
         } finally {
             DBUtils.close(conn);
         }
-        return gson.toJson(msgs);
     }
 
 }

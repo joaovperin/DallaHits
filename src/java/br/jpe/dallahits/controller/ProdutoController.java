@@ -10,7 +10,6 @@ import br.jpe.dallahits.exception.DallaHitsException;
 import br.jpe.dallahits.gen.bean.ProdutoBean;
 import br.jpe.dallahits.grid.ProdutoGrid;
 import br.jpe.dallahits.util.GsonUtils;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,9 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 public class ProdutoController {
-    
-    /** ARRUMAR OS COMENTÁRIOS DESAPORRA */
-            
 
     /** Api para gerar Jsons */
     private final GsonUtils gson = new GsonUtils();
@@ -46,7 +42,7 @@ public class ProdutoController {
      * @return String
      * @throws DallaHitsException
      */
-    @RequestMapping(value = {"/produto", "/produto/listagem"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/produto", "/produto/listagem" }, method = RequestMethod.GET)
     public String listagem() throws DallaHitsException {
         return "produto/grid";
     }
@@ -86,24 +82,15 @@ public class ProdutoController {
     }
 
     /**
-     * Retorna todos os produtos do banco
+     * Retorna os dados do Grid de produtos
      *
      * @return String Lista de produtos no formato JSON
      * @throws DallaHitsException
      */
-    @RequestMapping(value = "/produto/listagem/dados",  produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/produto/listagem/dados", produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public String getProdutos(HttpServletResponse res) throws DallaHitsException {
-            String dados = gson.toDataTable(new ProdutoGrid().getDados());
-        try {
-            System.out.println("entrou");
-//            res.getWriter().print(dados);
-            System.out.println("saiu");
-        } catch (Exception e) {
-            throw new DallaHitsException(e);
-        }
-
-        return dados;
+    public String getProdutos() throws DallaHitsException {
+        return gson.toDataTable(new ProdutoGrid().getDados());
     }
 
     /**

@@ -8,7 +8,7 @@
 -> Criar mecanismo de Filtro para os DAOs
    montagem dinâmica SQL para os WHERE
    métodos busca() que recebem filtro como parâmetro
-   
+
 -> Reestruturar rotinas de Grid
    utilizar abordagem de processador
    percorrer os dados lidos e montar json em ponto centralizado
@@ -64,6 +64,10 @@
 
 -> Criação do componente Accordeon
    ...
+
+-> Criação de Exception de validação
+   centralizar mensagem de validação
+   centralizar processo de exibição
 
 
 
