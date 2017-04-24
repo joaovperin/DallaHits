@@ -11,7 +11,10 @@ import br.jpe.dallahits.util.GsonUtils;
 import br.jpe.dallahits.util.HtmlTagBuilder;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import org.apache.catalina.util.Base64;
 
 /**
  * Classe Perin
@@ -19,6 +22,8 @@ import java.util.List;
  * @author Joaov
  */
 public class Perin {
+    
+    int code;
 
     public static void main(String[] args) throws DAOException {
         System.out.println("Hello!");
@@ -33,10 +38,15 @@ public class Perin {
     }
 
     private class Bean {
-
+        
         private List data;
 
         public List getData() {
+            
+            Collections.sort(data, (Perin a, Perin b) -> a.code - b.code);
+            
+            data.sort((Object a, Object b) -> 1);
+            
             return data;
         }
 

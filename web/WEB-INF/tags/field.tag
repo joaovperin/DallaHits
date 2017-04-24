@@ -21,4 +21,4 @@
     ${label}: 
 </c:if>
 <%-- Início da Tag: --%>
-<input type="${type}" name="${name}" id="${id}" class="form-control ${cssclazz}" placeholder="${placeholder}" ${required} ${autofocus} ${disabled} ${readonly}>
+<input type="${type}" name="${name}" id="${id}" class="form-control input ${cssclazz}" placeholder="${placeholder}" ${required} ${autofocus} ${disabled} ${readonly}>

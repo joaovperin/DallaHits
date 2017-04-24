@@ -1,5 +1,6 @@
 <%-- Descrição --%>
 <%@tag description="Tag padrão para Formulários" pageEncoding="UTF-8"%>
+<%@attribute name="id" description="Id do elemento de form" required="true" %>
 <%@attribute name="titulo" description="Título" required="false" %>
 <%@attribute name="action" description="URL para submit do form" required="true" %>
 <%@attribute name="submit" description="Texto para botão Submit" required="false" %>
@@ -16,7 +17,7 @@
     <%-- Se houver mensagem, exibe --%>
     <jpe:message msg="${msg}" center="true" />
     <div class="card card-container">
-        <form class="form-signin" action="${action}" method="POST">
+        <form id="form_${id}" class="form-signin" action="${action}" method="POST">
             <jsp:doBody />
             <%-- Se deve incluir botão subtmir --%>
             <c:if test="${not empty submit}">
@@ -28,4 +29,9 @@
     <c:if test="${not empty backUrl}">
         <jpe:button title="Voltar" href="${backUrl}" />
     </c:if>
+    <script>
+        $(function () {
+            Form.prepare($('#form_${id}'));
+        });
+    </script>
 </div>

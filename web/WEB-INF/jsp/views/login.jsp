@@ -10,7 +10,7 @@
             <div class="card card-container">
                 <img id="profile-img" class="profile-img-card" src="resources/img/my-icon.jpg" />
                 <p id="profile-name" class="profile-name-card"></p>
-                <form class="form-signin" action="login" method="POST">
+                <form class="form-signin" action="login" method="POST" id="login" >
                     <jpe:fieldText name="login" placeholder="Login" required="required" autofocus="autofocus" />
                     <jpe:fieldSenha name="senha" placeholder="Senha" required="required" />
                     <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Login</button>

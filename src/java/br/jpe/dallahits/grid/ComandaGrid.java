@@ -46,7 +46,9 @@ public class ComandaGrid extends AbstractGrid {
      */
     @Override
     protected JSONArray getColunas() {
-        return new ViewComandasEntidade().getColunas();
+        JSONArray colunas = new ViewComandasEntidade().getColunas();
+        colunas.remove("idCliente");
+        return colunas;
     }
 
     /**
