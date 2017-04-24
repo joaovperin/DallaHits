@@ -6,8 +6,25 @@
 <%-- Insere o template default --%>
 <tiles:insertDefinition  name="DefaultTemplate" >
     <tiles:putAttribute name="body">
-        <jpe:grid id="gridClientes" url="cliente/listagem" title="Clientes" addAcaoUpdate="true" />
+        <jpe:grid id="gridClientes" url="cliente/listagem" title="Clientes" addAcaoUpdate="true"
+                  callbackAdd="addCliente" callbackAlt="altCliente" />
         <%-- Se houver mensagem, exibe --%>
         <jpe:message msg="${msg}" />
+        <script>
+
+            function addCliente() {
+                console.log('Inclusão!');
+                
+            }
+
+            function altCliente(clientes) {
+                console.log('Alteração!');
+                var c = clientes[0];
+                console.log(c);
+            }
+
+        </script>
     </tiles:putAttribute>
 </tiles:insertDefinition>
+
+

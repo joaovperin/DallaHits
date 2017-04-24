@@ -45,6 +45,12 @@ public class ClienteController {
         return "cliente/grid";
     }
 
+    @RequestMapping(value = "/form", method = RequestMethod.GET)
+    public String form() throws DallaHitsException {
+            System.out.println("Request na modal õ/");
+        return "cliente/form";
+    }
+
     /**
      * URL para retornar os dados do grid de comandas em formato JSON
      *
