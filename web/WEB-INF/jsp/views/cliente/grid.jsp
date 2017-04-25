@@ -6,6 +6,9 @@
 <%-- Insere o template default --%>
 <tiles:insertDefinition  name="DefaultTemplate" >
     <tiles:putAttribute name="body">
+        <div id="modCt">
+
+        </div>
         <jpe:grid id="gridClientes" url="cliente/listagem" title="Clientes" addAcaoUpdate="true"
                   callbackAdd="addCliente" callbackAlt="altCliente" />
         <%-- Se houver mensagem, exibe --%>
@@ -14,7 +17,7 @@
 
             function addCliente() {
                 console.log('Inclusão!');
-                
+                openModal({url: '/cliente/form'}).load();
             }
 
             function altCliente(clientes) {

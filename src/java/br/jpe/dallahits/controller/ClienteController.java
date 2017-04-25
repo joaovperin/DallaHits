@@ -45,7 +45,7 @@ public class ClienteController {
         return "cliente/grid";
     }
 
-    @RequestMapping(value = "/form", method = RequestMethod.GET)
+    @RequestMapping(value = "/cliente/form", method = RequestMethod.GET)
     public String form() throws DallaHitsException {
             System.out.println("Request na modal õ/");
         return "cliente/form";
