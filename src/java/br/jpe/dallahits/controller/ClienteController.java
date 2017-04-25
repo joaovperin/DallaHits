@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Classe ClienteController
@@ -45,11 +46,26 @@ public class ClienteController {
         return "cliente/grid";
     }
 
+    /**
+     * URL para acesso do formulário de clientes (modal)
+     *
+     * @return String
+     * @throws DallaHitsException
+     */
     @RequestMapping(value = "/cliente/form", method = RequestMethod.GET)
-    public String form() throws DallaHitsException {
-            System.out.println("Request na modal õ/");
+    public String form(RedirectAttributes flashAttr) throws DallaHitsException {
+        
         return "cliente/form";
     }
+
+    @RequestMapping(value = "/cliente/alterar", method = RequestMethod.GET)
+    public String alterar(RedirectAttributes flashAttr) throws DallaHitsException {
+
+        flashAttr.addFlashAttribute("msg", "alterar");
+        return "redirect:cliente/form";
+    }
+
+
 
     /**
      * URL para retornar os dados do grid de comandas em formato JSON
