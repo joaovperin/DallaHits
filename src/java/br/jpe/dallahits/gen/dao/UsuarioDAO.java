@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- *
+ * 
  * ESTE FONTE É GERADO E NÃO DEVE SER ALTERADO.
  */
 package br.jpe.dallahits.gen.dao;
@@ -32,7 +32,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
     /** SQL para DELETE */
     private static final String SQL_DELETE = "DELETE FROM usuario";
 
-    /**
+    /** 
      * Construtor da classe UsuarioPk
      *
      * @param conn
@@ -43,7 +43,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /**
      * Realiza o comando Insert na entidade à partir de um bean
-     *
+     * 
      * @param bean
      * @throws DAOException
      */
@@ -59,7 +59,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /**
      * Realiza o comando Insert na entidade à partir de um bean
-     *
+     * 
      * @param bean
      * @return UsuarioBean
      * @throws DAOException
@@ -80,7 +80,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /**
      * Realiza uma busca no banco à partir da chave primária do elemento
-     *
+     * 
      * @param pk
      * @return UsuarioBean
      * @throws DAOException
@@ -100,7 +100,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /**
      * Realiza alteração de uma entidade no banco de dados
-     *
+     * 
      * @param bean
      * @throws DAOException
      */
@@ -118,7 +118,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /**
      * Realiza a deleção de um registro no banco de dados
-     *
+     * 
      * @param bean
      * @throws DAOException
      */
@@ -134,7 +134,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
         }
     }
 
-    /**
+    /** 
      * Retorna o comando SQL para executar uma SELECT
      *
      * @return String
@@ -144,7 +144,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
         return SQL_SELECT;
     }
 
-    /**
+    /** 
      * Retorna o comando SQL para executar um Insert
      *
      * @return String
@@ -154,7 +154,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
         return SQL_INSERT;
     }
 
-    /**
+    /** 
      * Retorna o comando SQL para executar um Update
      *
      * @param where Cláusula WHERE para executar filtros
@@ -165,7 +165,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
         return SQL_UPDATE.concat(where);
     }
 
-    /**
+    /** 
      * Retorna o comando SQL para executar um Delete
      *
      * @param where Cláusula WHERE para executar filtros
@@ -175,8 +175,8 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
     protected String getSqlDelete(String where) {
         return SQL_DELETE.concat(where);
     }
-
-    /**
+    
+    /** 
      * Retorna um Bean à partir de um ResultSet
      *
      * @return UsuarioBean
@@ -194,7 +194,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
         return bean;
     }
 
-    /**
+    /** 
      * Preenche um PreparedStatement à partir de um Bean
      *
      * @param pstmt PreparedStatement recém criado (vazio)

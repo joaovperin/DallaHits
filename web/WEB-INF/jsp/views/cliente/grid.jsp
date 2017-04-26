@@ -17,12 +17,13 @@
 
             function addCliente() {
                 console.log('Inclusão!');
-                openModal({url: '/cliente/form'}).load();
+                openModal({url: '/cliente/incluir'}).load();
             }
 
             function altCliente(clientes) {
                 console.log('Alteração!');
                 var c = clientes[0];
+                openModal({url: '/cliente/alterar', data: c}).load();
                 console.log(c);
             }
 

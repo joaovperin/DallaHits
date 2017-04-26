@@ -3,7 +3,8 @@
  *
  * Formato esperado:
  * {
- *  url: '/cliente/form'
+ *  url: '/cliente/form',
+ *  data: {}
  * }
  *
  */
@@ -13,7 +14,8 @@ var openModal = function (externalParams) {
     var ref;
     // Objeto com os parâmetros
     var param = {
-        ajax: true
+        ajax: true,
+        data: {}
     };
     // Mescla os parâmetro externos com os internos
     $.extend(param, externalParams);
@@ -34,6 +36,7 @@ var openModal = function (externalParams) {
         $.ajax({
             method: "GET",
             url: "/DallaHits/" + param.url,
+            data: param.data,
             success: function (data) {
                 ref = $(data).modal();
             }

@@ -5,7 +5,10 @@
 <%@ taglib prefix="spring" uri="/META-INF/tlds/spring.tld" %>
 <%-- Modal para manutenção de clientes --%>
 <jpe:modal id="modCliente" title="Inclusão - Cliente">
-    <jpe:form titulo="Clientes" action="cliente/incluir" submit="Gravar" id="clientes">
+
+    action: ${action}.
+
+    <jpe:form titulo="Clientes" action="cliente/gravar" submit="Gravar" id="clientes">
         <jpe:fieldText name="nome" placeholder="Nome Cliente" />
         <jpe:fieldText name="sexo" placeholder="Sexo" />
         <jpe:fieldNumber name="cpf" placeholder="CPF" />

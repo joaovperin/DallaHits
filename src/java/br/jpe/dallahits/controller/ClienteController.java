@@ -6,6 +6,7 @@
 package br.jpe.dallahits.controller;
 
 import br.jpe.dallahits.exception.DallaHitsException;
+import br.jpe.dallahits.gen.bean.ClienteBean;
 import br.jpe.dallahits.generics.AbstractGrid;
 import br.jpe.dallahits.grid.ClienteGrid;
 import br.jpe.dallahits.util.GsonUtils;
@@ -49,23 +50,61 @@ public class ClienteController {
     /**
      * URL para acesso do formulário de clientes (modal)
      *
+     * @param flashAttr
      * @return String
      * @throws DallaHitsException
      */
     @RequestMapping(value = "/cliente/form", method = RequestMethod.GET)
     public String form(RedirectAttributes flashAttr) throws DallaHitsException {
-        
         return "cliente/form";
     }
 
+    /**
+     * Acessa o formulário no modo alteração
+     *
+     * @param flashAttr
+     * @return String
+     * @throws DallaHitsException
+     */
     @RequestMapping(value = "/cliente/alterar", method = RequestMethod.GET)
-    public String alterar(RedirectAttributes flashAttr) throws DallaHitsException {
-
-        flashAttr.addFlashAttribute("msg", "alterar");
-        return "redirect:cliente/form";
+    public String alterar(ClienteBean c, RedirectAttributes flashAttr) throws DallaHitsException {
+        flashAttr.addFlashAttribute("action", "alterar");
+        System.out.println(c);
+        return "redirect:form";
     }
 
+    /**
+     * Acessa o formulário no modo inclusão
+     *
+     * @param flashAttr
+     * @return String
+     * @throws DallaHitsException
+     */
+    @RequestMapping(value = "/cliente/incluir", method = RequestMethod.GET)
+    public String incluir(RedirectAttributes flashAttr) throws DallaHitsException {
+        flashAttr.addFlashAttribute("action", "incluir");
+        return "redirect:form";
+    }
+    @RequestMapping(value = "/cliente/gravar", method = RequestMethod.POST)
+    public String gravar(ClienteBean c, String action, RedirectAttributes flashAttr) throws DallaHitsException {
+        System.out.println(c);
+        String msg = "Sucesso - " + flashAttr.asMap().get("action");
+        flashAttr.addFlashAttribute("msg", msg);
+        return "cliente/grid";
+    }
 
+    /**
+     * Acessa o formulário no modo consulta
+     *
+     * @param flashAttr
+     * @return String
+     * @throws DallaHitsException
+     */
+    @RequestMapping(value = "/cliente/consultar", method = RequestMethod.GET)
+    public String consultar(RedirectAttributes flashAttr) throws DallaHitsException {
+        flashAttr.addFlashAttribute("action", "consultar");
+        return "redirect:form";
+    }
 
     /**
      * URL para retornar os dados do grid de comandas em formato JSON
