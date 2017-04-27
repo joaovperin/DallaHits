@@ -85,9 +85,14 @@ public class ClienteController {
         flashAttr.addFlashAttribute("action", "incluir");
         return "redirect:form";
     }
+    
     @RequestMapping(value = "/cliente/gravar", method = RequestMethod.POST)
     public String gravar(ClienteBean c, String action, RedirectAttributes flashAttr) throws DallaHitsException {
         System.out.println(c);
+        System.out.println(action);
+        
+        
+        
         String msg = "Sucesso - " + flashAttr.asMap().get("action");
         flashAttr.addFlashAttribute("msg", msg);
         return "cliente/grid";

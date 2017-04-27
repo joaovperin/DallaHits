@@ -13,5 +13,6 @@
         <jpe:fieldText name="sexo" placeholder="Sexo" />
         <jpe:fieldNumber name="cpf" placeholder="CPF" />
         <jpe:fieldNumber name="idade" placeholder="Idade" />
+        <jpe:fieldHidden name="action" value="${action}" />
     </jpe:form>
 </jpe:modal>

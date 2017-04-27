@@ -2,7 +2,8 @@
 <%@tag description="Tag default para campos" pageEncoding="UTF-8"%>
 <%@attribute name="id" description="ID do campo" required="false" %>
 <%@attribute name="name" description="Name do campo" required="true" %>
-<%@attribute name="label" description="Rótulo do campo" required="true" %>
+<%@attribute name="label" description="Rótulo do campo" required="false" %>
+<%@attribute name="value" description="Valor do campo" required="false" %>
 <%@attribute name="type" description="Tipo do campo" required="true" %>
 <%@attribute name="placeholder" description="Placeholder do campo" required="false" %>
 <%@attribute name="required" description="Se o campo é obrigatório" required="false" %>
