@@ -10,7 +10,9 @@ import br.jpe.dallahits.gen.bean.ClienteBean;
 import br.jpe.dallahits.generics.AbstractGrid;
 import br.jpe.dallahits.grid.ClienteGrid;
 import br.jpe.dallahits.util.GsonUtils;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -62,12 +64,13 @@ public class ClienteController {
     /**
      * Acessa o formulário no modo alteração
      *
+     * @param c
      * @param flashAttr
      * @return String
      * @throws DallaHitsException
      */
     @RequestMapping(value = "/cliente/alterar", method = RequestMethod.GET)
-    public String alterar(ClienteBean c, RedirectAttributes flashAttr) throws DallaHitsException {
+    public String alterar(@Valid ClienteBean c, RedirectAttributes flashAttr) throws DallaHitsException {
         flashAttr.addFlashAttribute("action", "alterar");
         System.out.println(c);
         return "redirect:form";
@@ -85,14 +88,18 @@ public class ClienteController {
         flashAttr.addFlashAttribute("action", "incluir");
         return "redirect:form";
     }
-    
+
     @RequestMapping(value = "/cliente/gravar", method = RequestMethod.POST)
-    public String gravar(ClienteBean c, String action, RedirectAttributes flashAttr) throws DallaHitsException {
+    public String gravar(@Valid ClienteBean c, String action, RedirectAttributes flashAttr, BindingResult result) throws DallaHitsException {
         System.out.println(c);
         System.out.println(action);
-        
-        
-        
+
+        if (result.hasErrors()){
+            System.out.println("Erros!");
+        }
+
+
+
         String msg = "Sucesso - " + flashAttr.asMap().get("action");
         flashAttr.addFlashAttribute("msg", msg);
         return "cliente/grid";
