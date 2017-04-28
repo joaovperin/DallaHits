@@ -4,6 +4,7 @@
 <%@attribute name="url" description="URL para buscar dados do grid" required="true" %>
 <%@attribute name="title" description="Título do grid" required="false" %>
 <%@attribute name="criaFooter" description="Se deve incluir um footer" required="false" %>
+<%@attribute name="order" description="Ordenação do grid" required="false" %>
 <%@attribute name="clClick" description="Evento no DOM para disparar callbacks" required="false" %>
 <%@attribute name="addAcaoUpdate" description="Se deve adicionar ação Update" required="false" %>
 <%@attribute name="callbackAdd" description="Ação Add - nome da função de callback" required="false" %>
@@ -50,6 +51,7 @@
             callbackAdd: '${callbackAdd}',
             callbackAlt: '${callbackAlt}',
             callbackExc: '${callbackExc}',
+            order: '${order}',
             addAcaoUpdate: '${addAcaoUpdate}'
     <%-- Se definiu callback de clique --%>
     <c:if test="${not empty clClick}">

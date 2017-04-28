@@ -24,3 +24,4 @@
 <script type="text/javascript" src="<c:url value="/resources/third/js/dataTables.buttons.js" />"></script>
 <!--<script type="text/javascript" src="<c:url value="/resources/third/js/dataTables.colReorder.js" />"></script>-->
 <script type="text/javascript" src="<c:url value="/resources/third/js/buttons.bootstrap.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/third/js/jquery.numeric.min.js" />"></script>

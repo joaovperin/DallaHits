@@ -8,7 +8,7 @@
         <%-- Formulário de produtos! --%>
         <jpe:form action="incluir" id="listagem" backUrl="listagem" submit="Gravar" titulo="Inclusão de produtos!" >
             <jpe:fieldText name="descricao" placeholder="Descrição do produto" required="required" autofocus="autofocus" />
-            <jpe:fieldText name="valorUnitario" placeholder="Valor" required="required" />
+            <jpe:fieldNumber name="valorUnitario" placeholder="Valor" required="required" />
         </jpe:form>
         <script>
             $(function () {
@@ -21,7 +21,8 @@
                             minlength: 5
                         },
                         valorUnitario: {
-                            required: true
+                            required: true,
+                            number:true
                         }
                     },
                     // Mensagens de validação

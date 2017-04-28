@@ -26,6 +26,9 @@ var Grid = function (externalParams) {
     };
     // Mescla os parâmetro externos com os internos
     $.extend(param, externalParams);
+    
+    console.log('param: ');
+    console.log(param.order);
     // Realiza a criação do DataTable
     function criaDataTable(header) {
         // Cria o Datatable e associa à variável local 'table'
@@ -45,7 +48,7 @@ var Grid = function (externalParams) {
             "info": false,
             "processing": true,
             "responsive": true,
-            "order": [[0, "asc"]],
+            "order": getOrder(),
             "columns": getColumns(header.colunas),
             "select": true,
             // Para adicionar novas Strings
@@ -65,6 +68,13 @@ var Grid = function (externalParams) {
                 "infoEmpty": "Nenhum registro disponível."
             }
         });
+    }
+    
+    function getOrder(){
+        if (param.order){
+            return eval(param.order);
+        }
+        return [[0, "asc"]];
     }
 
     // Cria os botões no cabeçalho do Grid

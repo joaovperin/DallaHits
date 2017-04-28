@@ -2,9 +2,6 @@
 // Product Backlog do projeto!!!     //
 // --------------------------------- */
 
--> Atualizar Bean em inserts com entidades Auto_Increment
-   ...
-
 -> Criar mecanismo de Filtro para os DAOs
    montagem dinâmica SQL para os WHERE
    métodos busca() que recebem filtro como parâmetro

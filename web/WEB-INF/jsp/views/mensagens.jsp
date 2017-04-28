@@ -14,7 +14,7 @@
             <button id="addMsg" class="form-control" >Add</button>
         </div>
         <%-- Grid de mensagens --%>
-        <jpe:grid id="msg" url="mensagens" addAcaoUpdate="true" />
+        <jpe:grid id="msg" url="mensagens" addAcaoUpdate="true" order='[[0, "desc"]]' />
         <script>
             $(function () {
                 // Ao clicar no botão addMsg, cria uma nova
