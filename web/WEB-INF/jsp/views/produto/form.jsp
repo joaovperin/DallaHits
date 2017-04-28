@@ -22,25 +22,24 @@
                         },
                         valorUnitario: {
                             required: true,
-                            number:true
+                            number: true,
+                            max: 999999
                         }
                     },
                     // Mensagens de validação
                     messages: {
                         descricao: {
-                            required: "Mete a porra da descrição, carai",
-                            minlength: "Que bosta é essa? Min 5 caracteres rapá"
+                            required: "Este campo é obrigatório",
+                            minlength: "O tamanho mínimo deste campo é {0}."
                         },
                         valorUnitario: {
-                            required: "Precisa de valor essa droga"
+                            required: "Precisa de valor essa droga",
+                            max: "Valor máximo {0}"
                         }
                     },
                     // Força a submissão (ui)
                     submitHandler: function (form) {
-                        console.log('odjaljdsklajdsa');
-                        console.log(form);
-                        console.log(form.valid());
-                        if (form.valid()){
+                        if ($(form).valid()) {
                             form.submit();
                         }
                     }

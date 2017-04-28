@@ -16,19 +16,9 @@
 <%-- Início da Tag: --%>
 <jpe:field type="text" name="${name}" id="${id}" cssclazz="inp_number ${cssclazz}" placeholder="${placeholder}" label="${label}" required="${required}" autofocus="${autofocus}" disabled="${disabled}" readonly="${readonly}" value="${value}" />
 <script>
-    $("#${name}").numeric(",", function(elm){
-        alert("INVALIDO");
-        console.log(elm);
-    });
-    
-    
-    function numeric(separator, onErrorCallback){
-        
-        if (onErrorCallback && typeof onErrorCallback === 'function'){
-            onErrorCallback(this);
-        }
-        
-        
-    }
-    
+    $("#${name}").numeric(",");
+//    $('#${name}').keyup(function () {
+//        this.value = this.value.replace(/[^0-9\.]/g, '');
+//    });
+
 </script>

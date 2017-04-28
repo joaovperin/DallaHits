@@ -28,7 +28,7 @@ var Form = function () {
 
 /**
  * Retorna verdadeiro se o array possuir um par com a soma
- * 
+ *
  * @param arr Array de dados
  * @param sum Soma de valores
  * @return boolean
