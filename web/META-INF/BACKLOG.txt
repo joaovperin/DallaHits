@@ -1,4 +1,4 @@
-// --------------------------------- /*
+/*
 // Product Backlog do projeto!!!     //
 // --------------------------------- */
 
@@ -66,7 +66,9 @@
    centralizar mensagem de validação
    centralizar processo de exibição
 
-
+-> Utilizar plugin jQueryMask
+   https://igorescobar.github.io/jQuery-Mask-Plugin/
+   https://plugins.jquery.com/alphanum/
 
 //.......................................................... //
 //. TO BE CONTINUED...                                     . //
