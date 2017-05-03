@@ -19,7 +19,7 @@
 </c:if>
 <%-- Se não informou Label--%>
 <c:if test="${not empty label}">
-    ${label}: 
+    ${label}:
 </c:if>
 <%-- Início da Tag: --%>
-<input type="${type}" name="${name}" id="${id}" class="form-control input ${cssclazz}" placeholder="${placeholder}" ${required} ${autofocus} ${disabled} ${readonly}>
+<input type="${type}" name="${name}" id="${id}" value="${value}" class="form-control input ${cssclazz}" placeholder="${placeholder}" ${required} ${autofocus} ${disabled} ${readonly}>

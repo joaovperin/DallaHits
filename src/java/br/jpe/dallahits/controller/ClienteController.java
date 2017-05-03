@@ -5,11 +5,18 @@
  */
 package br.jpe.dallahits.controller;
 
+import br.jpe.dallahits.exception.DAOException;
 import br.jpe.dallahits.exception.DallaHitsException;
 import br.jpe.dallahits.gen.bean.ClienteBean;
+import br.jpe.dallahits.gen.dao.ClienteDAO;
 import br.jpe.dallahits.generics.AbstractGrid;
 import br.jpe.dallahits.grid.ClienteGrid;
 import br.jpe.dallahits.util.GsonUtils;
+import br.jpe.dallahits.util.db.Conexao;
+import br.jpe.dallahits.util.db.ConnFactory;
+import br.jpe.dallahits.util.db.DBUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -72,7 +79,7 @@ public class ClienteController {
     @RequestMapping(value = "/cliente/alterar", method = RequestMethod.GET)
     public String alterar(@Valid ClienteBean c, RedirectAttributes flashAttr) throws DallaHitsException {
         flashAttr.addFlashAttribute("action", "alterar");
-        System.out.println(c);
+        flashAttr.addFlashAttribute("cliente", c);
         return "redirect:form";
     }
 
@@ -89,18 +96,41 @@ public class ClienteController {
         return "redirect:form";
     }
 
+    /**
+     * URL para executar a gravação de clientes!
+     *
+     * @param c
+     * @param action
+     * @param flashAttr
+     * @param result
+     * @return String
+     * @throws DallaHitsException
+     */
     @RequestMapping(value = "/cliente/gravar", method = RequestMethod.POST)
-    public String gravar(@Valid ClienteBean c, String action, RedirectAttributes flashAttr, BindingResult result) throws DallaHitsException {
-        System.out.println(c);
-        System.out.println(action);
-
-        if (result.hasErrors()){
-            System.out.println("Erros!");
+    public String gravar(ClienteBean c, String action, RedirectAttributes flashAttr, BindingResult result,
+            HttpServletRequest req, HttpServletResponse res) throws
+            DallaHitsException {
+        String msg = "Sucesso - " + flashAttr.asMap().get("action");
+        Conexao conn = null;
+        try {
+            conn = ConnFactory.criaConexaoTransacao();
+            ClienteDAO dao = new ClienteDAO(conn);
+            // Se deve gravar um novo ou dar update
+            if ("incluir".equals(action)) {
+                dao.insertAi(c);
+            } else if ("alterar".equals(action)) {
+                dao.update(c);
+            }
+            DBUtils.commit(conn);
+        } catch (DAOException e) {
+            System.out.println("Erro! " + e);
+            msg = e.getMessage();
+            DBUtils.rollback(conn);
+        } finally {
+            DBUtils.close(conn);
         }
 
-
-
-        String msg = "Sucesso - " + flashAttr.asMap().get("action");
+        req.setAttribute("msg", msg);
         flashAttr.addFlashAttribute("msg", msg);
         return "cliente/grid";
     }
