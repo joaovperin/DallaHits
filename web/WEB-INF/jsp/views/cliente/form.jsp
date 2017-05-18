@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="/META-INF/tlds/spring.tld" %>
 <%-- Modal para manutenção de clientes --%>
 <jpe:modal id="modCliente" title="Cliente - ${action}">
-    <jpe:form titulo="Clientes" action="cliente/gravar" submit="Gravar" id="clientes">
+    <jpe:form titulo="Clientes" action="cliente/gravar" id="clientes">
         <c:if test="${action == 'alterar'}">
             <jpe:fieldHidden name="idCliente" value="${cliente.idCliente}" />
         </c:if>
@@ -14,10 +14,47 @@
         <jpe:fieldNumber name="cpf" placeholder="CPF" value="${cliente.cpf}" />
         <jpe:fieldNumber name="idade" placeholder="Idade" value="${cliente.idade}" />
         <jpe:fieldHidden name="action" value="${action}" />
+        <jpe:buttonSubmit id="grvCli" title="Gravar" tipo="button" />
     </jpe:form>
     <%-- Validações do formulário --%>
     <script>
         $(function () {
+
+            $('#btn_grvCli').click(function () {
+                console.log("oi");
+                // Se não for válido cai fora
+                if(!$('form#form_clientes').valid()){
+                    console.log('naaao');
+                    return;
+                }
+                // Envia requisição para gravar dados
+                Ajax.send({
+                    type: "POST",
+                    url: "cliente/gravar",
+                    data: cnvFormToObj('form_clientes'),
+                    success: function (ret) {
+                        console.log('Dados:\n');
+                        console.log(ret);
+                    }, error: function(ret){
+                        console.log("error");
+                    }
+                });
+            });
+
+            var cnvFormToObj = function (idForm) {
+                var data = {};
+                var arrSerialized = $('form#' + idForm).serializeArray();
+                for (var i = 0; i < arrSerialized.length; i++) {
+                    data[arrSerialized[i]['name']] = arrSerialized[i]['value'];
+                }
+                return data;
+            };
+
+            var gebi = function (idElm) {
+                return document.getElementById(idElm);
+            };
+
+
             // Inicializa a validação do Form
             $("form#form_clientes").validate({
                 // Regras de validação dos campos

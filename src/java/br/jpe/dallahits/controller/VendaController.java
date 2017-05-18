@@ -55,7 +55,7 @@ public class VendaController {
      */
     @RequestMapping(value = "/venda", method = RequestMethod.GET)
     public String venda() throws DallaHitsException {
-        return "venda";
+        return "venda/grid";
     }
 
     /**
@@ -88,7 +88,7 @@ public class VendaController {
                 ClienteDAO cliDao = new ClienteDAO(conn);
                 ClienteBean cliBean = new ClienteBean();
                 cliBean.setNome(cmd.getCliente());
-                cliBean.setIdade(21);
+//                cliBean.setIdade(21);
                 cliBean.setSexo("M");
                 bean.setIdCliente(cliDao.insertAi(cliBean).getIdCliente());
                 DBUtils.commit(conn);

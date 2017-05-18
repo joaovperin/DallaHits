@@ -205,6 +205,9 @@ public class ComandaDAO extends AbstractDAO<ComandaBean, ComandaPk> {
     protected PreparedStatement getPstmt(PreparedStatement pstmt, ComandaBean bean) throws SQLException {
         pstmt.setLong(1, bean.getIdCliente());
         pstmt.setInt(2, bean.getIdUsuario());
+        if (bean.getData() == null){
+           bean.setData(new java.util.Date());
+        }
         pstmt.setDate(3, new java.sql.Date(bean.getData().getTime()));
         pstmt.setDouble(4, bean.getValorTotal());
         return pstmt;

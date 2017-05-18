@@ -20,16 +20,12 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
 
     /** Código */
     private int idUsuario;
-    /** Login */
-    private String login;
-    /** Email */
-    private String email;
-    /** Senha */
-    private String senha;
     /** Nome */
     private String nome;
-    /** Tipo */
-    private String tipo;
+    /** Login */
+    private String login;
+    /** Senha */
+    private String senha;
 
     /** 
      * Construtor da classe UsuarioBean
@@ -55,6 +51,24 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
     }
 
     /** 
+     * Retorna o valor do campo Nome
+     * 
+     * @return String
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /** 
+     * Define o valor do campo Nome
+     * 
+     * @param nome
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    /** 
      * Retorna o valor do campo Login
      * 
      * @return String
@@ -70,24 +84,6 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
      */
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    /** 
-     * Retorna o valor do campo Email
-     * 
-     * @return String
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /** 
-     * Define o valor do campo Email
-     * 
-     * @param email
-     */
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     /** 
@@ -108,42 +104,6 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
         this.senha = senha;
     }
 
-    /** 
-     * Retorna o valor do campo Nome
-     * 
-     * @return String
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /** 
-     * Define o valor do campo Nome
-     * 
-     * @param nome
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /** 
-     * Retorna o valor do campo Tipo
-     * 
-     * @return String
-     */
-    public String getTipo() {
-        return tipo;
-    }
-
-    /** 
-     * Define o valor do campo Tipo
-     * 
-     * @param tipo
-     */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     /**
      * Retorna o valor das propriedades do bean em um JSONArray
      * 
@@ -153,11 +113,9 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
     public JSONArray toArray() {
         JSONArray obj = new JSONArray();
         obj.add(getIdUsuario());
-        obj.add(getLogin());
-        obj.add(getEmail());
-        obj.add(getSenha());
         obj.add(getNome());
-        obj.add(getTipo());
+        obj.add(getLogin());
+        obj.add(getSenha());
         return obj;
     }
 
@@ -170,11 +128,9 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + Objects.hashCode(this.idUsuario);
-        hash = 53 * hash + Objects.hashCode(this.login);
-        hash = 53 * hash + Objects.hashCode(this.email);
-        hash = 53 * hash + Objects.hashCode(this.senha);
         hash = 53 * hash + Objects.hashCode(this.nome);
-        hash = 53 * hash + Objects.hashCode(this.tipo);
+        hash = 53 * hash + Objects.hashCode(this.login);
+        hash = 53 * hash + Objects.hashCode(this.senha);
         return hash;
     }
 
@@ -199,19 +155,13 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
         if (!Objects.equals(this.idUsuario, other.idUsuario)) {
             return false;
         }
-        if (!Objects.equals(this.login, other.login)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.senha, other.senha)) {
-            return false;
-        }
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
-        if (!Objects.equals(this.tipo, other.tipo)) {
+        if (!Objects.equals(this.login, other.login)) {
+            return false;
+        }
+        if (!Objects.equals(this.senha, other.senha)) {
             return false;
         }
         return true;
@@ -226,11 +176,9 @@ public class UsuarioBean extends AbstractBean<UsuarioBean> {
     public String toString() {
         return "UsuarioBean{" +
                     "idUsuario=" + idUsuario + ", " +
-                    "login=" + login + ", " +
-                    "email=" + email + ", " +
-                    "senha=" + senha + ", " +
                     "nome=" + nome + ", " +
-                    "tipo=" + tipo + "}";
+                    "login=" + login + ", " +
+                    "senha=" + senha + "}";
     }
 
 }

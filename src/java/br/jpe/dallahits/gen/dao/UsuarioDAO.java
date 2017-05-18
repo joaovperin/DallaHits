@@ -24,11 +24,11 @@ import java.sql.SQLException;
 public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
 
     /** SQL para SELECT */
-    private static final String SQL_SELECT = "SELECT idUsuario, login, email, senha, nome, tipo FROM usuario";
+    private static final String SQL_SELECT = "SELECT idUsuario, nome, login, senha FROM usuario";
     /** SQL para INSERT */
-    private static final String SQL_INSERT = "INSERT INTO usuario (login, email, senha, nome, tipo) VALUES ( ?,  ?,  ?,  ?,  ? )";
+    private static final String SQL_INSERT = "INSERT INTO usuario (nome, login, senha) VALUES ( ?,  ?,  ? )";
     /** SQL para UPDATE */
-    private static final String SQL_UPDATE = "UPDATE usuario SET login =  ?, email =  ?, senha =  ?, nome =  ?, tipo =  ?";
+    private static final String SQL_UPDATE = "UPDATE usuario SET nome =  ?, login =  ?, senha =  ?";
     /** SQL para DELETE */
     private static final String SQL_DELETE = "DELETE FROM usuario";
 
@@ -109,7 +109,7 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
         try {
             String where = " WHERE idUsuario =  ?";
             PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlUpdate(where)), bean);
-            pstmt.setInt(6, bean.getIdUsuario());
+            pstmt.setInt(4, bean.getIdUsuario());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -186,11 +186,9 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
     protected UsuarioBean getBeanFromResultSet(ResultSet rs) throws SQLException {
         UsuarioBean bean = new UsuarioBean();
         bean.setIdUsuario(rs.getInt(1));
-        bean.setLogin(rs.getString(2));
-        bean.setEmail(rs.getString(3));
+        bean.setNome(rs.getString(2));
+        bean.setLogin(rs.getString(3));
         bean.setSenha(rs.getString(4));
-        bean.setNome(rs.getString(5));
-        bean.setTipo(rs.getString(6));
         return bean;
     }
 
@@ -204,11 +202,9 @@ public class UsuarioDAO extends AbstractDAO<UsuarioBean, UsuarioPk> {
      */
     @Override
     protected PreparedStatement getPstmt(PreparedStatement pstmt, UsuarioBean bean) throws SQLException {
-        pstmt.setString(1, bean.getLogin());
-        pstmt.setString(2, bean.getEmail());
+        pstmt.setString(1, bean.getNome());
+        pstmt.setString(2, bean.getLogin());
         pstmt.setString(3, bean.getSenha());
-        pstmt.setString(4, bean.getNome());
-        pstmt.setString(5, bean.getTipo());
         return pstmt;
     }
 

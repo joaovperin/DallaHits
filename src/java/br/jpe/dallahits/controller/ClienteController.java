@@ -15,11 +15,8 @@ import br.jpe.dallahits.util.GsonUtils;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.DBUtils;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,7 +48,7 @@ public class ClienteController {
      * @return String
      * @throws DallaHitsException
      */
-    @RequestMapping(value = "/cliente", method = RequestMethod.GET)
+    @RequestMapping(value = {"/cliente", "/cliente/listagem"}, method = RequestMethod.GET)
     public String cliente() throws DallaHitsException {
         return "cliente/grid";
     }
@@ -102,15 +99,14 @@ public class ClienteController {
      * @param c
      * @param action
      * @param flashAttr
-     * @param result
-     * @return String
+     * @return 
      * @throws DallaHitsException
      */
-    @RequestMapping(value = "/cliente/gravar", method = RequestMethod.POST)
-    public String gravar(ClienteBean c, String action, RedirectAttributes flashAttr, BindingResult result,
-            HttpServletRequest req, HttpServletResponse res) throws
-            DallaHitsException {
-        String msg = "Sucesso - " + flashAttr.asMap().get("action");
+    @RequestMapping(value = "/cliente/gravar", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public String gravar(ClienteBean c, String action, RedirectAttributes flashAttr)
+            throws DallaHitsException {
+        String msg = "Sucesso - " + action;
         Conexao conn = null;
         try {
             conn = ConnFactory.criaConexaoTransacao();
@@ -130,9 +126,9 @@ public class ClienteController {
             DBUtils.close(conn);
         }
 
-        req.setAttribute("msg", msg);
         flashAttr.addFlashAttribute("msg", msg);
-        return "cliente/grid";
+        System.out.println(msg);
+        return msg;
     }
 
     /**

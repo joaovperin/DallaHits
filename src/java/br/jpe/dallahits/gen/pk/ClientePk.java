@@ -8,6 +8,7 @@
 package br.jpe.dallahits.gen.pk;
 
 import br.jpe.dallahits.generics.AbstractPk;
+import java.util.Date;
 
 /**
  * Classe ClientePk

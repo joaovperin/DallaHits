@@ -238,6 +238,9 @@ public class ${entidade.nome}DAO extends AbstractDAO<${entidade.nome}Bean, ${ent
 <#list entidade.attrs as a>
 <#if !a.isPk>
     <#if a.tipo = 'Date'>
+        if (bean.get${a.nome?cap_first}() == null){
+           bean.set${a.nome?cap_first}(new java.util.Date());
+        }
         pstmt.set${a.tipo?cap_first}(${idx}, new java.sql.Date(bean.get${a.nome?cap_first}().getTime()));
     <#else>
         pstmt.set${a.tipo?cap_first}(${idx}, bean.get${a.nome?cap_first}());

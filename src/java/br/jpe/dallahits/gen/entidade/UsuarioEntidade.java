@@ -27,11 +27,9 @@ public class UsuarioEntidade extends AbstractViewEntidade<UsuarioBean> {
     public JSONArray getTitulos() {
        JSONArray titulos = new JSONArray();       
         titulos.add("Código");
-        titulos.add("Login");
-        titulos.add("Email");
-        titulos.add("Senha");
         titulos.add("Nome");
-        titulos.add("Tipo");
+        titulos.add("Login");
+        titulos.add("Senha");
        return titulos;
     }
      
@@ -39,11 +37,9 @@ public class UsuarioEntidade extends AbstractViewEntidade<UsuarioBean> {
     public JSONArray getColunas() {
        JSONArray colunas = new JSONArray();
         colunas.add("idUsuario");
-        colunas.add("login");
-        colunas.add("email");
-        colunas.add("senha");
         colunas.add("nome");
-        colunas.add("tipo");
+        colunas.add("login");
+        colunas.add("senha");
        return colunas;
     }
 

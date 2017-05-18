@@ -24,11 +24,11 @@ import java.sql.SQLException;
 public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
 
     /** SQL para SELECT */
-    private static final String SQL_SELECT = "SELECT idCliente, nome, sexo, idade, cpf FROM cliente";
+    private static final String SQL_SELECT = "SELECT idCliente, nome, sexo, dataNascimento FROM cliente";
     /** SQL para INSERT */
-    private static final String SQL_INSERT = "INSERT INTO cliente (nome, sexo, idade, cpf) VALUES ( ?,  ?,  ?,  ? )";
+    private static final String SQL_INSERT = "INSERT INTO cliente (nome, sexo, dataNascimento) VALUES ( ?,  ?,  ? )";
     /** SQL para UPDATE */
-    private static final String SQL_UPDATE = "UPDATE cliente SET nome =  ?, sexo =  ?, idade =  ?, cpf =  ?";
+    private static final String SQL_UPDATE = "UPDATE cliente SET nome =  ?, sexo =  ?, dataNascimento =  ?";
     /** SQL para DELETE */
     private static final String SQL_DELETE = "DELETE FROM cliente";
 
@@ -109,7 +109,7 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
         try {
             String where = " WHERE idCliente =  ?";
             PreparedStatement pstmt = getPstmt(conn.prepareStatement(getSqlUpdate(where)), bean);
-            pstmt.setLong(5, bean.getIdCliente());
+            pstmt.setLong(4, bean.getIdCliente());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -188,8 +188,7 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
         bean.setIdCliente(rs.getLong(1));
         bean.setNome(rs.getString(2));
         bean.setSexo(rs.getString(3));
-        bean.setIdade(rs.getInt(4));
-        bean.setCpf(rs.getLong(5));
+        bean.setDataNascimento(rs.getDate(4));
         return bean;
     }
 
@@ -205,8 +204,10 @@ public class ClienteDAO extends AbstractDAO<ClienteBean, ClientePk> {
     protected PreparedStatement getPstmt(PreparedStatement pstmt, ClienteBean bean) throws SQLException {
         pstmt.setString(1, bean.getNome());
         pstmt.setString(2, bean.getSexo());
-        pstmt.setInt(3, bean.getIdade());
-        pstmt.setLong(4, bean.getCpf());
+        if (bean.getDataNascimento() == null){
+           bean.setDataNascimento(new java.util.Date());
+        }
+        pstmt.setDate(3, new java.sql.Date(bean.getDataNascimento().getTime()));
         return pstmt;
     }
 

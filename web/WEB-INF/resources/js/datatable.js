@@ -27,8 +27,6 @@ var Grid = function (externalParams) {
     // Mescla os parâmetro externos com os internos
     $.extend(param, externalParams);
     
-    console.log('param: ');
-    console.log(param.order);
     // Realiza a criação do DataTable
     function criaDataTable(header) {
         // Cria o Datatable e associa à variável local 'table'

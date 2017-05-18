@@ -26,6 +26,42 @@ var Form = function () {
     return f;
 }();
 
+// Objeto auxiliar para trabalhar com Forms!
+var Ajax = function () {
+    // Objeto em sí
+    var a = {};
+    
+    // Defaults
+    var defs = {
+        
+    };
+
+    // Prepara
+    a.send = function (param) {
+        $.ajax({
+            type: param.type,
+            url: "/DallaHits/" + param.url,
+            data: param.data,
+            success: function () {
+                if (param.success) param.success();
+            }
+        });
+    };
+
+    // Retorna o objeto
+    return a;
+}();
+
+
+function formToObj(idForm){
+    var obj = {};
+    
+    
+    
+    return obj;
+}
+
+
 /**
  * Retorna verdadeiro se o array possuir um par com a soma
  *
@@ -33,14 +69,14 @@ var Form = function () {
  * @param sum Soma de valores
  * @return boolean
  */
-function hasPairWithSum(arr, sum){
-	var comps = [];
-	for (var i in arr){
-		var v = arr[i];
-		if (comps.indexOf(v) != -1){
-			return true;
-		}
-		comps.push(sum - v);
-	}
-	return false;
+function hasPairWithSum(arr, sum) {
+    var comps = [];
+    for (var i in arr) {
+        var v = arr[i];
+        if (comps.indexOf(v) != -1) {
+            return true;
+        }
+        comps.push(sum - v);
+    }
+    return false;
 }

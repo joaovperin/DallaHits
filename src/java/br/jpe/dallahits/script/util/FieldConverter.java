@@ -34,11 +34,11 @@ public class FieldConverter {
         if (field.startsWith("decimal(")) {
             return "double";
         }
-        if (field.startsWith("datetime") || field.startsWith("date ")) {
+        if (field.startsWith("datetime") || field.startsWith("date")) {
             return "Date";
         }
-        throw new UnsupportedOperationException("Tipo de campo ".concat(field).
-                concat(" NÃO SUPORTADO! FieldConverter.java."));
+        throw new UnsupportedOperationException("Tipo de campo '".concat(field).
+                concat("' NÃO SUPORTADO! FieldConverter.java."));
     }
 
 }

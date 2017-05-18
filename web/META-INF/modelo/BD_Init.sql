@@ -1,13 +1,17 @@
-INSERT INTO Usuario (Login, Email, Senha, Nome, Tipo) VALUES
-   ('joaovperin', 'joaovperin@live.com', '1234', 'João Victor', 'A'),
-   ('admin', 'admin@dallahits.com', 'admin', 'Administrador', 'A'),
-   ('fulano', 'fulanodetal@email.com', 'senha', 'Fulano de tal', 'R'),
-   ('narnia', '', '2', 'Nárnia', 'A'),
-   ('viccenzo', '', '1234', 'Jesus', 'A');
+INSERT INTO Usuario (Nome, Login, Senha) VALUES
+   ('Administrador', 'admin', 'admin'),
+   ('João Victor', 'joaovperin', '1234'),
+   ('Usuário X', 'usuario', 'senha'),
+   ('Usuário Y', 'user', 'pass'),
+   ('Fulano de tal', 'fulano', 'senha');
 
-INSERT INTO Mensagem (Usuario, Msg) VALUES
-   ('joaovperin', 'batata'),
-   ('admin', 'Bom dia, usuários');
+INSERT INTO Cliente (Nome, Sexo, DataNascimento) VALUES
+   ('Fabinho', 'M', '1994-02-12'),
+   ('Matheus', 'F', '1996-08-30'),
+   ('Juca', 'M', '1994-05-17'),
+   ('Andressa', 'F', '1996-11-07'),
+   ('Júlia', 'F', '1998-01-22'),
+   ('Eduarda', 'F', '1997-08-14');
 
 INSERT INTO Produto (Descricao, ValorUnitario) VALUES
    ('Batata', '12.50'), ('Vodka', '5.50'), ('Whisky', '11.00'), ('Água', '2.50'), ('Refri lata', '3.50'),
@@ -72,7 +76,6 @@ INSERT INTO Produto (Descricao, ValorUnitario) VALUES
    ('CAPELETTI DE LEGUMES 250G', '10.99'),
    ('CAPELETTI DE FRANGO 1000G', '10.99'),
    ('CAPELLETI DE CARNE ROMANHA 2KG', '10.99'),
-   ('G', '10.99'),
    ('BISCOITO MARIA', '10.99'),
    ('BISCOITO MIGNON', '10.99'),
    ('BISCOITO AGUA E SAL', '10.99'),
@@ -86,27 +89,20 @@ INSERT INTO Produto (Descricao, ValorUnitario) VALUES
    ('QUEIJO RALADO', '10.99'),
    ('MASSA CASEIRA PAVIOLI', '10.99'),
    ('MACARRAO TIPO GRAVATA', '10.99'),
-   ('BATATA PALHA', '10.99'),
    ('BATATA PALHA', '10.99');
-
-INSERT INTO Cliente (Nome, Sexo, Idade) VALUES
-   ('Fabinho', 'M', 23),
-   ('Matheus', 'F', 21),
-   ('Juca', 'M', 23),
-   ('Andressa', 'F', 21),
-   ('Júlia', 'F', 19),
-   ('Eduarda', 'F', 20);
 
 INSERT INTO Comanda (idCliente, idUsuario, Data, ValorTotal) VALUES
    (1, 1, '2017-02-14 19:13:55', '23.50'),
    (2, 1, '2017-02-14 20:32:11', '28.90'),
    (3, 2, '2017-03-14 21:13:10', '32.00'),
-   (4, 2, '2017-03-14 21:13:32', '30'),
-   (5, 2, '2017-04-14 18:32:49', '0.00'),
-   (6, 3, '2017-04-14 18:33:11', '0');
+   (4, 2, '2017-03-14 21:13:32', '30');
 
 INSERT INTO Item_Comanda (idComanda, Item, Produto, Quantidade, ValorTotalItem)
    VALUES (1, 1, 1, 2, '5.00'), (1, 2, 2, 1, '12.00'), (1, 3, 4, 1, '5.00');
 
 INSERT INTO Item_Comanda (idComanda, Item, Produto, Quantidade, ValorTotalItem)
    VALUES (2, 1, 1, 2, '2.40'), (2, 2, 2, 1, '8.99'), (2, 3, 4, 1, '52.00');
+
+INSERT INTO Mensagem (Usuario, Msg) VALUES
+   ('joaovperin', 'batata'),
+   ('admin', 'Bom dia, usuários');

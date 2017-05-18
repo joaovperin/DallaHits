@@ -10,6 +10,7 @@ package br.jpe.dallahits.gen.bean;
 import br.jpe.dallahits.generics.AbstractBean;
 import java.util.Objects;
 import org.json.simple.JSONArray;
+import java.util.Date;
 
 /**
  * Classe ClienteBean
@@ -24,10 +25,8 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
     private String nome;
     /** Sexo */
     private String sexo;
-    /** Idade */
-    private int idade;
-    /** Cpf */
-    private long cpf;
+    /** Data de nascimento */
+    private Date dataNascimento;
 
     /** 
      * Construtor da classe ClienteBean
@@ -89,39 +88,21 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
     }
 
     /** 
-     * Retorna o valor do campo Idade
+     * Retorna o valor do campo Data de nascimento
      * 
-     * @return int
+     * @return Date
      */
-    public int getIdade() {
-        return idade;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
     /** 
-     * Define o valor do campo Idade
+     * Define o valor do campo Data de nascimento
      * 
-     * @param idade
+     * @param dataNascimento
      */
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    /** 
-     * Retorna o valor do campo Cpf
-     * 
-     * @return long
-     */
-    public long getCpf() {
-        return cpf;
-    }
-
-    /** 
-     * Define o valor do campo Cpf
-     * 
-     * @param cpf
-     */
-    public void setCpf(long cpf) {
-        this.cpf = cpf;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     /**
@@ -135,8 +116,7 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
         obj.add(getIdCliente());
         obj.add(getNome());
         obj.add(getSexo());
-        obj.add(getIdade());
-        obj.add(getCpf());
+        obj.add(getDataNascimento());
         return obj;
     }
 
@@ -151,8 +131,7 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
         hash = 53 * hash + Objects.hashCode(this.idCliente);
         hash = 53 * hash + Objects.hashCode(this.nome);
         hash = 53 * hash + Objects.hashCode(this.sexo);
-        hash = 53 * hash + Objects.hashCode(this.idade);
-        hash = 53 * hash + Objects.hashCode(this.cpf);
+        hash = 53 * hash + Objects.hashCode(this.dataNascimento);
         return hash;
     }
 
@@ -183,10 +162,7 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
         if (!Objects.equals(this.sexo, other.sexo)) {
             return false;
         }
-        if (!Objects.equals(this.idade, other.idade)) {
-            return false;
-        }
-        if (!Objects.equals(this.cpf, other.cpf)) {
+        if (!Objects.equals(this.dataNascimento, other.dataNascimento)) {
             return false;
         }
         return true;
@@ -203,8 +179,7 @@ public class ClienteBean extends AbstractBean<ClienteBean> {
                     "idCliente=" + idCliente + ", " +
                     "nome=" + nome + ", " +
                     "sexo=" + sexo + ", " +
-                    "idade=" + idade + ", " +
-                    "cpf=" + cpf + "}";
+                    "dataNascimento=" + dataNascimento + "}";
     }
 
 }
