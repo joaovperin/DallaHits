@@ -41,6 +41,10 @@
     <path>/WEB-INF/tags/fieldSenha.tag</path>
   </tag-file>
   <tag-file>
+    <name>fieldCombo</name>
+    <path>/WEB-INF/tags/fieldCombo.tag</path>
+  </tag-file>
+  <tag-file>
     <name>fieldHidden</name>
     <path>/WEB-INF/tags/fieldHidden.tag</path>
   </tag-file>

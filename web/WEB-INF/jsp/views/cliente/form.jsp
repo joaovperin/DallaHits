@@ -11,6 +11,11 @@
         </c:if>
         <jpe:fieldText name="nome" placeholder="Nome Cliente" value="${cliente.nome}" />
         <jpe:fieldText name="sexo" placeholder="Sexo" value="${cliente.sexo}" />
+        <jpe:fieldCombo name="xxx" >
+            <option value="1">opt1</option>
+            <option value="2">opt2</option>
+            <option value="3">opt3</option>
+        </jpe:fieldCombo>
         <jpe:fieldNumber name="cpf" placeholder="CPF" value="${cliente.cpf}" />
         <jpe:fieldNumber name="idade" placeholder="Idade" value="${cliente.idade}" />
         <jpe:fieldHidden name="action" value="${action}" />
@@ -23,7 +28,7 @@
             $('#btn_grvCli').click(function () {
                 console.log("oi");
                 // Se não for válido cai fora
-                if(!$('form#form_clientes').valid()){
+                if (!$('form#form_clientes').valid()) {
                     console.log('naaao');
                     return;
                 }
@@ -35,7 +40,7 @@
                     success: function (ret) {
                         console.log('Dados:\n');
                         console.log(ret);
-                    }, error: function(ret){
+                    }, error: function (ret) {
                         console.log("error");
                     }
                 });
