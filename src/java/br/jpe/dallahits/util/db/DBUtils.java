@@ -44,7 +44,6 @@ public class DBUtils {
      * Realiza o fechamento de uma conexão
      *
      * @param conn Conexão com o banco
-     * @throws DAOException
      */
     public static void close(Conexao conn) {
         if (conn != null) {

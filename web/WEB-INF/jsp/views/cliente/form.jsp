@@ -10,13 +10,10 @@
             <jpe:fieldHidden name="idCliente" value="${cliente.idCliente}" />
         </c:if>
         <jpe:fieldText name="nome" placeholder="Nome Cliente" value="${cliente.nome}" />
-        <jpe:fieldText name="sexo" placeholder="Sexo" value="${cliente.sexo}" />
-        <jpe:fieldCombo name="xxx" >
-            <option value="1">opt1</option>
-            <option value="2">opt2</option>
-            <option value="3">opt3</option>
+        <jpe:fieldCombo name="sexo" >
+            <jpe:fieldComboOption value="M" selected="${cliente.sexo}" >Masculino</jpe:fieldComboOption>
+            <jpe:fieldComboOption value="F" selected="${cliente.sexo}" >Feminino</jpe:fieldComboOption>
         </jpe:fieldCombo>
-        <jpe:fieldNumber name="cpf" placeholder="CPF" value="${cliente.cpf}" />
         <jpe:fieldNumber name="idade" placeholder="Idade" value="${cliente.idade}" />
         <jpe:fieldHidden name="action" value="${action}" />
         <jpe:buttonSubmit id="grvCli" title="Gravar" tipo="button" />

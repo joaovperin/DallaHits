@@ -9,13 +9,13 @@ import br.jpe.dallahits.exception.DAOException;
 import br.jpe.dallahits.exception.DallaHitsException;
 import br.jpe.dallahits.gen.bean.ClienteBean;
 import br.jpe.dallahits.gen.dao.ClienteDAO;
+import br.jpe.dallahits.gen.pk.ClientePk;
 import br.jpe.dallahits.generics.AbstractGrid;
 import br.jpe.dallahits.grid.ClienteGrid;
 import br.jpe.dallahits.util.GsonUtils;
 import br.jpe.dallahits.util.db.Conexao;
 import br.jpe.dallahits.util.db.ConnFactory;
 import br.jpe.dallahits.util.db.DBUtils;
-import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,9 +74,17 @@ public class ClienteController {
      * @throws DallaHitsException
      */
     @RequestMapping(value = "/cliente/alterar", method = RequestMethod.GET)
-    public String alterar(@Valid ClienteBean c, RedirectAttributes flashAttr) throws DallaHitsException {
+    public String alterar(ClienteBean c, RedirectAttributes flashAttr) throws DallaHitsException {
+        ClienteBean cli = null;
+        try(Conexao conn = ConnFactory.criaConexao()){
+            cli = new ClienteDAO(conn).buscaPk(new ClientePk(c.getIdCliente()));
+        } catch (DAOException e) {
+            throw new DallaHitsException(e);
+        }
+
+
         flashAttr.addFlashAttribute("action", "alterar");
-        flashAttr.addFlashAttribute("cliente", c);
+        flashAttr.addFlashAttribute("cliente", cli);
         return "redirect:form";
     }
 
@@ -99,7 +107,7 @@ public class ClienteController {
      * @param c
      * @param action
      * @param flashAttr
-     * @return 
+     * @return
      * @throws DallaHitsException
      */
     @RequestMapping(value = "/cliente/gravar", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
