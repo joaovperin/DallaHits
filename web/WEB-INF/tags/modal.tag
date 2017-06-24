@@ -20,7 +20,7 @@
                 <jsp:doBody/>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button id="${id}_close" type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
             </div>
         </div>
 

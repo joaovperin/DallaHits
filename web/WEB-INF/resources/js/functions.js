@@ -30,10 +30,9 @@ var Form = function () {
 var Ajax = function () {
     // Objeto em sí
     var a = {};
-    
+
     // Defaults
     var defs = {
-        
     };
 
     // Prepara
@@ -42,8 +41,16 @@ var Ajax = function () {
             type: param.type,
             url: "/DallaHits/" + param.url,
             data: param.data,
-            success: function () {
-                if (param.success) param.success();
+            success: function (ret) {
+                if (param.success)
+                    param.success(ret);
+                if (param.finnaly)
+                    param.finnaly(ret);
+            }, error: function (err) {
+                if (param.err)
+                    param.success(err);
+                if (param.finnaly)
+                    param.finnaly(err);
             }
         });
     };
@@ -53,11 +60,11 @@ var Ajax = function () {
 }();
 
 
-function formToObj(idForm){
+function formToObj(idForm) {
     var obj = {};
-    
-    
-    
+
+
+
     return obj;
 }
 
@@ -80,3 +87,13 @@ function hasPairWithSum(arr, sum) {
     }
     return false;
 }
+
+/**
+ * Atalho para Document.getElementById();
+ * 
+ * @param {string} idElm
+ * @returns {Element}
+ */
+var gebi = function (idElm) {
+    return document.getElementById(idElm);
+};

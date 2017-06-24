@@ -23,10 +23,9 @@
         $(function () {
 
             $('#btn_grvCli').click(function () {
-                console.log("oi");
                 // Se não for válido cai fora
                 if (!$('form#form_clientes').valid()) {
-                    console.log('naaao');
+                    console.log('Inválido!');
                     return;
                 }
                 // Envia requisição para gravar dados
@@ -39,6 +38,15 @@
                         console.log(ret);
                     }, error: function (ret) {
                         console.log("error");
+                    },
+                    finnaly: function (ret){
+                        $('#modCliente_close').click();
+                        if (ret && ret.status === 200){
+                            alert("Sucesso!");
+                            $('#gridClientes').DataTable().ajax.reload();
+                        } else {
+                            alert("Erro!");
+                        }
                     }
                 });
             });
@@ -51,11 +59,6 @@
                 }
                 return data;
             };
-
-            var gebi = function (idElm) {
-                return document.getElementById(idElm);
-            };
-
 
             // Inicializa a validação do Form
             $("form#form_clientes").validate({
