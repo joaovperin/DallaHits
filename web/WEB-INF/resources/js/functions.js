@@ -8,7 +8,7 @@ var Form = function () {
     var f = {};
     // Prepara
     f.prepare = function (formElm) {
-        formElm.submit(function () {
+        formElm.submit(function (e) {
             f.limpaCampos(formElm);
         });
     };
@@ -80,7 +80,7 @@ function hasPairWithSum(arr, sum) {
     var comps = [];
     for (var i in arr) {
         var v = arr[i];
-        if (comps.indexOf(v) != -1) {
+        if (comps.indexOf(v) !== -1) {
             return true;
         }
         comps.push(sum - v);
@@ -96,4 +96,13 @@ function hasPairWithSum(arr, sum) {
  */
 var gebi = function (idElm) {
     return document.getElementById(idElm);
+};
+
+var cnvFormToObj = function (idForm) {
+    var data = {};
+    var arrSerialized = $('form#' + idForm).serializeArray();
+    for (var i = 0; i < arrSerialized.length; i++) {
+        data[arrSerialized[i]['name']] = arrSerialized[i]['value'];
+    }
+    return data;
 };

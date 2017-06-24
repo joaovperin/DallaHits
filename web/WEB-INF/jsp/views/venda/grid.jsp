@@ -5,24 +5,16 @@
 <%-- Insere o template default --%>
 <tiles:insertDefinition  name="DefaultTemplate" >
     <tiles:putAttribute name="body">
-        <%-- Modal para manutenção de comandas --%>
-        <jpe:modal id="modComanda" title="Inclusão - Comanda">
-            <jpe:form titulo="Comandas" action="comanda/incluir" submit="Gravar" id="comandas">
-                <jpe:fieldNumber name="idCliente" placeholder="Cód. Cliente" />
-                <p class="text-center">OU</p>
-                <jpe:fieldText name="cliente" placeholder="Nome Cliente" />
-            </jpe:form>
-            <!--<button type="button" class="btn btn-info btn-lg" id="myBtn">Botão</button>-->
-        </jpe:modal>
         <jpe:grid id="gridComandas" url="comandas" title="Comandas" addAcaoUpdate="true"
-                  callbackAdd="addComanda" callbackAlt="altComanda" callbackExc="excComanda" />
+                  callbackAdd="addComanda" />
         <%-- Se houver mensagem, exibe --%>
         <jpe:message msg="${msg}" />
         <script>
 
             function addComanda() {
                 console.log('Inclusão!');
-                $("#modComanda").modal();
+//                $("#modComanda").modal();
+                openModal({url: '/comanda/form'}).load();
             }
 
             function altComanda(comandas) {
